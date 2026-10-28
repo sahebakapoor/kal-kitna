@@ -3,15 +3,17 @@
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
 RAW = Path("data/raw")
 PROCESSED = Path("data/processed")
+PARAMS = Path("params.yaml")
 
-# Families that spoil fast. These are the ones where over-ordering costs real money.
-PERISHABLE_FAMILIES = [
-    "BREAD/BAKERY", "DAIRY", "DELI", "EGGS",
-    "MEATS", "POULTRY", "PRODUCE", "SEAFOOD",
-]
+
+def load_params(path: Path = PARAMS) -> dict:
+    """Read experiment settings from params.yaml."""
+    with open(path, encoding="utf-8") as f:
+        return yaml.safe_load(f)
 
 
 def load_raw(raw_dir: Path = RAW) -> dict[str, pd.DataFrame]:
@@ -23,15 +25,17 @@ def load_raw(raw_dir: Path = RAW) -> dict[str, pd.DataFrame]:
     }
 
 
-def make_perishables(train: pd.DataFrame, stores: pd.DataFrame) -> pd.DataFrame:
-    """Keep perishable families and attach store details."""
-    df = train[train["family"].isin(PERISHABLE_FAMILIES)].copy()
+def make_perishables(
+    train: pd.DataFrame, stores: pd.DataFrame, families: list[str]
+) -> pd.DataFrame:
+    """Keep the given families and attach store details."""
+    df = train[train["family"].isin(families)].copy()
     df = df.merge(stores[["store_nbr", "city", "type", "cluster"]], on="store_nbr", how="left")
     df = df.sort_values(["store_nbr", "family", "date"]).reset_index(drop=True)
     return df[["date", "store_nbr", "family", "sales", "onpromotion", "city", "type", "cluster"]]
 
 
-def validate(df: pd.DataFrame) -> list[str]:
+def validate(df: pd.DataFrame, families: list[str]) -> list[str]:
     """Return a list of problems. An empty list means the data is clean."""
     problems = []
     if df.empty:
@@ -43,16 +47,17 @@ def validate(df: pd.DataFrame) -> list[str]:
         problems.append("duplicate rows")
     if df[["date", "store_nbr", "family", "sales"]].isna().any().any():
         problems.append("nulls in key columns")
-    missing = set(PERISHABLE_FAMILIES) - set(df["family"].unique())
+    missing = set(families) - set(df["family"].unique())
     if missing:
         problems.append(f"missing families: {sorted(missing)}")
     return problems
 
 
 def main() -> None:
+    families = load_params()["data"]["families"]
     raw = load_raw()
-    df = make_perishables(raw["train"], raw["stores"])
-    problems = validate(df)
+    df = make_perishables(raw["train"], raw["stores"], families)
+    problems = validate(df, families)
     if problems:
         raise ValueError(f"Data validation failed: {problems}")
     PROCESSED.mkdir(parents=True, exist_ok=True)
