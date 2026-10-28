@@ -1,0 +1,51 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python -m kal_kitna.data
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: 53330c0085ee4d351c56e940dc13efef.dir
+      size: 124761708
+      nfiles: 7
+    - path: src/kal_kitna/data.py
+      hash: md5
+      md5: 490ae0cb7c1e5e67a91fd966542139cd
+      size: 2573
+    params:
+      params.yaml:
+        data.families:
+        - BREAD/BAKERY
+        - DAIRY
+        - DELI
+        - EGGS
+        - MEATS
+        - POULTRY
+        - PRODUCE
+        - SEAFOOD
+    outs:
+    - path: data/processed/holidays.parquet
+      hash: md5
+      md5: b8df8993d8080e2d9d61f2a9626acf3c
+      size: 8695
+    - path: data/processed/perishables.parquet
+      hash: md5
+      md5: 9808b454eb67ce943f7ebe0a04e4dcdb
+      size: 3489409
+  explore:
+    cmd: python -m kal_kitna.explore
+    deps:
+    - path: data/processed/perishables.parquet
+      hash: md5
+      md5: 9808b454eb67ce943f7ebe0a04e4dcdb
+      size: 3489409
+    - path: src/kal_kitna/explore.py
+      hash: md5
+      md5: 2c95f71cc146a06fa8a73b52d6a8fecb
+      size: 1767
+    outs:
+    - path: reports/figures
+      hash: md5
+      md5: dfa092bbf99c270087a989c251a0a5e7.dir
+      size: 156978
+      nfiles: 2

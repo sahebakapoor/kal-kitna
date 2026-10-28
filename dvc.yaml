@@ -1,0 +1,20 @@
+stages:
+  prepare:
+    cmd: python -m kal_kitna.data
+    deps:
+      - data/raw
+      - src/kal_kitna/data.py
+    params:
+      - data.families
+    outs:
+      - data/processed/perishables.parquet
+      - data/processed/holidays.parquet
+
+  explore:
+    cmd: python -m kal_kitna.explore
+    deps:
+      - data/processed/perishables.parquet
+      - src/kal_kitna/explore.py
+    outs:
+      - reports/figures:
+          cache: false
