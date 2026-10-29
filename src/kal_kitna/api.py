@@ -5,13 +5,14 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import date as Date
 from pathlib import Path
+from typing import Annotated
 
 import lightgbm as lgb
 import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
-from pydantic import BaseModel, Field, model_validator
 from fastapi.responses import RedirectResponse
+from pydantic import BaseModel, Field, model_validator
 
 from kal_kitna.newsvendor import critical_ratio
 from kal_kitna.train import feature_columns
@@ -125,7 +126,7 @@ def create_app(artifacts: Artifacts | None = None) -> FastAPI:
         }
 
     @app.get("/forecast", response_model=Recommendation)
-    def forecast(store_nbr: int = Query(gt=0), family: str = Query(), date: Date = Query()):
+    def forecast(store_nbr: Annotated[int, Query(gt=0)], family: str, date: Date):
         costs = art.policy["costs"]
         if family not in costs["families"]:
             raise HTTPException(status_code=404, detail=f"Unknown family: {family}")
