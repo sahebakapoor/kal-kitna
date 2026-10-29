@@ -75,3 +75,17 @@ stages:
     metrics:
       - reports/business.json:
           cache: false
+
+  export:
+    cmd: python -m kal_kitna.export
+    deps:
+      - data/features/features.parquet
+      - models/model.txt
+      - src/kal_kitna/export.py
+      - src/kal_kitna/decide.py
+      - src/kal_kitna/train.py
+    params:
+      - split
+      - costs
+    outs:
+      - models/serving
