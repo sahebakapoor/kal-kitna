@@ -8,11 +8,13 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
+    "fastapi>=0.162.0",
     "lightgbm>=4.7.0",
     "mlflow>=3",
     "pandas>=3.1.0",
     "pyarrow>=15,<26",
     "pyyaml>=6.0.3",
+    "uvicorn>=0.54.0",
 ]
 
 [project.scripts]
@@ -25,6 +27,7 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "dvc>=3.67.1",
+    "httpx>=0.28.1",
     "kaggle>=2.2.5",
     "matplotlib>=3.11.2",
     "pytest>=9.2.0",
