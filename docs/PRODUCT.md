@@ -39,3 +39,7 @@ transfers, the exact numbers don't.
 ## Non-goals (v1)
 No live store integration, no automatic ordering, no multi-day
 ordering for items with longer shelf life.
+
+API latency (/forecast, in-process, 300 random requests, my laptop): p50 ___ ms, p95 ___ ms. Target p95 < 200 ms: met / not met.
+
+| API p95 latency < 200 ms | p95 ___ ms (in-process, 300 requests) | ___ |
