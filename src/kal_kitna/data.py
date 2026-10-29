@@ -30,9 +30,22 @@ def make_perishables(
 ) -> pd.DataFrame:
     """Keep the given families and attach store details."""
     df = train[train["family"].isin(families)].copy()
-    df = df.merge(stores[["store_nbr", "city", "type", "cluster"]], on="store_nbr", how="left")
+    df = df.merge(
+        stores[["store_nbr", "city", "type", "cluster"]], on="store_nbr", how="left"
+    )
     df = df.sort_values(["store_nbr", "family", "date"]).reset_index(drop=True)
-    return df[["date", "store_nbr", "family", "sales", "onpromotion", "city", "type", "cluster"]]
+    return df[
+        [
+            "date",
+            "store_nbr",
+            "family",
+            "sales",
+            "onpromotion",
+            "city",
+            "type",
+            "cluster",
+        ]
+    ]
 
 
 def validate(df: pd.DataFrame, families: list[str]) -> list[str]:

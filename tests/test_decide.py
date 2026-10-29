@@ -52,7 +52,10 @@ def test_policies_use_the_right_inputs():
     )
     orders = policy_orders(df, {"DAIRY": 0.9, "EGGS": 0.5})
     assert orders["kal_kitna"].tolist() == [9.0, 10.0]  # forecast x family multiplier
-    assert orders["naive_last_week"].tolist() == [8.0, 15.0]  # falls back to the 28-day mean
+    assert orders["naive_last_week"].tolist() == [
+        8.0,
+        15.0,
+    ]  # falls back to the 28-day mean
     assert orders["forecast_only"].tolist() == [10.0, 20.0]
 
 

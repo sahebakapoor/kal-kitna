@@ -11,7 +11,9 @@ from kal_kitna.features import (
 def _series(sales, start="2017-01-01"):
     """One store, one family, consecutive days."""
     dates = pd.date_range(start, periods=len(sales), freq="D")
-    return pd.DataFrame({"date": dates, "store_nbr": 1, "family": "DAIRY", "sales": sales})
+    return pd.DataFrame(
+        {"date": dates, "store_nbr": 1, "family": "DAIRY", "sales": sales}
+    )
 
 
 def test_trim_drops_only_leading_zeros():
@@ -32,7 +34,9 @@ def test_missing_day_does_not_shift_lags():
     df = _series(list(range(1, 21)))
     df = df[df["date"] != "2017-01-05"]  # pretend the shop was closed
     df = add_lag_features(complete_calendar(df), lags=[7], windows=[7])
-    assert pd.isna(df.loc[df["date"] == "2017-01-12", "lag_7"].item())  # 7 days back is the closed day
+    assert pd.isna(
+        df.loc[df["date"] == "2017-01-12", "lag_7"].item()
+    )  # 7 days back is the closed day
     assert df.loc[df["date"] == "2017-01-13", "lag_7"].item() == 6
 
 

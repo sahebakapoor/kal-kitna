@@ -43,7 +43,9 @@ def load_artifacts(folder: Path = SERVING) -> Artifacts:
 
 def multiplier_for(policy: dict, family: str, ratio: float) -> float:
     """Read the family's error spread at the given critical ratio, interpolating between percentiles."""
-    return float(np.interp(ratio, policy["quantile_levels"], policy["error_quantiles"][family]))
+    return float(
+        np.interp(ratio, policy["quantile_levels"], policy["error_quantiles"][family])
+    )
 
 
 class OrderRequest(BaseModel):
@@ -87,12 +89,16 @@ def create_app(artifacts: Artifacts | None = None) -> FastAPI:
         version="1.0.0",
     )
 
-    def recommend(store: int, family: str, day: Date, cost: float, price: float, goodwill: float):
+    def recommend(
+        store: int, family: str, day: Date, cost: float, price: float, goodwill: float
+    ):
         if family not in art.policy["error_quantiles"]:
             raise HTTPException(status_code=404, detail=f"Unknown family: {family}")
         key = (store, family, day)
         if key not in index:
-            raise HTTPException(status_code=404, detail=f"No data for store {store}, {family}, {day}")
+            raise HTTPException(
+                status_code=404, detail=f"No data for store {store}, {family}, {day}"
+            )
         row = feats.iloc[[index[key]]]
         forecast = max(float(art.predict(row)[0]), 0.0)
         ratio = critical_ratio(cost, price, goodwill)
@@ -107,7 +113,7 @@ def create_app(artifacts: Artifacts | None = None) -> FastAPI:
             recommended_order=round(order, 1),
             actual=None if pd.isna(actual) else round(float(actual), 1),
         )
-    
+
     @app.get("/", include_in_schema=False)
     def root():
         return RedirectResponse(url="/docs")
@@ -131,10 +137,14 @@ def create_app(artifacts: Artifacts | None = None) -> FastAPI:
         if family not in costs["families"]:
             raise HTTPException(status_code=404, detail=f"Unknown family: {family}")
         c = costs["families"][family]
-        return recommend(store_nbr, family, date, c["cost"], c["price"], costs["goodwill_pct"])
+        return recommend(
+            store_nbr, family, date, c["cost"], c["price"], costs["goodwill_pct"]
+        )
 
     @app.post("/order", response_model=Recommendation)
     def order(req: OrderRequest):
-        return recommend(req.store_nbr, req.family, req.date, req.cost, req.price, req.goodwill_pct)
+        return recommend(
+            req.store_nbr, req.family, req.date, req.cost, req.price, req.goodwill_pct
+        )
 
     return app

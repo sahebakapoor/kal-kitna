@@ -14,7 +14,13 @@ def _fake_inputs():
         for f in families
     ]
     stores = pd.DataFrame(
-        {"store_nbr": [1], "city": ["Quito"], "state": ["Pichincha"], "type": ["D"], "cluster": [13]}
+        {
+            "store_nbr": [1],
+            "city": ["Quito"],
+            "state": ["Pichincha"],
+            "type": ["D"],
+            "cluster": [13],
+        }
     )
     return pd.DataFrame(rows), stores
 

@@ -46,7 +46,9 @@ def fit_multipliers(
     return multipliers
 
 
-def policy_orders(df: pd.DataFrame, multipliers: dict[str, float]) -> dict[str, pd.Series]:
+def policy_orders(
+    df: pd.DataFrame, multipliers: dict[str, float]
+) -> dict[str, pd.Series]:
     """Three ways to decide tomorrow's order."""
     mult = df["family"].astype(str).map(multipliers)
     return {
@@ -99,7 +101,9 @@ def main() -> None:
         "mistake_cost_cut_pct": round(
             100 * (1 - kk["mistake_cost_rs"] / naive["mistake_cost_rs"]), 1
         ),
-        "profit_gain_per_store_rs": round((kk["profit_rs"] - naive["profit_rs"]) / n_stores),
+        "profit_gain_per_store_rs": round(
+            (kk["profit_rs"] - naive["profit_rs"]) / n_stores
+        ),
     }
 
     REPORTS.mkdir(exist_ok=True)
@@ -110,14 +114,18 @@ def main() -> None:
     }
     (REPORTS / "business.json").write_text(json.dumps(report, indent=2))
 
-    print(f"{'policy':<18}{'profit Rs':>14}{'waste Rs':>12}{'stockout Rs':>13}{'fill rate':>11}")
+    print(
+        f"{'policy':<18}{'profit Rs':>14}{'waste Rs':>12}{'stockout Rs':>13}{'fill rate':>11}"
+    )
     for name, r in results.items():
         print(
             f"{name:<18}{r['profit_rs']:>14,}{r['waste_rs']:>12,}"
             f"{r['stockout_rs']:>13,}{r['fill_rate']:>11.1%}"
         )
     print(f"\nKal Kitna vs naive over 4 test weeks, {n_stores} stores:")
-    print(f"  waste cut {headline['waste_cut_pct']}%, total mistake cost cut {headline['mistake_cost_cut_pct']}%")
+    print(
+        f"  waste cut {headline['waste_cut_pct']}%, total mistake cost cut {headline['mistake_cost_cut_pct']}%"
+    )
     print(f"  profit gain per store: Rs {headline['profit_gain_per_store_rs']:,}")
 
 

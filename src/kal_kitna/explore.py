@@ -33,7 +33,12 @@ def main() -> None:
     ax.figure.savefig(FIGURES / "daily_sales.png", dpi=120)
     plt.close(ax.figure)
 
-    by_day = df.assign(day=df["date"].dt.day_name()).groupby("day")["sales"].mean().reindex(DAYS)
+    by_day = (
+        df.assign(day=df["date"].dt.day_name())
+        .groupby("day")["sales"]
+        .mean()
+        .reindex(DAYS)
+    )
     ax = by_day.plot(kind="bar", figsize=(8, 4), title="Average sales by day of week")
     ax.set_ylabel("Average units per store-family-day")
     ax.figure.tight_layout()

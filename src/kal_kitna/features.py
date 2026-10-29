@@ -29,10 +29,14 @@ def complete_calendar(df: pd.DataFrame) -> pd.DataFrame:
         ],
         names=["store_nbr", "family", "date"],
     )
-    return df.set_index(["store_nbr", "family", "date"]).reindex(full_index).reset_index()
+    return (
+        df.set_index(["store_nbr", "family", "date"]).reindex(full_index).reset_index()
+    )
 
 
-def add_lag_features(df: pd.DataFrame, lags: list[int], windows: list[int]) -> pd.DataFrame:
+def add_lag_features(
+    df: pd.DataFrame, lags: list[int], windows: list[int]
+) -> pd.DataFrame:
     """Past sales only. Every feature for day D uses data from before day D."""
     df = df.sort_values(KEYS + ["date"]).copy()
     sales = df.groupby(KEYS)["sales"]
@@ -50,7 +54,9 @@ def add_calendar_features(df: pd.DataFrame, holidays: pd.DataFrame) -> pd.DataFr
     df["day_of_week"] = df["date"].dt.day_of_week
     df["day_of_month"] = df["date"].dt.day
     df["month"] = df["date"].dt.month
-    df["is_payday"] = (df["date"].dt.day.eq(15) | df["date"].dt.is_month_end).astype(int)
+    df["is_payday"] = (df["date"].dt.day.eq(15) | df["date"].dt.is_month_end).astype(
+        int
+    )
     national = holidays[
         holidays["locale"].eq("National")
         & ~holidays["transferred"]

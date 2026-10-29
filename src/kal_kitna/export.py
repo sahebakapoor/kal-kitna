@@ -16,7 +16,9 @@ SERVING = Path("models/serving")
 LEVELS = [round(float(q), 2) for q in np.arange(0.01, 1.0, 0.01)]  # 0.01 ... 0.99
 
 
-def error_quantiles(calib: pd.DataFrame, min_forecast: float = 1.0) -> dict[str, list[float]]:
+def error_quantiles(
+    calib: pd.DataFrame, min_forecast: float = 1.0
+) -> dict[str, list[float]]:
     """For each family, actual / forecast at every percentile from 1% to 99%."""
     usable = calib[calib["forecast"] >= min_forecast]
     ratio = usable["sales"] / usable["forecast"]
@@ -48,7 +50,9 @@ def main() -> None:
         "model_trees": booster.num_trees(),
     }
     (SERVING / "policy.json").write_text(json.dumps(policy, indent=2))
-    print(f"Serving bundle: {len(test):,} feature rows, {policy['model_trees']} trees -> {SERVING}")
+    print(
+        f"Serving bundle: {len(test):,} feature rows, {policy['model_trees']} trees -> {SERVING}"
+    )
 
 
 if __name__ == "__main__":

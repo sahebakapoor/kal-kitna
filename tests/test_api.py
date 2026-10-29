@@ -23,7 +23,10 @@ def _artifacts():
         "error_quantiles": {"DAIRY": spread, "EGGS": spread},
         "costs": {
             "goodwill_pct": 0.0,
-            "families": {"DAIRY": {"cost": 50, "price": 100}, "EGGS": {"cost": 6, "price": 7}},
+            "families": {
+                "DAIRY": {"cost": 50, "price": 100},
+                "EGGS": {"cost": 6, "price": 7},
+            },
         },
         "model_trees": 7,
     }
@@ -85,13 +88,25 @@ def test_owner_goodwill_raises_the_order(client):
 
 
 def test_cost_above_price_is_rejected(client):
-    payload = {"store_nbr": 1, "family": "DAIRY", "date": "2017-08-01", "cost": 90, "price": 60}
+    payload = {
+        "store_nbr": 1,
+        "family": "DAIRY",
+        "date": "2017-08-01",
+        "cost": 90,
+        "price": 60,
+    }
     assert client.post("/order", json=payload).status_code == 422
 
 
 def test_unknown_store_is_404(client):
-    assert client.get("/forecast?store_nbr=999&family=DAIRY&date=2017-08-01").status_code == 404
+    assert (
+        client.get("/forecast?store_nbr=999&family=DAIRY&date=2017-08-01").status_code
+        == 404
+    )
 
 
 def test_unknown_family_is_404(client):
-    assert client.get("/forecast?store_nbr=1&family=COFFEE&date=2017-08-01").status_code == 404
+    assert (
+        client.get("/forecast?store_nbr=1&family=COFFEE&date=2017-08-01").status_code
+        == 404
+    )
