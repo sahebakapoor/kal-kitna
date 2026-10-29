@@ -1,0 +1,40 @@
+{
+  "multipliers": {
+    "BREAD/BAKERY": 0.963,
+    "DAIRY": 0.926,
+    "DELI": 0.954,
+    "EGGS": 0.854,
+    "MEATS": 0.935,
+    "POULTRY": 0.932,
+    "PRODUCE": 0.979,
+    "SEAFOOD": 0.867
+  },
+  "policies": {
+    "naive_last_week": {
+      "profit_rs": 108951737,
+      "waste_rs": 45014749,
+      "stockout_rs": 20554605,
+      "mistake_cost_rs": 65569354,
+      "fill_rate": 0.9409
+    },
+    "forecast_only": {
+      "profit_rs": 128196546,
+      "waste_rs": 29328325,
+      "stockout_rs": 13879283,
+      "mistake_cost_rs": 43207608,
+      "fill_rate": 0.9599
+    },
+    "kal_kitna": {
+      "profit_rs": 137367520,
+      "waste_rs": 15528235,
+      "stockout_rs": 22802335,
+      "mistake_cost_rs": 38330570,
+      "fill_rate": 0.9343
+    }
+  },
+  "headline": {
+    "waste_cut_pct": 65.5,
+    "mistake_cost_cut_pct": 41.5,
+    "profit_gain_per_store_rs": 526218
+  }
+}

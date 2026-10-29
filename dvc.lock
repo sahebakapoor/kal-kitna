@@ -150,3 +150,67 @@ stages:
       hash: md5
       md5: 3dc052997c132b8c92fd24a99ec3916a
       size: 127
+  decide:
+    cmd: python -m kal_kitna.decide
+    deps:
+    - path: data/features/features.parquet
+      hash: md5
+      md5: 54a2176d2f314988dbd60000147eef83
+      size: 24127943
+    - path: models/model.txt
+      hash: md5
+      md5: 4310e4d7b5805cf4e3257a2225b9b85c
+      size: 9675111
+    - path: src/kal_kitna/decide.py
+      hash: md5
+      md5: 2304552580bff34097d8ca81d9e6b767
+      size: 4769
+    - path: src/kal_kitna/evaluation.py
+      hash: md5
+      md5: 54944676407f67b1583b773596d92634
+      size: 1166
+    - path: src/kal_kitna/newsvendor.py
+      hash: md5
+      md5: 95072742674f3ea5e1e1c32df277ae70
+      size: 597
+    - path: src/kal_kitna/train.py
+      hash: md5
+      md5: 50b5ed3f233131278bb5291703a47590
+      size: 3399
+    params:
+      params.yaml:
+        costs:
+          goodwill_pct: 0.2
+          families:
+            BREAD/BAKERY:
+              cost: 30
+              price: 40
+            DAIRY:
+              cost: 50
+              price: 60
+            DELI:
+              cost: 80
+              price: 110
+            EGGS:
+              cost: 6
+              price: 7
+            MEATS:
+              cost: 300
+              price: 380
+            POULTRY:
+              cost: 200
+              price: 250
+            PRODUCE:
+              cost: 30
+              price: 45
+            SEAFOOD:
+              cost: 400
+              price: 520
+        split:
+          valid_start: '2017-06-21'
+          test_start: '2017-07-19'
+    outs:
+    - path: reports/business.json
+      hash: md5
+      md5: 213a5116c213a5f12af14e47e59a6930
+      size: 914

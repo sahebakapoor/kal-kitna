@@ -59,3 +59,19 @@ stages:
     metrics:
       - reports/metrics.json:
           cache: false
+
+  decide:
+    cmd: python -m kal_kitna.decide
+    deps:
+      - data/features/features.parquet
+      - models/model.txt
+      - src/kal_kitna/decide.py
+      - src/kal_kitna/newsvendor.py
+      - src/kal_kitna/evaluation.py
+      - src/kal_kitna/train.py
+    params:
+      - split
+      - costs
+    metrics:
+      - reports/business.json:
+          cache: false
