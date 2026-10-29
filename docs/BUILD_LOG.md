@@ -25,3 +25,7 @@
 | 0.2 (default) | | | |
 | 0.5 | | | |
 Conclusion: ...
+
+| 4 | Decision layer (newsvendor) | done | per-family multipliers calibrated on valid; test: waste cut ___%, profit +Rs ___/store; goodwill sensitivity 0-0.5; 27 tests |
+
+API latency (/forecast, in-process, 300 random requests, my laptop): p50 ___ ms, p95 ___ ms. Target p95 < 200 ms: met / not met.
