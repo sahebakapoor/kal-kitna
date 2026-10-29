@@ -12,9 +12,8 @@ wheels/
 # ML artifacts
 mlruns/
 mlartifacts/
-# data is versioned by DVC, not git
-data/raw/
-data/processed/
+mlflow.db
+# data folders are ignored by DVC-managed .gitignore files inside data/
 # secrets
 .env
 kaggle.json

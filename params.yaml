@@ -8,3 +8,16 @@ data:
     - POULTRY
     - PRODUCE
     - SEAFOOD
+
+split:
+  valid_start: "2017-06-21"
+  test_start: "2017-07-19"
+
+model:
+  objective: tweedie
+  learning_rate: 0.05
+  num_leaves: 63
+  min_child_samples: 50
+  n_estimators: 2000
+  early_stopping_rounds: 100
+  seed: 42
