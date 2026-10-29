@@ -7,6 +7,13 @@ Run locally from the project root:
 
 Then open http://127.0.0.1:8000 (redirects to the interactive docs).
 
+Run in Docker (needs models/serving on disk: `uv run dvc repro`):
+
+    docker build -t kal-kitna:dev .
+    docker run -d --name kal-kitna -p 8000:8000 kal-kitna:dev
+
+Then open http://127.0.0.1:8000. Stop with `docker rm -f kal-kitna`.
+
 All responses are JSON. Dates are YYYY-MM-DD. Quantities are units (or kg for weight-sold families).
 
 ## GET /health

@@ -29,3 +29,5 @@ Conclusion: ...
 | 4 | Decision layer (newsvendor) | done | per-family multipliers calibrated on valid; test: waste cut ___%, profit +Rs ___/store; goodwill sensitivity 0-0.5; 27 tests |
 
 | 5 | FastAPI + tests | done | 4 endpoints + docs redirect, serving bundle, 38 tests, p95 ___ ms |
+
+| 6 | Docker | done | python:3.11-slim + uv, deps cached as a layer, MLflow kept out, non-root user, healthcheck; image 347 MB content / 1.47 GB disk |
