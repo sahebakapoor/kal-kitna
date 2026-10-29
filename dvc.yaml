@@ -29,3 +29,33 @@ stages:
       - features
     outs:
       - data/features/features.parquet
+
+  baseline:
+    cmd: python -m kal_kitna.baseline
+    deps:
+      - data/features/features.parquet
+      - src/kal_kitna/baseline.py
+      - src/kal_kitna/evaluation.py
+    params:
+      - split
+    metrics:
+      - reports/baseline.json:
+          cache: false
+
+  train:
+    cmd: python -m kal_kitna.train
+    deps:
+      - data/features/features.parquet
+      - reports/baseline.json
+      - src/kal_kitna/train.py
+      - src/kal_kitna/evaluation.py
+    params:
+      - split
+      - model
+    outs:
+      - models/model.txt
+      - reports/importance.json:
+          cache: false
+    metrics:
+      - reports/metrics.json:
+          cache: false
