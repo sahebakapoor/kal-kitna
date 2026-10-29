@@ -10,7 +10,6 @@ requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.162.0",
     "lightgbm>=4.7.0",
-    "mlflow>=3",
     "pandas>=3.1.0",
     "pyarrow>=15,<26",
     "pyyaml>=6.0.3",
@@ -30,6 +29,7 @@ dev = [
     "httpx>=0.28.1",
     "kaggle>=2.2.5",
     "matplotlib>=3.11.2",
+    "mlflow>=3",
     "pytest>=9.2.0",
     "ruff>=0.17.3",
 ]

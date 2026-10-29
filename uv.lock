@@ -1869,7 +1869,6 @@ source = { editable = "." }
 dependencies = [
     { name = "fastapi" },
     { name = "lightgbm" },
-    { name = "mlflow" },
     { name = "pandas" },
     { name = "pyarrow" },
     { name = "pyyaml" },
@@ -1882,6 +1881,7 @@ dev = [
     { name = "httpx" },
     { name = "kaggle" },
     { name = "matplotlib" },
+    { name = "mlflow" },
     { name = "pytest" },
     { name = "ruff" },
 ]
@@ -1890,7 +1890,6 @@ dev = [
 requires-dist = [
     { name = "fastapi", specifier = ">=0.162.0" },
     { name = "lightgbm", specifier = ">=4.7.0" },
-    { name = "mlflow", specifier = ">=3" },
     { name = "pandas", specifier = ">=3.1.0" },
     { name = "pyarrow", specifier = ">=15,<26" },
     { name = "pyyaml", specifier = ">=6.0.3" },
@@ -1903,6 +1902,7 @@ dev = [
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "kaggle", specifier = ">=2.2.5" },
     { name = "matplotlib", specifier = ">=3.11.2" },
+    { name = "mlflow", specifier = ">=3" },
     { name = "pytest", specifier = ">=9.2.0" },
     { name = "ruff", specifier = ">=0.17.3" },
 ]

@@ -4,7 +4,6 @@ import json
 from pathlib import Path
 
 import lightgbm as lgb
-import mlflow
 import numpy as np
 import pandas as pd
 
@@ -39,8 +38,7 @@ def train_model(train: pd.DataFrame, valid: pd.DataFrame, p: dict) -> lgb.LGBMRe
     model.fit(
         train[cols],
         train[TARGET],
-        eval_X=valid[cols],
-        eval_y=valid[TARGET],
+        eval_set=[(valid[cols], valid[TARGET])],
         callbacks=[lgb.early_stopping(p["early_stopping_rounds"], verbose=False)],
     )
     return model
@@ -52,6 +50,8 @@ def score(model: lgb.LGBMRegressor, df: pd.DataFrame) -> dict[str, float]:
 
 
 def main() -> None:
+    import mlflow  # training-only dependency; keeps the API image free of MLflow
+
     params = load_params()
     split, model_params = params["split"], params["model"]
     df = pd.read_parquet(FEATURES)
