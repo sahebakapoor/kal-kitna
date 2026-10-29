@@ -71,11 +71,82 @@ stages:
           - 1
           - 7
           - 14
+          - 28
           windows:
           - 7
           - 28
     outs:
     - path: data/features/features.parquet
       hash: md5
-      md5: 86d5b3a39f417bdc3e2e1bcae66a5560
-      size: 21305206
+      md5: 54a2176d2f314988dbd60000147eef83
+      size: 24127943
+  baseline:
+    cmd: python -m kal_kitna.baseline
+    deps:
+    - path: data/features/features.parquet
+      hash: md5
+      md5: 54a2176d2f314988dbd60000147eef83
+      size: 24127943
+    - path: src/kal_kitna/baseline.py
+      hash: md5
+      md5: a02cea1b2896b7d6fc9870143ab41a51
+      size: 1260
+    - path: src/kal_kitna/evaluation.py
+      hash: md5
+      md5: 54944676407f67b1583b773596d92634
+      size: 1166
+    params:
+      params.yaml:
+        split:
+          valid_start: '2017-06-21'
+          test_start: '2017-07-19'
+    outs:
+    - path: reports/baseline.json
+      hash: md5
+      md5: e7499327c444ab8cae654160e9893ebf
+      size: 293
+  train:
+    cmd: python -m kal_kitna.train
+    deps:
+    - path: data/features/features.parquet
+      hash: md5
+      md5: 54a2176d2f314988dbd60000147eef83
+      size: 24127943
+    - path: reports/baseline.json
+      hash: md5
+      md5: e7499327c444ab8cae654160e9893ebf
+      size: 293
+    - path: src/kal_kitna/evaluation.py
+      hash: md5
+      md5: 54944676407f67b1583b773596d92634
+      size: 1166
+    - path: src/kal_kitna/train.py
+      hash: md5
+      md5: 50b5ed3f233131278bb5291703a47590
+      size: 3399
+    params:
+      params.yaml:
+        model:
+          objective: tweedie
+          learning_rate: 0.1
+          num_leaves: 63
+          min_child_samples: 50
+          n_estimators: 5000
+          early_stopping_rounds: 100
+          seed: 42
+        split:
+          valid_start: '2017-06-21'
+          test_start: '2017-07-19'
+    outs:
+    - path: models/model.txt
+      hash: md5
+      md5: 4310e4d7b5805cf4e3257a2225b9b85c
+      size: 9675111
+    - path: reports/importance.json
+      hash: md5
+      md5: b5cf060a16f3e098b163f7752a90151f
+      size: 655
+    - path: reports/metrics.json
+      hash: md5
+      md5: 3dc052997c132b8c92fd24a99ec3916a
+      size: 127

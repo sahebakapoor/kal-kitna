@@ -1,27 +1,32 @@
 data:
   families:
-    - BREAD/BAKERY
-    - DAIRY
-    - DELI
-    - EGGS
-    - MEATS
-    - POULTRY
-    - PRODUCE
-    - SEAFOOD
-
+  - BREAD/BAKERY
+  - DAIRY
+  - DELI
+  - EGGS
+  - MEATS
+  - POULTRY
+  - PRODUCE
+  - SEAFOOD
 split:
-  valid_start: "2017-06-21"
-  test_start: "2017-07-19"
+  valid_start: '2017-06-21'
+  test_start: '2017-07-19'
 
 model:
   objective: tweedie
-  learning_rate: 0.05
+  learning_rate: 0.1
   num_leaves: 63
   min_child_samples: 50
-  n_estimators: 2000
+  n_estimators: 5000
   early_stopping_rounds: 100
   seed: 42
 
 features:
-  lags: [1, 7, 14]
-  windows: [7, 28]
+  lags:
+  - 1
+  - 7
+  - 14
+  - 28
+  windows:
+  - 7
+  - 28

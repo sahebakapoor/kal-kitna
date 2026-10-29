@@ -1,0 +1,7 @@
+{
+  "valid_wape": 0.0817,
+  "valid_bias": 0.0075,
+  "test_wape": 0.0893,
+  "test_bias": 0.009,
+  "best_iteration": 1397
+}

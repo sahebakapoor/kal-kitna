@@ -1,0 +1,10 @@
+{
+  "last_week_valid_wape": 0.129,
+  "last_week_valid_bias": 0.0124,
+  "four_week_avg_valid_wape": 0.2321,
+  "four_week_avg_valid_bias": 0.0138,
+  "last_week_test_wape": 0.1342,
+  "last_week_test_bias": 0.0159,
+  "four_week_avg_test_wape": 0.2054,
+  "four_week_avg_test_bias": 0.028
+}
