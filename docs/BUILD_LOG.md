@@ -15,3 +15,13 @@
 - Interaction: with lag 28, lr 0.1 beat lr 0.05 (0.0817 vs 0.0823), the opposite of what happened without it.
 - Decision: lunar-ossa (lr 0.1, lags 1/7/14/28). Lowest valid WAPE and ~30% fewer trees than the first model.
 - Caveat: gaps between experiments are small and from one 4-week window; the robust result is the 37% gain over baseline.
+
+| 3 | Baseline + LightGBM + MLflow | done | test WAPE 0.134 -> 0.089 (-33.5%), bias +0.9%; 5 experiments, lag 28 + lr 0.1 won; 16 tests |
+
+### Sensitivity to goodwill (share of price lost per missed sale)
+| goodwill | Kal Kitna profit vs naive | waste cut | fill rate |
+|---|---|---|---|
+| 0.0 | | | |
+| 0.2 (default) | | | |
+| 0.5 | | | |
+Conclusion: ...
