@@ -47,7 +47,7 @@ def add_lag_features(df: pd.DataFrame, lags: list[int], windows: list[int]) -> p
 
 def add_calendar_features(df: pd.DataFrame, holidays: pd.DataFrame) -> pd.DataFrame:
     """Things the shop owner knows about tomorrow in advance."""
-    df["day_of_week"] = df["date"].dt.dayofweek
+    df["day_of_week"] = df["date"].dt.day_of_week
     df["day_of_month"] = df["date"].dt.day
     df["month"] = df["date"].dt.month
     df["is_payday"] = (df["date"].dt.day.eq(15) | df["date"].dt.is_month_end).astype(int)

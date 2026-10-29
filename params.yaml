@@ -30,3 +30,15 @@ features:
   windows:
   - 7
   - 28
+
+costs:
+  goodwill_pct: 0.2
+  families:
+    BREAD/BAKERY: {cost: 30, price: 40}
+    DAIRY: {cost: 50, price: 60}
+    DELI: {cost: 80, price: 110}
+    EGGS: {cost: 6, price: 7}
+    MEATS: {cost: 300, price: 380}
+    POULTRY: {cost: 200, price: 250}
+    PRODUCE: {cost: 30, price: 45}
+    SEAFOOD: {cost: 400, price: 520}
