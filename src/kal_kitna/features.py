@@ -40,7 +40,7 @@ def add_lag_features(df: pd.DataFrame, lags: list[int], windows: list[int]) -> p
         df[f"lag_{lag}"] = sales.shift(lag)
     for window in windows:
         df[f"mean_{window}"] = sales.transform(
-            lambda s: s.shift(1).rolling(window, min_periods=1).mean()
+            lambda s, w=window: s.shift(1).rolling(w, min_periods=1).mean()
         )
     return df
 

@@ -62,8 +62,8 @@ stages:
       size: 3489409
     - path: src/kal_kitna/features.py
       hash: md5
-      md5: 65118c56b5b02d1e3fb390e2a5d25638
-      size: 3626
+      md5: 99576fc7545e1525ff0ac1b012e50cb2
+      size: 3631
     params:
       params.yaml:
         features:
