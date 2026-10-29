@@ -1,5 +1,6 @@
 """Turn forecasts into order quantities, and measure the result in rupees."""
 
+import json
 from pathlib import Path
 
 import lightgbm as lgb
@@ -45,25 +46,79 @@ def fit_multipliers(
     return multipliers
 
 
+def policy_orders(df: pd.DataFrame, multipliers: dict[str, float]) -> dict[str, pd.Series]:
+    """Three ways to decide tomorrow's order."""
+    mult = df["family"].astype(str).map(multipliers)
+    return {
+        "naive_last_week": df["lag_7"].fillna(df["mean_28"]).fillna(0),
+        "forecast_only": df["forecast"],
+        "kal_kitna": df["forecast"] * mult,
+    }
+
+
+def simulate(df: pd.DataFrame, orders: pd.Series, costs: dict) -> dict[str, float]:
+    """Play out the orders against real demand and count the money."""
+    fam = df["family"].astype(str)
+    cost = fam.map(lambda f: costs["families"][f]["cost"])
+    price = fam.map(lambda f: costs["families"][f]["price"])
+    goodwill = costs["goodwill_pct"]
+    actual = df["sales"]
+
+    sold = np.minimum(orders, actual)
+    leftover = (orders - actual).clip(lower=0)
+    short = (actual - orders).clip(lower=0)
+    waste = leftover * cost
+    stockout = short * ((price - cost) + goodwill * price)
+    return {
+        "profit_rs": round(float((sold * price - orders * cost).sum())),
+        "waste_rs": round(float(waste.sum())),
+        "stockout_rs": round(float(stockout.sum())),
+        "mistake_cost_rs": round(float((waste + stockout).sum())),
+        "fill_rate": round(float(sold.sum() / actual.sum()), 4),
+    }
+
+
 def main() -> None:
     params = load_params()
-    split = params["split"]
+    split, costs = params["split"], params["costs"]
     df = pd.read_parquet(FEATURES)
-    _, valid, _ = time_split(df, split["valid_start"], split["test_start"])
+    _, valid, test = time_split(df, split["valid_start"], split["test_start"])
 
     booster = lgb.Booster(model_file=str(MODEL))
-    valid = predict(booster, valid)
-    ratios = family_ratios(params["costs"])
-    multipliers = fit_multipliers(valid, ratios)
+    valid, test = predict(booster, valid), predict(booster, test)
+    multipliers = fit_multipliers(valid, family_ratios(costs))
 
-    usable = valid[valid["forecast"] >= 1]
-    rel = usable["sales"] / usable["forecast"]
-    spread = rel.groupby(usable["family"], observed=True).quantile([0.2, 0.5, 0.8]).unstack()
-    print("How actual sales compare to the forecast (actual / forecast):")
-    print(spread.round(2))
-    print(f"\n{'family':<14}{'ratio':>7}{'multiplier':>12}")
-    for fam in ratios:
-        print(f"{fam:<14}{ratios[fam]:>7.3f}{multipliers[fam]:>12.3f}")
+    results = {
+        name: simulate(test, orders, costs)
+        for name, orders in policy_orders(test, multipliers).items()
+    }
+    naive, kk = results["naive_last_week"], results["kal_kitna"]
+    n_stores = test["store_nbr"].nunique()
+    headline = {
+        "waste_cut_pct": round(100 * (1 - kk["waste_rs"] / naive["waste_rs"]), 1),
+        "mistake_cost_cut_pct": round(
+            100 * (1 - kk["mistake_cost_rs"] / naive["mistake_cost_rs"]), 1
+        ),
+        "profit_gain_per_store_rs": round((kk["profit_rs"] - naive["profit_rs"]) / n_stores),
+    }
+
+    REPORTS.mkdir(exist_ok=True)
+    report = {
+        "multipliers": {f: round(m, 3) for f, m in multipliers.items()},
+        "policies": results,
+        "headline": headline,
+    }
+    (REPORTS / "business.json").write_text(json.dumps(report, indent=2))
+
+    print(f"{'policy':<18}{'profit Rs':>14}{'waste Rs':>12}{'stockout Rs':>13}{'fill rate':>11}")
+    for name, r in results.items():
+        print(
+            f"{name:<18}{r['profit_rs']:>14,}{r['waste_rs']:>12,}"
+            f"{r['stockout_rs']:>13,}{r['fill_rate']:>11.1%}"
+        )
+    print(f"\nKal Kitna vs naive over 4 test weeks, {n_stores} stores:")
+    print(f"  waste cut {headline['waste_cut_pct']}%, total mistake cost cut {headline['mistake_cost_cut_pct']}%")
+    print(f"  profit gain per store: Rs {headline['profit_gain_per_store_rs']:,}")
 
 
 if __name__ == "__main__":

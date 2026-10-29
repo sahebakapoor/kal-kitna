@@ -30,7 +30,6 @@ features:
   windows:
   - 7
   - 28
-
 costs:
   goodwill_pct: 0.2
   families:
