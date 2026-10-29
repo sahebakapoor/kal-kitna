@@ -49,3 +49,33 @@ stages:
       md5: dfa092bbf99c270087a989c251a0a5e7.dir
       size: 156978
       nfiles: 2
+  featurize:
+    cmd: python -m kal_kitna.features
+    deps:
+    - path: data/processed/holidays.parquet
+      hash: md5
+      md5: b8df8993d8080e2d9d61f2a9626acf3c
+      size: 8695
+    - path: data/processed/perishables.parquet
+      hash: md5
+      md5: 9808b454eb67ce943f7ebe0a04e4dcdb
+      size: 3489409
+    - path: src/kal_kitna/features.py
+      hash: md5
+      md5: e8d4d2d255fd21c9df5ad87b4f36fe20
+      size: 3624
+    params:
+      params.yaml:
+        features:
+          lags:
+          - 1
+          - 7
+          - 14
+          windows:
+          - 7
+          - 28
+    outs:
+    - path: data/features/features.parquet
+      hash: md5
+      md5: 86d5b3a39f417bdc3e2e1bcae66a5560
+      size: 21305206

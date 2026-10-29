@@ -18,3 +18,14 @@ stages:
     outs:
       - reports/figures:
           cache: false
+
+  featurize:
+    cmd: python -m kal_kitna.features
+    deps:
+      - data/processed/perishables.parquet
+      - data/processed/holidays.parquet
+      - src/kal_kitna/features.py
+    params:
+      - features
+    outs:
+      - data/features/features.parquet
