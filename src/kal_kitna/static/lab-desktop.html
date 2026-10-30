@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en" data-page="lab" data-layout="desktop">
+<head>
+<meta charset="utf-8">
+<script>(function(){var t=null;try{t=JSON.parse(localStorage.getItem("kk:theme"))}catch(e){}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eaf1ff">
+<title>Kal Kitna Lab · built on real grocery data</title>
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" rel="stylesheet">
+<link href="/static/kk.css?v=8" rel="stylesheet">
+<style>
+  .bar-top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 18px; height: 70px; padding: 0 36px; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .wordmark { font-size: 20px; }
+  .labtag { font-size: 11px; font-weight: 700; letter-spacing: .8px; color: var(--primary-ink); background: var(--primary-wash); padding: 4px 9px; border-radius: 7px; }
+  .tabs { display: flex; gap: 4px; margin-left: 10px; }
+  .tabs button { height: 40px; padding: 0 14px; border: 1px solid transparent; border-radius: 12px; background: none; font-size: 13.5px; color: var(--ink-2); }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button[aria-selected="true"] { background: var(--card); border-color: var(--line); color: var(--primary-ink); font-weight: 600; box-shadow: var(--shadow); }
+  .bar-top .theme-btn { margin-left: auto; }
+  .body { max-width: 1320px; margin: 0 auto; padding: 22px 36px 48px; }
+  .panel { display: none; } .panel.on { display: block; animation: fade .2s var(--ease); }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .pad { padding: 20px; }
+  .g4 { display: grid; grid-template-columns: 1.35fr 1fr 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .g21 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-top: 16px; align-items: start; }
+  .hero-res { padding: 22px; }
+  .hero-res .l { font-size: 12.5px; opacity: .9; }
+  .hero-res .v { font-size: 54px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.05; margin-top: 6px; }
+  .hero-res .s { font-size: 13px; opacity: .92; margin-top: 8px; line-height: 1.5; }
+  .kpi { padding: 18px 20px; }
+  .kpi .l { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--ink-2); }
+  .kpi .l i { font-size: 17px; color: var(--primary); }
+  .kpi .v { font-size: 30px; font-weight: 700; letter-spacing: -.6px; margin-top: 8px; }
+  .kpi .s { font-size: 12px; color: var(--ink-3); margin-top: 4px; line-height: 1.45; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+  .controls .chip-row { flex: 1; }
+  .seg { display: inline-grid; }
+  .note { font-family: var(--hand); font-size: 20px; color: var(--marigold-ink); }
+  .finding { font-size: 13px; color: var(--ink-2); line-height: 1.6; margin-top: 12px; }
+  .finding b { color: var(--ink); }
+  table.t { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .t th, .t td { padding: 10px 8px; font-size: 12.5px; text-align: left; }
+  .t th { font-size: 11px; font-weight: 500; color: var(--ink-3); }
+  .t td { border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  .t .r { text-align: right; }
+  .t tr.hl td { background: var(--leaf-wash); font-weight: 600; }
+  .t tr.hl td:first-child { border-radius: 10px 0 0 10px; } .t tr.hl td:last-child { border-radius: 0 10px 10px 0; }
+  .pipe { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+  .stage { height: 38px; padding: 0 13px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; }
+  .stage i { font-size: 16px; color: var(--primary); }
+  .pipe > .ti-arrow-right { color: var(--ink-3); }
+  .prose { font-size: 14px; line-height: 1.75; color: var(--ink-2); }
+  .prose h3 { color: var(--ink); font-size: 15px; margin: 18px 0 4px; }
+  .prose h3:first-child { margin-top: 0; }
+  .prose b { color: var(--ink); }
+  .biz { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+  .biz .card { padding: 16px; }
+  .biz b { display: block; font-size: 26px; font-weight: 700; letter-spacing: -.5px; }
+  .biz span { font-size: 12px; color: var(--ink-3); }
+  .try-top .input { width: auto; min-width: 140px; height: 42px; background-color: var(--card); font-size: 14px; }
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+  .tiles .card { padding: 16px; } .tiles b { display: block; font-size: 24px; font-weight: 700; } .tiles span { font-size: 12px; color: var(--ink-3); }
+  .missing { padding: 26px; text-align: center; color: var(--ink-2); }
+  @media (max-width: 1100px) { .g4 { grid-template-columns: 1fr 1fr; } .g2, .g21 { grid-template-columns: 1fr; } .tabs button { padding: 0 10px; } }
+</style>
+</head>
+<body>
+<header class="bar-top">
+  <a class="wordmark" href="/">Kal Kitna</a><span class="labtag">LAB</span>
+  <nav class="tabs" role="tablist" aria-label="Lab sections">
+    <button role="tab" aria-selected="true" data-tab="overview">Overview</button>
+    <button role="tab" aria-selected="false" data-tab="compare">Compare</button>
+    <button role="tab" aria-selected="false" data-tab="stores">Stores</button>
+    <button role="tab" aria-selected="false" data-tab="decisions">Decisions</button>
+    <button role="tab" aria-selected="false" data-tab="try">Try it</button>
+    <button role="tab" aria-selected="false" data-tab="built">How it was built</button>
+  </nav>
+  <button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button>
+  <nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=desktop"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=desktop" aria-current="page"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav>
+</header>
+
+<main class="body">
+  <div class="honest"><i class="ti ti-shield-check" aria-hidden="true"></i><span>Every chart here comes from the model's 4 held-out test weeks on the <b>real Kaggle grocery data</b>, summarised by the pipeline. Only totals and scores are published, never data rows, as the competition rules require. <span id="window"></span></span></div>
+
+  <!-- OVERVIEW -->
+  <section class="panel on" id="p-overview">
+    <div class="g4">
+      <div class="hero-card hero-res"><div class="l">Forecast error vs the best naive baseline</div><div class="v num" id="o-gain">–</div><div class="s" id="o-gain-s">–</div></div>
+      <div class="card kpi"><div class="l"><i class="ti ti-target-arrow" aria-hidden="true"></i>Within 10% of real sales</div><div class="v num" id="o-within">–</div><div class="s" id="o-within-s">–</div></div>
+      <div class="card kpi"><div class="l"><i class="ti ti-building-store" aria-hidden="true"></i>Stores where it wins</div><div class="v num" id="o-stores">–</div><div class="s">Lower error than "same day last week"</div></div>
+      <div class="card kpi"><div class="l"><i class="ti ti-scale" aria-hidden="true"></i>Bias</div><div class="v num" id="o-bias">–</div><div class="s" id="o-bias-s">–</div></div>
+    </div>
+    <div class="card pad" style="margin-top:16px">
+      <div class="between"><div><p class="h-title">Every test day: forecast vs what really sold</p><p class="h-sub">Hover or tap a day. Chain-wide totals across all stores.</p></div><span class="note">the closer the lines hug the bars, the less waste</span></div>
+      <div class="controls"><div class="chip-row" id="o-fams"></div><div style="display:flex;gap:6px" id="o-series"></div></div>
+      <div class="chart-box" id="o-daily" style="margin-top:12px"></div>
+    </div>
+    <div class="g2">
+      <div class="card pad"><p class="h-title">What the model leans on</p><p class="h-sub">Share of total feature importance (gain)</p><div id="o-imp" style="margin-top:12px"></div></div>
+      <div class="card pad"><p class="h-title">How the methods rank</p><p class="h-sub">Error on the test weeks · lower is better</p><div class="bars" id="o-bars" style="margin-top:14px"></div>
+        <div class="finding"><b>Read it as:</b> for every 100 units sold, the best naive rule is off by about <b id="o-lw-units">–</b>; Kal Kitna by about <b id="o-m-units">–</b>.</div></div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="panel" id="p-compare">
+    <div class="g21">
+      <div class="card pad"><div class="between"><div><p class="h-title">Product by product</p><p class="h-sub">Hover a row for all three methods</p></div><div class="seg" role="tablist"><button aria-selected="true" data-m="wape">Error</button><button aria-selected="false" data-m="bias">Bias</button></div></div>
+        <div class="chart-box" id="c-fams" style="margin-top:14px"></div></div>
+      <div>
+        <div class="card pad"><p class="h-title">How far off, how often</p><p class="h-sub">Share of store-product-days in each error band</p><div class="chart-box" id="c-err" style="margin-top:10px"></div>
+          <div class="legend" style="margin-top:6px"><span><i style="background:#4c7dff"></i>Kal Kitna</span><span><i style="background:#ffcf86"></i>Same day last week</span></div></div>
+        <div class="card pad" style="margin-top:16px"><p class="h-title">By day of the week</p><p class="h-sub">Error per weekday</p><div class="chart-box" id="c-week" style="margin-top:10px"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORES -->
+  <section class="panel" id="p-stores">
+    <div class="g21">
+      <div class="card pad"><p class="h-title">Every store, one dot</p><p class="h-sub">Below the dashed line, Kal Kitna made smaller errors than the baseline. Hover a dot.</p><div class="chart-box" id="s-scatter" style="margin-top:10px"></div></div>
+      <div class="card pad"><p class="h-title" id="s-title">–</p><p class="h-sub">Largest improvements and the stores where the baseline held up</p><table class="t" id="s-table"></table></div>
+    </div>
+  </section>
+
+  <!-- DECISIONS -->
+  <section class="panel" id="p-decisions">
+    <div class="card pad"><p class="h-title">From forecast to order, in rupees</p><p class="h-sub">The same 4 test weeks, replayed with three ordering rules at illustrative prices</p>
+      <div class="biz" id="d-head"></div>
+      <table class="t" id="d-table" style="margin-top:14px"></table>
+      <div class="finding"><b>Why order less than the forecast?</b> A spoiled unit of a perishable costs its full price; a missed sale only costs the margin. The newsvendor rule turns that imbalance into an order, per product. Try it with your own prices in the <a href="/app?view=desktop">Kirana App</a>.</div></div>
+  </section>
+
+  <!-- TRY -->
+  <section class="panel" id="p-try">
+    <div class="card pad try-top">
+      <div class="between"><div><p class="h-title">Try the model</p><p class="h-sub">The real model on simulated stores. Click a day.</p></div><select class="input" id="t-store" aria-label="Store"></select></div>
+      <div class="chip-row" id="t-chips" style="margin-top:14px"></div>
+      <div id="t-chart" style="margin-top:12px"><div class="skel" style="height:240px"></div></div>
+    </div>
+    <div class="tiles"><div class="card"><b class="num" id="t-acc">–</b><span>Forecast accuracy</span></div><div class="card"><b class="num" id="t-close">–</b><span>Days within 10%</span></div><div class="card"><b class="num" id="t-day">–</b><span id="t-day-l">Selected day</span></div><div class="card"><b class="num" id="t-sold">–</b><span>Units sold, 4 weeks</span></div></div>
+  </section>
+
+  <!-- BUILT -->
+  <section class="panel" id="p-built">
+    <div class="g2" style="margin-top:0">
+      <div class="card pad"><div class="between"><div><p class="h-title">Five experiments</p><p class="h-sub">Compared on validation only; the test weeks were read once</p></div><span class="pill t-info"><i class="ti ti-flask" aria-hidden="true"></i>DVC + MLflow</span></div><table class="t" id="b-exp"></table>
+        <div class="finding"><b>The surprise:</b> the 28-day lag helped only with the faster learning rate. An isolating run revealed the interaction.</div></div>
+      <div class="card pad prose" id="b-data">
+        <h3>The data</h3><p>Daily sales from <b>Corporación Favorita</b> (Kaggle): 54 stores, 4.5 years. Kal Kitna keeps the <b>8 families that spoil fast</b>: 727,488 rows.</p>
+        <h3>What was hiding in it</h3><p><b>Fake zeros</b> before each product's first sale, <b>Christmas Day missing</b>, a pre-Christmas spike, the <b>April 2016 earthquake</b>, and <b>paydays</b>. Each became a cleaning rule or a feature.</p>
+        <h3>Honest evaluation</h3><p>Split by date, every feature built only from earlier days (proven by tests), a fair baseline first, and the test weeks read once.</p>
+      </div>
+    </div>
+    <div class="card pad" style="margin-top:16px"><p class="h-title">One command rebuilds everything: <code style="font-size:12px;background:var(--wash);padding:3px 8px;border-radius:8px">uv run dvc repro</code></p><div class="pipe" id="b-pipe"></div></div>
+  </section>
+</main>
+
+<script src="/static/core.js?v=8"></script>
+<script src="/static/lab.js?v=8"></script>
+<script>
+(function () {
+  "use strict";
+  const K = window.KK, L = window.LAB, $ = (id) => document.getElementById(id);
+  let R = null, fam = "ALL", on = { actual: true, model: true, last_week: true, four_week: false }, metric = "wape";
+  const RUNS = [["first model", "lr 0.05, lags 1/7/14", 0.0827, 1977], ["tenor-knit", "allow 5,000 trees", 0.0826, 2276], ["dotal-nosh", "learning rate 0.1", 0.0840, 1057], ["lunar-ossa", "+ 28-day lag", 0.0817, 1397, true], ["fuggy-farl", "28-day lag at lr 0.05", 0.0823, 2691]];
+  const STAGES = [["prepare", "ti-download"], ["featurize", "ti-adjustments"], ["baseline", "ti-ruler-measure"], ["train", "ti-brain"], ["decide", "ti-scale"], ["lab", "ti-chart-dots-3"], ["export", "ti-package-export"], ["demo", "ti-building-store"]];
+  const W = () => Math.min(1248, document.querySelector(".body").clientWidth - 112);
+
+  /* Tabs, deep-linkable with #tab */
+  function tab(t) {
+    document.querySelectorAll(".tabs button").forEach((b) => b.setAttribute("aria-selected", b.dataset.tab === t));
+    document.querySelectorAll(".panel").forEach((p) => p.classList.toggle("on", p.id === "p-" + t));
+    history.replaceState(null, "", location.search + "#" + t);
+    if (t === "try") startTry();
+    if (R) draw(t);
+  }
+  document.querySelectorAll(".tabs button").forEach((b) => (b.onclick = () => tab(b.dataset.tab)));
+
+  function draw(t) {
+    if (t === "overview") overview();
+    if (t === "compare") compare();
+    if (t === "stores") storesTab();
+    if (t === "decisions") decisions();
+  }
+
+  function overview() {
+    const o = R.overall, best = Math.min(o.last_week.wape, o.four_week.wape), gain = 1 - o.model.wape / best;
+    $("o-gain").textContent = "−" + L.pct(gain);
+    $("o-gain-s").textContent = `WAPE ${o.last_week.wape.toFixed(3)} → ${o.model.wape.toFixed(3)} on ${R.window.rows.toLocaleString("en-IN")} store-product-days the model never saw.`;
+    $("o-within").textContent = L.pct(L.within10(R.errors, "model"), 0);
+    $("o-within-s").textContent = `of store-product-days, vs ${L.pct(L.within10(R.errors, "last_week"), 0)} for the baseline`;
+    const wins = R.by_store.filter((s) => s.model < s.last_week).length;
+    $("o-stores").textContent = `${wins}/${R.by_store.length}`;
+    $("o-bias").textContent = (o.model.bias >= 0 ? "+" : "") + L.pct(o.model.bias);
+    $("o-bias-s").textContent = `Leans ${o.model.bias >= 0 ? "slightly high" : "slightly low"}; baseline ${(o.last_week.bias >= 0 ? "+" : "") + L.pct(o.last_week.bias)}`;
+    $("o-fams").innerHTML = [["ALL", "All products", "ti-building-store"]].concat(K.families().filter((f) => R.daily_by_family[f]).map((f) => [f, K.look(f).name, K.look(f).icon]))
+      .map(([f, n, ic]) => `<button class="chip" aria-pressed="${f === fam}" data-f="${f}"><i class="ti ${ic}" aria-hidden="true"></i>${n}</button>`).join("");
+    $("o-fams").querySelectorAll("button").forEach((b) => (b.onclick = () => { fam = b.dataset.f; overview(); }));
+    $("o-series").innerHTML = Object.entries(L.SERIES).map(([k, s]) => `<button class="toggle" aria-pressed="${on[k]}" data-k="${k}"><i style="background:${k === "actual" ? "#9fb7ff" : s.color}"></i>${s.label}</button>`).join("");
+    $("o-series").querySelectorAll("button").forEach((b) => (b.onclick = () => { on[b.dataset.k] = !on[b.dataset.k]; if (!Object.values(on).some(Boolean)) on.model = true; overview(); }));
+    L.daily($("o-daily"), fam === "ALL" ? R.daily : R.daily_by_family[fam], on, W(), 300);
+    L.importance($("o-imp"), R.importance);
+    const rows = [["Four-week average", o.four_week.wape, "#dbe2ee"], ["Same day last week", o.last_week.wape, "#ffcf86"], ["Kal Kitna", o.model.wape, "var(--hero)"]], mx = Math.max(...rows.map((r) => r[1]));
+    $("o-bars").innerHTML = rows.map(([n, v, c]) => `<div class="b"><span${n === "Kal Kitna" ? ' style="font-weight:600"' : ""}>${n}</span><div class="track"><div class="fill" style="width:${(v / mx) * 100}%;background:${c}"></div></div><span class="v"${n === "Kal Kitna" ? ' style="color:var(--leaf)"' : ""}>${v.toFixed(3)}</span></div>`).join("");
+    $("o-lw-units").textContent = Math.round(best * 100) + " units"; $("o-m-units").textContent = Math.round(o.model.wape * 100) + " units";
+  }
+
+  function compare() {
+    const w1 = document.querySelector("#c-fams").clientWidth || 700, w2 = document.querySelector("#c-err").clientWidth || 440;
+    L.families($("c-fams"), R.by_family, metric, w1);
+    L.errors($("c-err"), R.errors, w2, 220);
+    L.weekdays($("c-week"), R.by_weekday, w2, 200);
+  }
+  document.querySelectorAll("#p-compare .seg button").forEach((b) => (b.onclick = () => { metric = b.dataset.m; document.querySelectorAll("#p-compare .seg button").forEach((x) => x.setAttribute("aria-selected", x === b)); compare(); }));
+
+  function storesTab() {
+    const rows = R.by_store, wins = rows.filter((s) => s.model < s.last_week).length;
+    $("s-title").textContent = `Wins in ${wins} of ${rows.length} stores`;
+    const w = document.querySelector("#s-scatter").clientWidth || 700;
+    const sorted = [...rows].sort((a, b) => (1 - a.model / a.last_week) < (1 - b.model / b.last_week) ? 1 : -1);
+    const table = (pick) => {
+      const list = sorted.slice(0, 6).concat(sorted.slice(-3));
+      $("s-table").innerHTML = `<tr><th>Store</th><th class="r">Kal Kitna</th><th class="r">Last week</th><th class="r">Change</th></tr>` + list.map((s) => { const ch = 1 - s.model / s.last_week; return `<tr class="${pick && pick.store === s.store ? "hl" : ""}"><td>Store ${s.store}</td><td class="r">${L.pct(s.model)}</td><td class="r">${L.pct(s.last_week)}</td><td class="r" style="color:${ch > 0 ? "var(--leaf)" : "var(--coral)"};font-weight:600">${ch > 0 ? "−" : "+"}${Math.abs(Math.round(ch * 100))}%</td></tr>`; }).join("");
+    };
+    table(); L.stores($("s-scatter"), rows, w, Math.min(460, w), table);
+  }
+
+  function decisions() {
+    const b = R.business;
+    if (!b) { $("d-head").innerHTML = '<div class="missing" style="grid-column:1/-1">Run the decide stage (<code>uv run dvc repro</code>) to see rupee results here.</div>'; $("d-table").innerHTML = ""; return; }
+    const h = b.headline;
+    $("d-head").innerHTML = `<div class="card"><b class="num" style="color:var(--leaf)">${h.waste_cut_pct}%</b><span>less waste than ordering like last week</span></div><div class="card"><b class="num">${h.mistake_cost_cut_pct}%</b><span>lower total mistake cost</span></div><div class="card"><b class="num">${K.money(h.profit_gain_per_store_rs)}</b><span>more profit per store, 4 weeks</span></div>`;
+    const P = b.policies, names = { naive_last_week: "Order like last week", forecast_only: "Order the forecast", kal_kitna: "Kal Kitna (newsvendor)" };
+    $("d-table").innerHTML = `<tr><th>Rule</th><th class="r">Profit</th><th class="r">Waste</th><th class="r">Stockouts</th><th class="r">Fill rate</th></tr>` + Object.keys(names).filter((k) => P[k]).map((k) => `<tr class="${k === "kal_kitna" ? "hl" : ""}"><td>${names[k]}</td><td class="r">${K.money(P[k].profit_rs)}</td><td class="r">${K.money(P[k].waste_rs)}</td><td class="r">${K.money(P[k].stockout_rs)}</td><td class="r">${L.pct(P[k].fill_rate)}</td></tr>`).join("");
+  }
+
+  /* Built tab (static) */
+  $("b-exp").innerHTML = `<tr><th>Run</th><th>Change</th><th class="r">Valid WAPE</th><th class="r">Trees</th></tr>` + RUNS.map(([n, c, w, t, win]) => `<tr class="${win ? "hl" : ""}"><td>${n}${win ? ' <i class="ti ti-trophy" style="color:var(--marigold-ink)" aria-label="winner"></i>' : ""}</td><td>${c}</td><td class="r">${w.toFixed(4)}</td><td class="r">${t.toLocaleString("en-IN")}</td></tr>`).join("");
+  $("b-pipe").innerHTML = STAGES.map(([n, ic]) => `<span class="stage"><i class="ti ${ic}" aria-hidden="true"></i>${n}</span>`).join('<i class="ti ti-arrow-right" aria-hidden="true"></i>');
+
+  /* Try it: the demo stores */
+  let started = false, tf = "DAIRY", sel = null;
+  async function startTry() {
+    if (started) return; started = true;
+    try {
+      await K.init(); tf = K.S.family;
+      $("t-store").innerHTML = K.S.opts.stores.map((s) => `<option value="${s}">Store ${s}</option>`).join(""); $("t-store").value = K.S.store;
+      $("t-store").onchange = (e) => { K.setStore(e.target.value); tryDraw(); };
+      tryDraw();
+    } catch (e) { $("t-chart").innerHTML = `<div class="empty"><i class="ti ti-wifi-off" aria-hidden="true"></i>${K.esc(e.message)}</div>`; }
+  }
+  async function tryDraw() {
+    $("t-chips").innerHTML = K.families().map((f) => `<button class="chip" aria-pressed="${f === tf}" data-f="${f}"><i class="ti ${K.look(f).icon}" aria-hidden="true"></i>${K.look(f).name}</button>`).join("");
+    $("t-chips").querySelectorAll("button").forEach((b) => (b.onclick = () => { tf = b.dataset.f; tryDraw(); }));
+    const s = await K.loadSeries(tf); sel = sel && s.some((d) => d.date === sel) ? sel : s[s.length - 1].date;
+    $("t-chart").innerHTML = K.chart(s, sel, W(), 260);
+    $("t-chart").querySelectorAll("[data-date]").forEach((r) => (r.onclick = () => { sel = r.dataset.date; tryDraw(); }));
+    const ins = K.insights(tf, s), d = s.find((x) => x.date === sel);
+    $("t-acc").textContent = ins.accuracy == null ? "–" : Math.round(ins.accuracy * 100) + "%"; $("t-close").textContent = `${ins.close}/${ins.days}`; $("t-sold").textContent = K.fmt(ins.sold);
+    $("t-day").textContent = `${K.fmt(d.forecast)} → ${K.fmt(d.actual)}`; $("t-day-l").textContent = `${K.short(sel)}: forecast → sold`;
+  }
+
+  window.addEventListener("resize", K.debounce(() => { if (!R) return; const t = document.querySelector(".tabs [aria-selected='true']").dataset.tab; draw(t); }, 200));
+
+  (async function boot() {
+    K.fitLayout("desktop", "/lab");
+    K.decorate();
+    const start = (location.hash || "#overview").slice(1);
+    try {
+      R = await L.load();
+      $("window").textContent = `Test window: ${K.short(R.window.start)} to ${K.short(R.window.end)}, ${R.window.stores} stores.`;
+    } catch (e) {
+      document.querySelectorAll("#p-overview,#p-compare,#p-stores,#p-decisions").forEach((p) => (p.innerHTML = `<div class="card missing" style="margin-top:16px"><i class="ti ti-database-off" style="font-size:30px;display:block;margin-bottom:8px;color:var(--ink-3)" aria-hidden="true"></i>${K.esc(e.message)}</div>`));
+    }
+    tab(document.querySelector(`.tabs button[data-tab="${start}"]`) ? start : "overview");
+  })();
+})();
+</script>
+</body>
+</html>

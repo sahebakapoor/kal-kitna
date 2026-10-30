@@ -20,7 +20,10 @@ RUN uv sync --frozen --no-dev --no-install-project
 # Then the code and the serving bundle
 COPY src ./src
 RUN uv sync --frozen --no-dev
-COPY models/serving ./models/serving
+# Public image: simulated demo stores + Lab summary only, never real data rows
+COPY models/demo ./models/demo
+COPY models/lab.json ./models/lab.json
+ENV KAL_KITNA_BUNDLE=models/demo
 
 # Never run as root
 RUN useradd --create-home appuser

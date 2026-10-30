@@ -1,0 +1,2372 @@
+{
+ "window": {
+  "start": "2017-07-19",
+  "end": "2017-08-15",
+  "rows": 12096,
+  "stores": 54,
+  "families": 8
+ },
+ "overall": {
+  "model": {
+   "wape": 0.0893,
+   "bias": 0.009
+  },
+  "last_week": {
+   "wape": 0.1342,
+   "bias": 0.0159
+  },
+  "four_week": {
+   "wape": 0.2054,
+   "bias": 0.028
+  }
+ },
+ "by_family": {
+  "BREAD/BAKERY": {
+   "model": {
+    "wape": 0.0921,
+    "bias": 0.0058
+   },
+   "last_week": {
+    "wape": 0.1375,
+    "bias": 0.009
+   },
+   "four_week": {
+    "wape": 0.1686,
+    "bias": 0.02
+   },
+   "units": 807316
+  },
+  "DAIRY": {
+   "model": {
+    "wape": 0.0783,
+    "bias": 0.0169
+   },
+   "last_week": {
+    "wape": 0.13,
+    "bias": 0.02
+   },
+   "four_week": {
+    "wape": 0.1735,
+    "bias": 0.0419
+   },
+   "units": 1271565
+  },
+  "DELI": {
+   "model": {
+    "wape": 0.1088,
+    "bias": 0.0302
+   },
+   "last_week": {
+    "wape": 0.1755,
+    "bias": 0.0258
+   },
+   "four_week": {
+    "wape": 0.1968,
+    "bias": 0.0407
+   },
+   "units": 459104
+  },
+  "EGGS": {
+   "model": {
+    "wape": 0.1605,
+    "bias": -0.0014
+   },
+   "last_week": {
+    "wape": 0.2086,
+    "bias": 0.0093
+   },
+   "four_week": {
+    "wape": 0.2775,
+    "bias": 0.011
+   },
+   "units": 297322
+  },
+  "MEATS": {
+   "model": {
+    "wape": 0.1169,
+    "bias": 0.0006
+   },
+   "last_week": {
+    "wape": 0.1714,
+    "bias": 0.0079
+   },
+   "four_week": {
+    "wape": 0.2503,
+    "bias": 0.0081
+   },
+   "units": 569872
+  },
+  "POULTRY": {
+   "model": {
+    "wape": 0.1045,
+    "bias": 0.0129
+   },
+   "last_week": {
+    "wape": 0.1627,
+    "bias": 0.0249
+   },
+   "four_week": {
+    "wape": 0.231,
+    "bias": 0.0314
+   },
+   "units": 576592
+  },
+  "PRODUCE": {
+   "model": {
+    "wape": 0.0759,
+    "bias": 0.0056
+   },
+   "last_week": {
+    "wape": 0.1107,
+    "bias": 0.0152
+   },
+   "four_week": {
+    "wape": 0.2082,
+    "bias": 0.0273
+   },
+   "units": 3472466
+  },
+  "SEAFOOD": {
+   "model": {
+    "wape": 0.2103,
+    "bias": 0.0154
+   },
+   "last_week": {
+    "wape": 0.3035,
+    "bias": 0.0065
+   },
+   "four_week": {
+    "wape": 0.2894,
+    "bias": 0.0239
+   },
+   "units": 30149
+  }
+ },
+ "by_store": [
+  {
+   "store": 1,
+   "model": 0.0899,
+   "last_week": 0.1482
+  },
+  {
+   "store": 2,
+   "model": 0.0683,
+   "last_week": 0.103
+  },
+  {
+   "store": 3,
+   "model": 0.0573,
+   "last_week": 0.083
+  },
+  {
+   "store": 4,
+   "model": 0.0795,
+   "last_week": 0.1324
+  },
+  {
+   "store": 5,
+   "model": 0.0865,
+   "last_week": 0.1159
+  },
+  {
+   "store": 6,
+   "model": 0.0663,
+   "last_week": 0.1034
+  },
+  {
+   "store": 7,
+   "model": 0.0659,
+   "last_week": 0.0834
+  },
+  {
+   "store": 8,
+   "model": 0.0598,
+   "last_week": 0.1118
+  },
+  {
+   "store": 9,
+   "model": 0.0894,
+   "last_week": 0.1564
+  },
+  {
+   "store": 10,
+   "model": 0.1574,
+   "last_week": 0.2305
+  },
+  {
+   "store": 11,
+   "model": 0.1396,
+   "last_week": 0.1895
+  },
+  {
+   "store": 12,
+   "model": 0.1253,
+   "last_week": 0.1619
+  },
+  {
+   "store": 13,
+   "model": 0.1503,
+   "last_week": 0.2217
+  },
+  {
+   "store": 14,
+   "model": 0.1601,
+   "last_week": 0.2158
+  },
+  {
+   "store": 15,
+   "model": 0.1353,
+   "last_week": 0.1529
+  },
+  {
+   "store": 16,
+   "model": 0.1333,
+   "last_week": 0.2066
+  },
+  {
+   "store": 17,
+   "model": 0.0965,
+   "last_week": 0.1414
+  },
+  {
+   "store": 18,
+   "model": 0.1171,
+   "last_week": 0.1594
+  },
+  {
+   "store": 19,
+   "model": 0.126,
+   "last_week": 0.1602
+  },
+  {
+   "store": 20,
+   "model": 0.0974,
+   "last_week": 0.1712
+  },
+  {
+   "store": 21,
+   "model": 0.1178,
+   "last_week": 0.1653
+  },
+  {
+   "store": 22,
+   "model": 0.2436,
+   "last_week": 0.2486
+  },
+  {
+   "store": 23,
+   "model": 0.1303,
+   "last_week": 0.1635
+  },
+  {
+   "store": 24,
+   "model": 0.0779,
+   "last_week": 0.122
+  },
+  {
+   "store": 25,
+   "model": 0.1458,
+   "last_week": 0.2245
+  },
+  {
+   "store": 26,
+   "model": 0.1572,
+   "last_week": 0.2495
+  },
+  {
+   "store": 27,
+   "model": 0.0898,
+   "last_week": 0.1501
+  },
+  {
+   "store": 28,
+   "model": 0.1563,
+   "last_week": 0.2555
+  },
+  {
+   "store": 29,
+   "model": 0.1281,
+   "last_week": 0.2174
+  },
+  {
+   "store": 30,
+   "model": 0.1409,
+   "last_week": 0.182
+  },
+  {
+   "store": 31,
+   "model": 0.0859,
+   "last_week": 0.1411
+  },
+  {
+   "store": 32,
+   "model": 0.1832,
+   "last_week": 0.2519
+  },
+  {
+   "store": 33,
+   "model": 0.1254,
+   "last_week": 0.1804
+  },
+  {
+   "store": 34,
+   "model": 0.1145,
+   "last_week": 0.1741
+  },
+  {
+   "store": 35,
+   "model": 0.1756,
+   "last_week": 0.2468
+  },
+  {
+   "store": 36,
+   "model": 0.1368,
+   "last_week": 0.1548
+  },
+  {
+   "store": 37,
+   "model": 0.0808,
+   "last_week": 0.107
+  },
+  {
+   "store": 38,
+   "model": 0.1035,
+   "last_week": 0.1299
+  },
+  {
+   "store": 39,
+   "model": 0.1239,
+   "last_week": 0.1469
+  },
+  {
+   "store": 40,
+   "model": 0.1069,
+   "last_week": 0.1471
+  },
+  {
+   "store": 41,
+   "model": 0.0776,
+   "last_week": 0.1143
+  },
+  {
+   "store": 42,
+   "model": 0.0796,
+   "last_week": 0.1094
+  },
+  {
+   "store": 43,
+   "model": 0.1364,
+   "last_week": 0.1722
+  },
+  {
+   "store": 44,
+   "model": 0.0587,
+   "last_week": 0.0933
+  },
+  {
+   "store": 45,
+   "model": 0.0564,
+   "last_week": 0.103
+  },
+  {
+   "store": 46,
+   "model": 0.0752,
+   "last_week": 0.1398
+  },
+  {
+   "store": 47,
+   "model": 0.0642,
+   "last_week": 0.1185
+  },
+  {
+   "store": 48,
+   "model": 0.0777,
+   "last_week": 0.1661
+  },
+  {
+   "store": 49,
+   "model": 0.0743,
+   "last_week": 0.0976
+  },
+  {
+   "store": 50,
+   "model": 0.0782,
+   "last_week": 0.1255
+  },
+  {
+   "store": 51,
+   "model": 0.0881,
+   "last_week": 0.1292
+  },
+  {
+   "store": 52,
+   "model": 0.0899,
+   "last_week": 0.1183
+  },
+  {
+   "store": 53,
+   "model": 0.0879,
+   "last_week": 0.1256
+  },
+  {
+   "store": 54,
+   "model": 0.1131,
+   "last_week": 0.1674
+  }
+ ],
+ "by_weekday": [
+  {
+   "day": 0,
+   "model": 0.0903,
+   "last_week": 0.1136,
+   "four_week": 0.1313
+  },
+  {
+   "day": 1,
+   "model": 0.0948,
+   "last_week": 0.1738,
+   "four_week": 0.2384
+  },
+  {
+   "day": 2,
+   "model": 0.0749,
+   "last_week": 0.1345,
+   "four_week": 0.2267
+  },
+  {
+   "day": 3,
+   "model": 0.0965,
+   "last_week": 0.14,
+   "four_week": 0.3483
+  },
+  {
+   "day": 4,
+   "model": 0.0975,
+   "last_week": 0.1247,
+   "four_week": 0.2012
+  },
+  {
+   "day": 5,
+   "model": 0.0945,
+   "last_week": 0.13,
+   "four_week": 0.1244
+  },
+  {
+   "day": 6,
+   "model": 0.0805,
+   "last_week": 0.1263,
+   "four_week": 0.2004
+  }
+ ],
+ "daily": [
+  {
+   "date": "2017-07-19",
+   "actual": 278943,
+   "model": 285240,
+   "last_week": 281817,
+   "four_week": 280223
+  },
+  {
+   "date": "2017-07-20",
+   "actual": 215700,
+   "model": 211141,
+   "last_week": 202782,
+   "four_week": 279904
+  },
+  {
+   "date": "2017-07-21",
+   "actual": 264745,
+   "model": 263081,
+   "last_week": 263645,
+   "four_week": 280392
+  },
+  {
+   "date": "2017-07-22",
+   "actual": 284866,
+   "model": 291773,
+   "last_week": 293755,
+   "four_week": 280241
+  },
+  {
+   "date": "2017-07-23",
+   "actual": 323365,
+   "model": 323824,
+   "last_week": 346813,
+   "four_week": 279511
+  },
+  {
+   "date": "2017-07-24",
+   "actual": 264176,
+   "model": 255771,
+   "last_week": 265481,
+   "four_week": 278497
+  },
+  {
+   "date": "2017-07-25",
+   "actual": 238378,
+   "model": 243678,
+   "last_week": 242297,
+   "four_week": 278907
+  },
+  {
+   "date": "2017-07-26",
+   "actual": 269748,
+   "model": 272955,
+   "last_week": 278943,
+   "four_week": 278937
+  },
+  {
+   "date": "2017-07-27",
+   "actual": 199184,
+   "model": 201001,
+   "last_week": 215700,
+   "four_week": 278547
+  },
+  {
+   "date": "2017-07-28",
+   "actual": 266072,
+   "model": 256920,
+   "last_week": 264745,
+   "four_week": 278351
+  },
+  {
+   "date": "2017-07-29",
+   "actual": 291551,
+   "model": 298171,
+   "last_week": 284866,
+   "four_week": 278107
+  },
+  {
+   "date": "2017-07-30",
+   "actual": 326027,
+   "model": 331288,
+   "last_week": 323365,
+   "four_week": 275851
+  },
+  {
+   "date": "2017-07-31",
+   "actual": 269371,
+   "model": 278828,
+   "last_week": 264176,
+   "four_week": 273376
+  },
+  {
+   "date": "2017-08-01",
+   "actual": 295306,
+   "model": 276952,
+   "last_week": 238378,
+   "four_week": 272507
+  },
+  {
+   "date": "2017-08-02",
+   "actual": 317556,
+   "model": 320384,
+   "last_week": 269748,
+   "four_week": 273394
+  },
+  {
+   "date": "2017-08-03",
+   "actual": 220561,
+   "model": 233654,
+   "last_week": 199184,
+   "four_week": 273780
+  },
+  {
+   "date": "2017-08-04",
+   "actual": 272500,
+   "model": 264136,
+   "last_week": 266072,
+   "four_week": 273714
+  },
+  {
+   "date": "2017-08-05",
+   "actual": 290455,
+   "model": 302516,
+   "last_week": 291551,
+   "four_week": 273610
+  },
+  {
+   "date": "2017-08-06",
+   "actual": 325940,
+   "model": 326753,
+   "last_week": 326027,
+   "four_week": 273047
+  },
+  {
+   "date": "2017-08-07",
+   "actual": 254797,
+   "model": 262332,
+   "last_week": 269371,
+   "four_week": 272179
+  },
+  {
+   "date": "2017-08-08",
+   "actual": 237889,
+   "model": 244048,
+   "last_week": 295306,
+   "four_week": 271897
+  },
+  {
+   "date": "2017-08-09",
+   "actual": 267768,
+   "model": 272373,
+   "last_week": 317556,
+   "four_week": 271561
+  },
+  {
+   "date": "2017-08-10",
+   "actual": 203995,
+   "model": 201621,
+   "last_week": 220561,
+   "four_week": 271060
+  },
+  {
+   "date": "2017-08-11",
+   "actual": 273495,
+   "model": 280601,
+   "last_week": 272500,
+   "four_week": 271103
+  },
+  {
+   "date": "2017-08-12",
+   "actual": 245234,
+   "model": 272894,
+   "last_week": 290455,
+   "four_week": 271455
+  },
+  {
+   "date": "2017-08-13",
+   "actual": 278630,
+   "model": 282752,
+   "last_week": 325940,
+   "four_week": 269722
+  },
+  {
+   "date": "2017-08-14",
+   "actual": 252117,
+   "model": 248169,
+   "last_week": 254797,
+   "four_week": 267287
+  },
+  {
+   "date": "2017-08-15",
+   "actual": 256019,
+   "model": 248841,
+   "last_week": 237889,
+   "four_week": 266809
+  }
+ ],
+ "daily_by_family": {
+  "BREAD/BAKERY": [
+   {
+    "date": "2017-07-19",
+    "actual": 25960,
+    "model": 26793,
+    "last_week": 26800,
+    "four_week": 30205
+   },
+   {
+    "date": "2017-07-20",
+    "actual": 23985,
+    "model": 23574,
+    "last_week": 23351,
+    "four_week": 30151
+   },
+   {
+    "date": "2017-07-21",
+    "actual": 25577,
+    "model": 26398,
+    "last_week": 26527,
+    "four_week": 30171
+   },
+   {
+    "date": "2017-07-22",
+    "actual": 30156,
+    "model": 31234,
+    "last_week": 31756,
+    "four_week": 30104
+   },
+   {
+    "date": "2017-07-23",
+    "actual": 35512,
+    "model": 37461,
+    "last_week": 39648,
+    "four_week": 29962
+   },
+   {
+    "date": "2017-07-24",
+    "actual": 29498,
+    "model": 28525,
+    "last_week": 29796,
+    "four_week": 29741
+   },
+   {
+    "date": "2017-07-25",
+    "actual": 25604,
+    "model": 25516,
+    "last_week": 25287,
+    "four_week": 29770
+   },
+   {
+    "date": "2017-07-26",
+    "actual": 25294,
+    "model": 25740,
+    "last_week": 25960,
+    "four_week": 29769
+   },
+   {
+    "date": "2017-07-27",
+    "actual": 22203,
+    "model": 22552,
+    "last_week": 23985,
+    "four_week": 29725
+   },
+   {
+    "date": "2017-07-28",
+    "actual": 26636,
+    "model": 25217,
+    "last_week": 25577,
+    "four_week": 29656
+   },
+   {
+    "date": "2017-07-29",
+    "actual": 32232,
+    "model": 32131,
+    "last_week": 30156,
+    "four_week": 29621
+   },
+   {
+    "date": "2017-07-30",
+    "actual": 37865,
+    "model": 38376,
+    "last_week": 35512,
+    "four_week": 29404
+   },
+   {
+    "date": "2017-07-31",
+    "actual": 30382,
+    "model": 31607,
+    "last_week": 29498,
+    "four_week": 29155
+   },
+   {
+    "date": "2017-08-01",
+    "actual": 31076,
+    "model": 29950,
+    "last_week": 25604,
+    "four_week": 29073
+   },
+   {
+    "date": "2017-08-02",
+    "actual": 29808,
+    "model": 30192,
+    "last_week": 25294,
+    "four_week": 29154
+   },
+   {
+    "date": "2017-08-03",
+    "actual": 24496,
+    "model": 25827,
+    "last_week": 22203,
+    "four_week": 29191
+   },
+   {
+    "date": "2017-08-04",
+    "actual": 28771,
+    "model": 26236,
+    "last_week": 26636,
+    "four_week": 29181
+   },
+   {
+    "date": "2017-08-05",
+    "actual": 32727,
+    "model": 33437,
+    "last_week": 32232,
+    "four_week": 29207
+   },
+   {
+    "date": "2017-08-06",
+    "actual": 38118,
+    "model": 37852,
+    "last_week": 37865,
+    "four_week": 29198
+   },
+   {
+    "date": "2017-08-07",
+    "actual": 29332,
+    "model": 29977,
+    "last_week": 30382,
+    "four_week": 29108
+   },
+   {
+    "date": "2017-08-08",
+    "actual": 26227,
+    "model": 26293,
+    "last_week": 31076,
+    "four_week": 29094
+   },
+   {
+    "date": "2017-08-09",
+    "actual": 25880,
+    "model": 26295,
+    "last_week": 29808,
+    "four_week": 29094
+   },
+   {
+    "date": "2017-08-10",
+    "actual": 23947,
+    "model": 23089,
+    "last_week": 24496,
+    "four_week": 29061
+   },
+   {
+    "date": "2017-08-11",
+    "actual": 28204,
+    "model": 29291,
+    "last_week": 28771,
+    "four_week": 29082
+   },
+   {
+    "date": "2017-08-12",
+    "actual": 27404,
+    "model": 30432,
+    "last_week": 32727,
+    "four_week": 29142
+   },
+   {
+    "date": "2017-08-13",
+    "actual": 33263,
+    "model": 33262,
+    "last_week": 38118,
+    "four_week": 28987
+   },
+   {
+    "date": "2017-08-14",
+    "actual": 28002,
+    "model": 28259,
+    "last_week": 29332,
+    "four_week": 28759
+   },
+   {
+    "date": "2017-08-15",
+    "actual": 29158,
+    "model": 26515,
+    "last_week": 26227,
+    "four_week": 28694
+   }
+  ],
+  "DAIRY": [
+   {
+    "date": "2017-07-19",
+    "actual": 44636,
+    "model": 45273,
+    "last_week": 45493,
+    "four_week": 49064
+   },
+   {
+    "date": "2017-07-20",
+    "actual": 37492,
+    "model": 36014,
+    "last_week": 34485,
+    "four_week": 48974
+   },
+   {
+    "date": "2017-07-21",
+    "actual": 41364,
+    "model": 41809,
+    "last_week": 40997,
+    "four_week": 48999
+   },
+   {
+    "date": "2017-07-22",
+    "actual": 51050,
+    "model": 52858,
+    "last_week": 53472,
+    "four_week": 48903
+   },
+   {
+    "date": "2017-07-23",
+    "actual": 57689,
+    "model": 60293,
+    "last_week": 63760,
+    "four_week": 48686
+   },
+   {
+    "date": "2017-07-24",
+    "actual": 47914,
+    "model": 44573,
+    "last_week": 45904,
+    "four_week": 48299
+   },
+   {
+    "date": "2017-07-25",
+    "actual": 39929,
+    "model": 40109,
+    "last_week": 40025,
+    "four_week": 48336
+   },
+   {
+    "date": "2017-07-26",
+    "actual": 42966,
+    "model": 43497,
+    "last_week": 44636,
+    "four_week": 48352
+   },
+   {
+    "date": "2017-07-27",
+    "actual": 33693,
+    "model": 34558,
+    "last_week": 37492,
+    "four_week": 48263
+   },
+   {
+    "date": "2017-07-28",
+    "actual": 41282,
+    "model": 39920,
+    "last_week": 41364,
+    "four_week": 48189
+   },
+   {
+    "date": "2017-07-29",
+    "actual": 53084,
+    "model": 53524,
+    "last_week": 51050,
+    "four_week": 48089
+   },
+   {
+    "date": "2017-07-30",
+    "actual": 59432,
+    "model": 60785,
+    "last_week": 57689,
+    "four_week": 47601
+   },
+   {
+    "date": "2017-07-31",
+    "actual": 46493,
+    "model": 49665,
+    "last_week": 47914,
+    "four_week": 47024
+   },
+   {
+    "date": "2017-08-01",
+    "actual": 48765,
+    "model": 47825,
+    "last_week": 39929,
+    "four_week": 46796
+   },
+   {
+    "date": "2017-08-02",
+    "actual": 50997,
+    "model": 51745,
+    "last_week": 42966,
+    "four_week": 46900
+   },
+   {
+    "date": "2017-08-03",
+    "actual": 38537,
+    "model": 39962,
+    "last_week": 33693,
+    "four_week": 46944
+   },
+   {
+    "date": "2017-08-04",
+    "actual": 42872,
+    "model": 43968,
+    "last_week": 41282,
+    "four_week": 46929
+   },
+   {
+    "date": "2017-08-05",
+    "actual": 52289,
+    "model": 54279,
+    "last_week": 53084,
+    "four_week": 46883
+   },
+   {
+    "date": "2017-08-06",
+    "actual": 60062,
+    "model": 60223,
+    "last_week": 59432,
+    "four_week": 46700
+   },
+   {
+    "date": "2017-08-07",
+    "actual": 44167,
+    "model": 46007,
+    "last_week": 46493,
+    "four_week": 46486
+   },
+   {
+    "date": "2017-08-08",
+    "actual": 38198,
+    "model": 40470,
+    "last_week": 48765,
+    "four_week": 46408
+   },
+   {
+    "date": "2017-08-09",
+    "actual": 42374,
+    "model": 43215,
+    "last_week": 50997,
+    "four_week": 46323
+   },
+   {
+    "date": "2017-08-10",
+    "actual": 34648,
+    "model": 34357,
+    "last_week": 38537,
+    "four_week": 46212
+   },
+   {
+    "date": "2017-08-11",
+    "actual": 44909,
+    "model": 44871,
+    "last_week": 42872,
+    "four_week": 46218
+   },
+   {
+    "date": "2017-08-12",
+    "actual": 42854,
+    "model": 48977,
+    "last_week": 52289,
+    "four_week": 46357
+   },
+   {
+    "date": "2017-08-13",
+    "actual": 50112,
+    "model": 51347,
+    "last_week": 60062,
+    "four_week": 45978
+   },
+   {
+    "date": "2017-08-14",
+    "actual": 43050,
+    "model": 42732,
+    "last_week": 44167,
+    "four_week": 45491
+   },
+   {
+    "date": "2017-08-15",
+    "actual": 40707,
+    "model": 40227,
+    "last_week": 38198,
+    "four_week": 45389
+   }
+  ],
+  "DELI": [
+   {
+    "date": "2017-07-19",
+    "actual": 13757,
+    "model": 14232,
+    "last_week": 13927,
+    "four_week": 17342
+   },
+   {
+    "date": "2017-07-20",
+    "actual": 13044,
+    "model": 13199,
+    "last_week": 12447,
+    "four_week": 17371
+   },
+   {
+    "date": "2017-07-21",
+    "actual": 17967,
+    "model": 17845,
+    "last_week": 18885,
+    "four_week": 17415
+   },
+   {
+    "date": "2017-07-22",
+    "actual": 18260,
+    "model": 19039,
+    "last_week": 19584,
+    "four_week": 17403
+   },
+   {
+    "date": "2017-07-23",
+    "actual": 20733,
+    "model": 21132,
+    "last_week": 22570,
+    "four_week": 17371
+   },
+   {
+    "date": "2017-07-24",
+    "actual": 15982,
+    "model": 16056,
+    "last_week": 16760,
+    "four_week": 17333
+   },
+   {
+    "date": "2017-07-25",
+    "actual": 14123,
+    "model": 14476,
+    "last_week": 14637,
+    "four_week": 17387
+   },
+   {
+    "date": "2017-07-26",
+    "actual": 13176,
+    "model": 13503,
+    "last_week": 13757,
+    "four_week": 17419
+   },
+   {
+    "date": "2017-07-27",
+    "actual": 11554,
+    "model": 12139,
+    "last_week": 13044,
+    "four_week": 17440
+   },
+   {
+    "date": "2017-07-28",
+    "actual": 18127,
+    "model": 17724,
+    "last_week": 17967,
+    "four_week": 17412
+   },
+   {
+    "date": "2017-07-29",
+    "actual": 19142,
+    "model": 19960,
+    "last_week": 18260,
+    "four_week": 17384
+   },
+   {
+    "date": "2017-07-30",
+    "actual": 21337,
+    "model": 22185,
+    "last_week": 20733,
+    "four_week": 17215
+   },
+   {
+    "date": "2017-07-31",
+    "actual": 16678,
+    "model": 18183,
+    "last_week": 15982,
+    "four_week": 17024
+   },
+   {
+    "date": "2017-08-01",
+    "actual": 18713,
+    "model": 19268,
+    "last_week": 14123,
+    "four_week": 16930
+   },
+   {
+    "date": "2017-08-02",
+    "actual": 16546,
+    "model": 17329,
+    "last_week": 13176,
+    "four_week": 17001
+   },
+   {
+    "date": "2017-08-03",
+    "actual": 14424,
+    "model": 14970,
+    "last_week": 11554,
+    "four_week": 17021
+   },
+   {
+    "date": "2017-08-04",
+    "actual": 18881,
+    "model": 19249,
+    "last_week": 18127,
+    "four_week": 17015
+   },
+   {
+    "date": "2017-08-05",
+    "actual": 18866,
+    "model": 20309,
+    "last_week": 19142,
+    "four_week": 16992
+   },
+   {
+    "date": "2017-08-06",
+    "actual": 21537,
+    "model": 21486,
+    "last_week": 21337,
+    "four_week": 16934
+   },
+   {
+    "date": "2017-08-07",
+    "actual": 15486,
+    "model": 16439,
+    "last_week": 16678,
+    "four_week": 16882
+   },
+   {
+    "date": "2017-08-08",
+    "actual": 13814,
+    "model": 14400,
+    "last_week": 18713,
+    "four_week": 16849
+   },
+   {
+    "date": "2017-08-09",
+    "actual": 13164,
+    "model": 13456,
+    "last_week": 16546,
+    "four_week": 16820
+   },
+   {
+    "date": "2017-08-10",
+    "actual": 12231,
+    "model": 12296,
+    "last_week": 14424,
+    "four_week": 16793
+   },
+   {
+    "date": "2017-08-11",
+    "actual": 18680,
+    "model": 19098,
+    "last_week": 18881,
+    "four_week": 16785
+   },
+   {
+    "date": "2017-08-12",
+    "actual": 15690,
+    "model": 17579,
+    "last_week": 18866,
+    "four_week": 16778
+   },
+   {
+    "date": "2017-08-13",
+    "actual": 17593,
+    "model": 18167,
+    "last_week": 21537,
+    "four_week": 16639
+   },
+   {
+    "date": "2017-08-14",
+    "actual": 14663,
+    "model": 14916,
+    "last_week": 15486,
+    "four_week": 16461
+   },
+   {
+    "date": "2017-08-15",
+    "actual": 14935,
+    "model": 14341,
+    "last_week": 13814,
+    "four_week": 16386
+   }
+  ],
+  "EGGS": [
+   {
+    "date": "2017-07-19",
+    "actual": 9150,
+    "model": 8894,
+    "last_week": 8438,
+    "four_week": 10724
+   },
+   {
+    "date": "2017-07-20",
+    "actual": 7977,
+    "model": 7812,
+    "last_week": 7054,
+    "four_week": 10727
+   },
+   {
+    "date": "2017-07-21",
+    "actual": 9735,
+    "model": 9138,
+    "last_week": 9050,
+    "four_week": 10763
+   },
+   {
+    "date": "2017-07-22",
+    "actual": 10622,
+    "model": 11191,
+    "last_week": 11266,
+    "four_week": 10798
+   },
+   {
+    "date": "2017-07-23",
+    "actual": 13476,
+    "model": 13205,
+    "last_week": 13650,
+    "four_week": 10766
+   },
+   {
+    "date": "2017-07-24",
+    "actual": 14347,
+    "model": 14194,
+    "last_week": 15264,
+    "four_week": 10741
+   },
+   {
+    "date": "2017-07-25",
+    "actual": 8981,
+    "model": 8823,
+    "last_week": 8935,
+    "four_week": 10769
+   },
+   {
+    "date": "2017-07-26",
+    "actual": 8386,
+    "model": 8769,
+    "last_week": 9150,
+    "four_week": 10790
+   },
+   {
+    "date": "2017-07-27",
+    "actual": 7530,
+    "model": 7381,
+    "last_week": 7977,
+    "four_week": 10792
+   },
+   {
+    "date": "2017-07-28",
+    "actual": 10450,
+    "model": 9085,
+    "last_week": 9735,
+    "four_week": 10807
+   },
+   {
+    "date": "2017-07-29",
+    "actual": 11091,
+    "model": 11616,
+    "last_week": 10622,
+    "four_week": 10857
+   },
+   {
+    "date": "2017-07-30",
+    "actual": 13048,
+    "model": 13797,
+    "last_week": 13476,
+    "four_week": 10780
+   },
+   {
+    "date": "2017-07-31",
+    "actual": 15017,
+    "model": 15211,
+    "last_week": 14347,
+    "four_week": 10679
+   },
+   {
+    "date": "2017-08-01",
+    "actual": 11871,
+    "model": 11138,
+    "last_week": 8981,
+    "four_week": 10628
+   },
+   {
+    "date": "2017-08-02",
+    "actual": 9919,
+    "model": 10555,
+    "last_week": 8386,
+    "four_week": 10699
+   },
+   {
+    "date": "2017-08-03",
+    "actual": 7894,
+    "model": 8658,
+    "last_week": 7530,
+    "four_week": 10734
+   },
+   {
+    "date": "2017-08-04",
+    "actual": 9618,
+    "model": 9710,
+    "last_week": 10450,
+    "four_week": 10742
+   },
+   {
+    "date": "2017-08-05",
+    "actual": 10734,
+    "model": 11523,
+    "last_week": 11091,
+    "four_week": 10763
+   },
+   {
+    "date": "2017-08-06",
+    "actual": 13293,
+    "model": 13130,
+    "last_week": 13048,
+    "four_week": 10751
+   },
+   {
+    "date": "2017-08-07",
+    "actual": 14597,
+    "model": 14074,
+    "last_week": 15017,
+    "four_week": 10736
+   },
+   {
+    "date": "2017-08-08",
+    "actual": 8682,
+    "model": 8900,
+    "last_week": 11871,
+    "four_week": 10713
+   },
+   {
+    "date": "2017-08-09",
+    "actual": 8198,
+    "model": 8696,
+    "last_week": 9919,
+    "four_week": 10717
+   },
+   {
+    "date": "2017-08-10",
+    "actual": 8016,
+    "model": 7488,
+    "last_week": 7894,
+    "four_week": 10708
+   },
+   {
+    "date": "2017-08-11",
+    "actual": 9428,
+    "model": 9969,
+    "last_week": 9618,
+    "four_week": 10743
+   },
+   {
+    "date": "2017-08-12",
+    "actual": 9560,
+    "model": 10444,
+    "last_week": 10734,
+    "four_week": 10756
+   },
+   {
+    "date": "2017-08-13",
+    "actual": 11478,
+    "model": 11432,
+    "last_week": 13293,
+    "four_week": 10695
+   },
+   {
+    "date": "2017-08-14",
+    "actual": 14600,
+    "model": 12875,
+    "last_week": 14597,
+    "four_week": 10618
+   },
+   {
+    "date": "2017-08-15",
+    "actual": 9624,
+    "model": 9196,
+    "last_week": 8682,
+    "four_week": 10594
+   }
+  ],
+  "MEATS": [
+   {
+    "date": "2017-07-19",
+    "actual": 16779,
+    "model": 16879,
+    "last_week": 16141,
+    "four_week": 20523
+   },
+   {
+    "date": "2017-07-20",
+    "actual": 18586,
+    "model": 18453,
+    "last_week": 18059,
+    "four_week": 20531
+   },
+   {
+    "date": "2017-07-21",
+    "actual": 29940,
+    "model": 27437,
+    "last_week": 27462,
+    "four_week": 20546
+   },
+   {
+    "date": "2017-07-22",
+    "actual": 20568,
+    "model": 20217,
+    "last_week": 20326,
+    "four_week": 20586
+   },
+   {
+    "date": "2017-07-23",
+    "actual": 22393,
+    "model": 21425,
+    "last_week": 21528,
+    "four_week": 20579
+   },
+   {
+    "date": "2017-07-24",
+    "actual": 18858,
+    "model": 17366,
+    "last_week": 18332,
+    "four_week": 20581
+   },
+   {
+    "date": "2017-07-25",
+    "actual": 16672,
+    "model": 16854,
+    "last_week": 16982,
+    "four_week": 20660
+   },
+   {
+    "date": "2017-07-26",
+    "actual": 16620,
+    "model": 16021,
+    "last_week": 16779,
+    "four_week": 20706
+   },
+   {
+    "date": "2017-07-27",
+    "actual": 18519,
+    "model": 17775,
+    "last_week": 18586,
+    "four_week": 20736
+   },
+   {
+    "date": "2017-07-28",
+    "actual": 27799,
+    "model": 27918,
+    "last_week": 29940,
+    "four_week": 20754
+   },
+   {
+    "date": "2017-07-29",
+    "actual": 20238,
+    "model": 21594,
+    "last_week": 20568,
+    "four_week": 20684
+   },
+   {
+    "date": "2017-07-30",
+    "actual": 21830,
+    "model": 22452,
+    "last_week": 22393,
+    "four_week": 20476
+   },
+   {
+    "date": "2017-07-31",
+    "actual": 18102,
+    "model": 19435,
+    "last_week": 18858,
+    "four_week": 20289
+   },
+   {
+    "date": "2017-08-01",
+    "actual": 21092,
+    "model": 20793,
+    "last_week": 16672,
+    "four_week": 20254
+   },
+   {
+    "date": "2017-08-02",
+    "actual": 20152,
+    "model": 20414,
+    "last_week": 16620,
+    "four_week": 20376
+   },
+   {
+    "date": "2017-08-03",
+    "actual": 20418,
+    "model": 20723,
+    "last_week": 18519,
+    "four_week": 20409
+   },
+   {
+    "date": "2017-08-04",
+    "actual": 29885,
+    "model": 30196,
+    "last_week": 27799,
+    "four_week": 20434
+   },
+   {
+    "date": "2017-08-05",
+    "actual": 21418,
+    "model": 22103,
+    "last_week": 20238,
+    "four_week": 20469
+   },
+   {
+    "date": "2017-08-06",
+    "actual": 22117,
+    "model": 22547,
+    "last_week": 21830,
+    "four_week": 20506
+   },
+   {
+    "date": "2017-08-07",
+    "actual": 17641,
+    "model": 18122,
+    "last_week": 18102,
+    "four_week": 20499
+   },
+   {
+    "date": "2017-08-08",
+    "actual": 15926,
+    "model": 17153,
+    "last_week": 21092,
+    "four_week": 20549
+   },
+   {
+    "date": "2017-08-09",
+    "actual": 16879,
+    "model": 16830,
+    "last_week": 20152,
+    "four_week": 20514
+   },
+   {
+    "date": "2017-08-10",
+    "actual": 19185,
+    "model": 18112,
+    "last_week": 20418,
+    "four_week": 20540
+   },
+   {
+    "date": "2017-08-11",
+    "actual": 26944,
+    "model": 27203,
+    "last_week": 29885,
+    "four_week": 20580
+   },
+   {
+    "date": "2017-08-12",
+    "actual": 17776,
+    "model": 19326,
+    "last_week": 21418,
+    "four_week": 20562
+   },
+   {
+    "date": "2017-08-13",
+    "actual": 18633,
+    "model": 19014,
+    "last_week": 22117,
+    "four_week": 20471
+   },
+   {
+    "date": "2017-08-14",
+    "actual": 16976,
+    "model": 16848,
+    "last_week": 17641,
+    "four_week": 20367
+   },
+   {
+    "date": "2017-08-15",
+    "actual": 17928,
+    "model": 17007,
+    "last_week": 15926,
+    "four_week": 20319
+   }
+  ],
+  "POULTRY": [
+   {
+    "date": "2017-07-19",
+    "actual": 16820,
+    "model": 17345,
+    "last_week": 17129,
+    "four_week": 21388
+   },
+   {
+    "date": "2017-07-20",
+    "actual": 16190,
+    "model": 15054,
+    "last_week": 14512,
+    "four_week": 21370
+   },
+   {
+    "date": "2017-07-21",
+    "actual": 28328,
+    "model": 28112,
+    "last_week": 29293,
+    "four_week": 21471
+   },
+   {
+    "date": "2017-07-22",
+    "actual": 22272,
+    "model": 22342,
+    "last_week": 23068,
+    "four_week": 21506
+   },
+   {
+    "date": "2017-07-23",
+    "actual": 25999,
+    "model": 24816,
+    "last_week": 26361,
+    "four_week": 21491
+   },
+   {
+    "date": "2017-07-24",
+    "actual": 19465,
+    "model": 18284,
+    "last_week": 19405,
+    "four_week": 21498
+   },
+   {
+    "date": "2017-07-25",
+    "actual": 16770,
+    "model": 16999,
+    "last_week": 17262,
+    "four_week": 21564
+   },
+   {
+    "date": "2017-07-26",
+    "actual": 16549,
+    "model": 16392,
+    "last_week": 16820,
+    "four_week": 21584
+   },
+   {
+    "date": "2017-07-27",
+    "actual": 14552,
+    "model": 14601,
+    "last_week": 16190,
+    "four_week": 21589
+   },
+   {
+    "date": "2017-07-28",
+    "actual": 28521,
+    "model": 28195,
+    "last_week": 28328,
+    "four_week": 21606
+   },
+   {
+    "date": "2017-07-29",
+    "actual": 22477,
+    "model": 23952,
+    "last_week": 22272,
+    "four_week": 21588
+   },
+   {
+    "date": "2017-07-30",
+    "actual": 25089,
+    "model": 26183,
+    "last_week": 25999,
+    "four_week": 21342
+   },
+   {
+    "date": "2017-07-31",
+    "actual": 19708,
+    "model": 20320,
+    "last_week": 19465,
+    "four_week": 21147
+   },
+   {
+    "date": "2017-08-01",
+    "actual": 21794,
+    "model": 21617,
+    "last_week": 16770,
+    "four_week": 21076
+   },
+   {
+    "date": "2017-08-02",
+    "actual": 20375,
+    "model": 20678,
+    "last_week": 16549,
+    "four_week": 21175
+   },
+   {
+    "date": "2017-08-03",
+    "actual": 17088,
+    "model": 17633,
+    "last_week": 14552,
+    "four_week": 21218
+   },
+   {
+    "date": "2017-08-04",
+    "actual": 28809,
+    "model": 29699,
+    "last_week": 28521,
+    "four_week": 21240
+   },
+   {
+    "date": "2017-08-05",
+    "actual": 22489,
+    "model": 23889,
+    "last_week": 22477,
+    "four_week": 21199
+   },
+   {
+    "date": "2017-08-06",
+    "actual": 25088,
+    "model": 25336,
+    "last_week": 25089,
+    "four_week": 21170
+   },
+   {
+    "date": "2017-08-07",
+    "actual": 18579,
+    "model": 19059,
+    "last_week": 19708,
+    "four_week": 21124
+   },
+   {
+    "date": "2017-08-08",
+    "actual": 16944,
+    "model": 16997,
+    "last_week": 21794,
+    "four_week": 21118
+   },
+   {
+    "date": "2017-08-09",
+    "actual": 16485,
+    "model": 16755,
+    "last_week": 20375,
+    "four_week": 21105
+   },
+   {
+    "date": "2017-08-10",
+    "actual": 15056,
+    "model": 14747,
+    "last_week": 17088,
+    "four_week": 21082
+   },
+   {
+    "date": "2017-08-11",
+    "actual": 25318,
+    "model": 28525,
+    "last_week": 28809,
+    "four_week": 21101
+   },
+   {
+    "date": "2017-08-12",
+    "actual": 19135,
+    "model": 20618,
+    "last_week": 22489,
+    "four_week": 20959
+   },
+   {
+    "date": "2017-08-13",
+    "actual": 20509,
+    "model": 21113,
+    "last_week": 25088,
+    "four_week": 20819
+   },
+   {
+    "date": "2017-08-14",
+    "actual": 18598,
+    "model": 17459,
+    "last_week": 18579,
+    "four_week": 20610
+   },
+   {
+    "date": "2017-08-15",
+    "actual": 17587,
+    "model": 17323,
+    "last_week": 16944,
+    "four_week": 20581
+   }
+  ],
+  "PRODUCE": [
+   {
+    "date": "2017-07-19",
+    "actual": 150953,
+    "model": 154890,
+    "last_week": 152978,
+    "four_week": 129844
+   },
+   {
+    "date": "2017-07-20",
+    "actual": 97593,
+    "model": 96233,
+    "last_week": 92111,
+    "four_week": 129647
+   },
+   {
+    "date": "2017-07-21",
+    "actual": 110555,
+    "model": 111078,
+    "last_week": 110263,
+    "four_week": 129893
+   },
+   {
+    "date": "2017-07-22",
+    "actual": 130701,
+    "model": 133667,
+    "last_week": 133167,
+    "four_week": 129807
+   },
+   {
+    "date": "2017-07-23",
+    "actual": 146226,
+    "model": 144132,
+    "last_week": 157883,
+    "four_week": 129526
+   },
+   {
+    "date": "2017-07-24",
+    "actual": 117117,
+    "model": 115788,
+    "last_week": 119026,
+    "four_week": 129179
+   },
+   {
+    "date": "2017-07-25",
+    "actual": 115458,
+    "model": 120005,
+    "last_week": 118281,
+    "four_week": 129295
+   },
+   {
+    "date": "2017-07-26",
+    "actual": 145918,
+    "model": 148126,
+    "last_week": 150953,
+    "four_week": 129194
+   },
+   {
+    "date": "2017-07-27",
+    "actual": 90481,
+    "model": 91233,
+    "last_week": 97593,
+    "four_week": 128882
+   },
+   {
+    "date": "2017-07-28",
+    "actual": 111949,
+    "model": 107639,
+    "last_week": 110555,
+    "four_week": 128810
+   },
+   {
+    "date": "2017-07-29",
+    "actual": 131989,
+    "model": 134110,
+    "last_week": 130701,
+    "four_week": 128767
+   },
+   {
+    "date": "2017-07-30",
+    "actual": 146046,
+    "model": 146082,
+    "last_week": 146226,
+    "four_week": 127928
+   },
+   {
+    "date": "2017-07-31",
+    "actual": 121886,
+    "model": 123325,
+    "last_week": 117117,
+    "four_week": 126969
+   },
+   {
+    "date": "2017-08-01",
+    "actual": 140896,
+    "model": 125195,
+    "last_week": 115458,
+    "four_week": 126665
+   },
+   {
+    "date": "2017-08-02",
+    "actual": 168636,
+    "model": 168295,
+    "last_week": 145918,
+    "four_week": 126999
+   },
+   {
+    "date": "2017-08-03",
+    "actual": 96780,
+    "model": 104995,
+    "last_week": 90481,
+    "four_week": 127172
+   },
+   {
+    "date": "2017-08-04",
+    "actual": 112283,
+    "model": 103696,
+    "last_week": 111949,
+    "four_week": 127079
+   },
+   {
+    "date": "2017-08-05",
+    "actual": 130624,
+    "model": 135652,
+    "last_week": 131989,
+    "four_week": 127005
+   },
+   {
+    "date": "2017-08-06",
+    "actual": 144456,
+    "model": 144790,
+    "last_week": 146046,
+    "four_week": 126695
+   },
+   {
+    "date": "2017-08-07",
+    "actual": 114001,
+    "model": 117655,
+    "last_week": 121886,
+    "four_week": 126260
+   },
+   {
+    "date": "2017-08-08",
+    "actual": 117101,
+    "model": 118958,
+    "last_week": 140896,
+    "four_week": 126087
+   },
+   {
+    "date": "2017-08-09",
+    "actual": 143806,
+    "model": 146193,
+    "last_week": 168636,
+    "four_week": 125906
+   },
+   {
+    "date": "2017-08-10",
+    "actual": 90194,
+    "model": 90751,
+    "last_week": 96780,
+    "four_week": 125578
+   },
+   {
+    "date": "2017-08-11",
+    "actual": 118738,
+    "model": 120313,
+    "last_week": 112283,
+    "four_week": 125510
+   },
+   {
+    "date": "2017-08-12",
+    "actual": 111788,
+    "model": 124335,
+    "last_week": 130624,
+    "four_week": 125812
+   },
+   {
+    "date": "2017-08-13",
+    "actual": 125924,
+    "model": 127243,
+    "last_week": 144456,
+    "four_week": 125049
+   },
+   {
+    "date": "2017-08-14",
+    "actual": 115258,
+    "model": 114135,
+    "last_week": 114001,
+    "four_week": 123907
+   },
+   {
+    "date": "2017-08-15",
+    "actual": 125109,
+    "model": 123319,
+    "last_week": 117101,
+    "four_week": 123773
+   }
+  ],
+  "SEAFOOD": [
+   {
+    "date": "2017-07-19",
+    "actual": 889,
+    "model": 935,
+    "last_week": 910,
+    "four_week": 1133
+   },
+   {
+    "date": "2017-07-20",
+    "actual": 832,
+    "model": 801,
+    "last_week": 763,
+    "four_week": 1133
+   },
+   {
+    "date": "2017-07-21",
+    "actual": 1280,
+    "model": 1264,
+    "last_week": 1169,
+    "four_week": 1134
+   },
+   {
+    "date": "2017-07-22",
+    "actual": 1237,
+    "model": 1225,
+    "last_week": 1117,
+    "four_week": 1134
+   },
+   {
+    "date": "2017-07-23",
+    "actual": 1336,
+    "model": 1360,
+    "last_week": 1414,
+    "four_week": 1130
+   },
+   {
+    "date": "2017-07-24",
+    "actual": 995,
+    "model": 985,
+    "last_week": 993,
+    "four_week": 1125
+   },
+   {
+    "date": "2017-07-25",
+    "actual": 842,
+    "model": 896,
+    "last_week": 888,
+    "four_week": 1125
+   },
+   {
+    "date": "2017-07-26",
+    "actual": 840,
+    "model": 907,
+    "last_week": 889,
+    "four_week": 1123
+   },
+   {
+    "date": "2017-07-27",
+    "actual": 652,
+    "model": 761,
+    "last_week": 832,
+    "four_week": 1120
+   },
+   {
+    "date": "2017-07-28",
+    "actual": 1308,
+    "model": 1224,
+    "last_week": 1280,
+    "four_week": 1119
+   },
+   {
+    "date": "2017-07-29",
+    "actual": 1298,
+    "model": 1283,
+    "last_week": 1237,
+    "four_week": 1116
+   },
+   {
+    "date": "2017-07-30",
+    "actual": 1380,
+    "model": 1429,
+    "last_week": 1336,
+    "four_week": 1105
+   },
+   {
+    "date": "2017-07-31",
+    "actual": 1106,
+    "model": 1082,
+    "last_week": 995,
+    "four_week": 1089
+   },
+   {
+    "date": "2017-08-01",
+    "actual": 1099,
+    "model": 1165,
+    "last_week": 842,
+    "four_week": 1086
+   },
+   {
+    "date": "2017-08-02",
+    "actual": 1123,
+    "model": 1176,
+    "last_week": 840,
+    "four_week": 1090
+   },
+   {
+    "date": "2017-08-03",
+    "actual": 924,
+    "model": 886,
+    "last_week": 652,
+    "four_week": 1091
+   },
+   {
+    "date": "2017-08-04",
+    "actual": 1380,
+    "model": 1383,
+    "last_week": 1308,
+    "four_week": 1094
+   },
+   {
+    "date": "2017-08-05",
+    "actual": 1307,
+    "model": 1324,
+    "last_week": 1298,
+    "four_week": 1092
+   },
+   {
+    "date": "2017-08-06",
+    "actual": 1270,
+    "model": 1389,
+    "last_week": 1380,
+    "four_week": 1092
+   },
+   {
+    "date": "2017-08-07",
+    "actual": 995,
+    "model": 999,
+    "last_week": 1106,
+    "four_week": 1083
+   },
+   {
+    "date": "2017-08-08",
+    "actual": 998,
+    "model": 878,
+    "last_week": 1099,
+    "four_week": 1080
+   },
+   {
+    "date": "2017-08-09",
+    "actual": 982,
+    "model": 932,
+    "last_week": 1123,
+    "four_week": 1084
+   },
+   {
+    "date": "2017-08-10",
+    "actual": 717,
+    "model": 781,
+    "last_week": 924,
+    "four_week": 1086
+   },
+   {
+    "date": "2017-08-11",
+    "actual": 1273,
+    "model": 1331,
+    "last_week": 1380,
+    "four_week": 1085
+   },
+   {
+    "date": "2017-08-12",
+    "actual": 1028,
+    "model": 1184,
+    "last_week": 1307,
+    "four_week": 1088
+   },
+   {
+    "date": "2017-08-13",
+    "actual": 1118,
+    "model": 1174,
+    "last_week": 1270,
+    "four_week": 1085
+   },
+   {
+    "date": "2017-08-14",
+    "actual": 971,
+    "model": 946,
+    "last_week": 995,
+    "four_week": 1075
+   },
+   {
+    "date": "2017-08-15",
+    "actual": 970,
+    "model": 913,
+    "last_week": 998,
+    "four_week": 1074
+   }
+  ]
+ },
+ "errors": {
+  "bins": [
+   "<5%",
+   "5\u201310%",
+   "10\u201320%",
+   "20\u201330%",
+   "30\u201350%",
+   "50%+"
+  ],
+  "shares": {
+   "model": [
+    0.2893,
+    0.2266,
+    0.2519,
+    0.1032,
+    0.0769,
+    0.0521
+   ],
+   "last_week": [
+    0.1988,
+    0.1711,
+    0.2557,
+    0.1516,
+    0.1245,
+    0.0982
+   ],
+   "four_week": [
+    0.1499,
+    0.1447,
+    0.2314,
+    0.1661,
+    0.1834,
+    0.1245
+   ]
+  }
+ },
+ "importance": [
+  {
+   "feature": "mean_7",
+   "share": 0.7769
+  },
+  {
+   "feature": "lag_7",
+   "share": 0.131
+  },
+  {
+   "feature": "lag_1",
+   "share": 0.0417
+  },
+  {
+   "feature": "lag_14",
+   "share": 0.0158
+  },
+  {
+   "feature": "day_of_month",
+   "share": 0.0105
+  },
+  {
+   "feature": "lag_28",
+   "share": 0.0078
+  },
+  {
+   "feature": "family",
+   "share": 0.0063
+  },
+  {
+   "feature": "month",
+   "share": 0.0042
+  },
+  {
+   "feature": "day_of_week",
+   "share": 0.0035
+  },
+  {
+   "feature": "city",
+   "share": 0.0023
+  }
+ ],
+ "business": {
+  "multipliers": {
+   "BREAD/BAKERY": 0.963,
+   "DAIRY": 0.926,
+   "DELI": 0.954,
+   "EGGS": 0.854,
+   "MEATS": 0.935,
+   "POULTRY": 0.932,
+   "PRODUCE": 0.979,
+   "SEAFOOD": 0.867
+  },
+  "policies": {
+   "naive_last_week": {
+    "profit_rs": 108951737,
+    "waste_rs": 45014749,
+    "stockout_rs": 20554605,
+    "mistake_cost_rs": 65569354,
+    "fill_rate": 0.9409
+   },
+   "forecast_only": {
+    "profit_rs": 128196546,
+    "waste_rs": 29328325,
+    "stockout_rs": 13879283,
+    "mistake_cost_rs": 43207608,
+    "fill_rate": 0.9599
+   },
+   "kal_kitna": {
+    "profit_rs": 137367520,
+    "waste_rs": 15528235,
+    "stockout_rs": 22802335,
+    "mistake_cost_rs": 38330570,
+    "fill_rate": 0.9343
+   }
+  },
+  "headline": {
+   "waste_cut_pct": 65.5,
+   "mistake_cost_cut_pct": 41.5,
+   "profit_gain_per_store_rs": 526218
+  }
+ },
+ "model_params": {
+  "objective": "tweedie",
+  "learning_rate": 0.1,
+  "num_leaves": 63,
+  "min_child_samples": 50,
+  "n_estimators": 5000,
+  "early_stopping_rounds": 100,
+  "seed": 42
+ }
+}

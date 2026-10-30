@@ -89,3 +89,32 @@ stages:
       - costs
     outs:
       - models/serving
+
+  demo:
+    cmd: python -m kal_kitna.demo_bundle
+    deps:
+      - models/serving
+      - src/kal_kitna/demo_bundle.py
+      - src/kal_kitna/features.py
+    params:
+      - features
+    outs:
+      - models/demo:
+          cache: false
+
+  lab:
+    cmd: python -m kal_kitna.lab_report
+    deps:
+      - data/features/features.parquet
+      - models/model.txt
+      - reports/importance.json
+      - reports/business.json
+      - src/kal_kitna/lab_report.py
+      - src/kal_kitna/baseline.py
+      - src/kal_kitna/decide.py
+      - src/kal_kitna/evaluation.py
+    params:
+      - split
+    outs:
+      - models/lab.json:
+          cache: false

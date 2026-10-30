@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en" data-layout="mobile">
+<head>
+<meta charset="utf-8">
+<script>(function(){var t=null;try{t=JSON.parse(localStorage.getItem("kk:theme"))}catch(e){}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eaf1ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kal Kitna">
+<title>Kal Kitna</title>
+<link rel="manifest" href="/static/manifest.json">
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/static/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" rel="stylesheet">
+<link href="/static/kk.css?v=8" rel="stylesheet">
+<style>
+  /* The page itself scrolls (no nested scroll boxes); bars are fixed to the screen. */
+  .shell { max-width: 480px; margin: 0 auto; min-height: 100dvh; }
+  .view { padding-bottom: calc(176px + env(safe-area-inset-bottom, 0px)); display: none; }
+  .view.on { display: block; animation: fade .18s var(--ease); }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .pad { padding: 0 18px; }
+
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px 0; }
+  .greet small { display: block; font-size: 13px; color: var(--ink-2); }
+  .greet { min-width: 0; }
+  .greet b { display: block; font-size: clamp(19px, 5.6vw, 22px); font-weight: 600; letter-spacing: -.2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .store { height: 36px; width: auto; flex: none; padding: 0 30px 0 12px; border-radius: 999px; background-color: var(--glass); font-size: 12.5px; font-weight: 600; }
+  .sub { display: flex; gap: 8px; padding: 12px 18px 2px; overflow-x: auto; scrollbar-width: none; }
+  .sub::-webkit-scrollbar { display: none; }
+  .sub > * { flex: none; }
+  .date-chip { position: relative; }
+  .date-chip input { position: absolute; inset: 0; opacity: 0; width: 100%; }
+  button.chip { border: 1px solid var(--line); }
+
+  .hero { margin: 14px 18px 0; padding: 18px 18px 16px; }
+  .hero .t { font-size: 14px; font-weight: 600; } .hero .t span { opacity: .82; font-weight: 400; }
+  .hero-main { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+  .big { font-size: clamp(42px, 13vw, 56px); font-weight: 700; line-height: 1; letter-spacing: -1.5px; white-space: nowrap; }
+  .big small { font-size: 14px; font-weight: 500; letter-spacing: 0; opacity: .85; margin-left: 4px; }
+  .hero .note { font-family: var(--hand); font-size: clamp(16px, 4.6vw, 19px); line-height: 1.1; margin-top: 6px; max-width: 190px; opacity: .95; }
+  .mini-gauge { width: clamp(88px, 28vw, 118px); flex: none; }
+  .hs b { font-size: clamp(14px, 4vw, 16px) !important; }
+  .hs-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+  .hs { border-radius: 14px; padding: 9px 10px; }
+  .hs b { display: block; font-size: 16px; font-weight: 600; }
+  .hs span { font-size: 10.5px; opacity: .88; }
+
+  .sec { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 18px 10px; }
+  .sec b { font-size: 15px; font-weight: 600; }
+  .sec button { border: 0; background: none; font-size: 12px; font-weight: 500; color: var(--primary-ink); }
+  .prods { display: flex; gap: 10px; padding: 2px 18px 4px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .prods::-webkit-scrollbar { display: none; }
+  .prod { flex: none; width: 64px; display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: none; padding: 0; font-size: 11px; font-weight: 500; color: var(--ink-2); scroll-snap-align: start; }
+  .prod .ava { width: 56px; height: 56px; border-radius: 18px; font-size: 24px; border: 2px solid transparent; transition: transform .15s; }
+  .prod[aria-pressed="true"] { color: var(--ink); font-weight: 600; }
+  .prod[aria-pressed="true"] .ava { border-color: var(--c); transform: translateY(-2px); box-shadow: 0 8px 16px -10px var(--c); }
+  .tick { position: absolute; right: -4px; top: -4px; width: 19px; height: 19px; border-radius: 50%; background: var(--leaf); color: #fff; font-size: 12px; display: grid; place-items: center; border: 2px solid var(--card); }
+
+  .list { margin: 0 18px; padding: 2px 14px; }
+  .li { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; border: 0; background: none; text-align: left; padding: 8px 0; }
+  .li + .li { border-top: 1px solid var(--line); }
+  .li .nm { font-size: 14px; font-weight: 600; }
+  .li .sb { font-size: 11px; color: var(--ink-3); }
+  .li .q { margin-left: auto; text-align: right; font-size: 16px; font-weight: 700; }
+  .li .q span { display: block; font-size: 10.5px; font-weight: 500; color: var(--ink-3); }
+  .li .go { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; flex: none; margin-left: 4px; }
+
+  .title { padding: 16px 18px 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .ctrls { display: flex; gap: 8px; align-items: center; flex: none; }
+  /* Compact switch on inner tabs: icons only, the words stay for screen readers */
+  .ctrls .modes a { font-size: 0; gap: 0; padding: 0 9px; }
+  .ctrls .modes a i { font-size: 17px; }
+  .title { flex-wrap: wrap; }
+  .title > div:first-child { width: 100%; }
+  .title .ctrls { order: -1; margin-left: auto; }
+  .title small { display: block; font-size: 12.5px; color: var(--ink-2); }
+  .title h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -.4px; }
+  .summary { margin: 14px 18px 0; padding: 14px 16px; display: flex; align-items: center; gap: 14px; }
+  .grp-h { display: flex; align-items: center; gap: 8px; margin: 16px 20px 8px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+  .grp-h .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .grp-h span:last-child { margin-left: auto; font-weight: 500; color: var(--ink-3); }
+
+  .cta { position: fixed; left: 50%; transform: translateX(-50%); width: min(444px, calc(100% - 36px)); bottom: calc(94px + env(safe-area-inset-bottom, 0px)); z-index: 30; }
+  .cta.two { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+  .tabbar { position: fixed; left: 50%; transform: translateX(-50%); width: min(456px, calc(100% - 24px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 40; height: 66px; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; border-radius: 22px; background: var(--glass); border: 1px solid var(--line); box-shadow: var(--shadow); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .tabbar button { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: 0; background: none; font-size: 10.5px; font-weight: 500; color: var(--ink-3); }
+  .tabbar button i { font-size: 23px; }
+  .tabbar button[aria-selected="true"] { color: var(--primary-ink); font-weight: 600; }
+  .tabbar button[aria-selected="true"]::before { content: ""; position: absolute; top: 4px; width: 22px; height: 3px; border-radius: 2px; background: var(--primary); }
+  .badge { position: absolute; top: 8px; left: calc(50% + 6px); min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: var(--marigold); color: #4a2f00; font-size: 10px; font-weight: 700; display: grid; place-items: center; }
+
+  .toast { bottom: calc(168px + env(safe-area-inset-bottom, 0px)); }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 18px 0; }
+  .tile { padding: 12px; }
+  .tile b { display: block; font-size: 18px; font-weight: 700; }
+  .tile span { font-size: 10.5px; color: var(--ink-3); }
+  .saved { margin: 14px 18px 0; padding: 18px; border-radius: var(--r-xl); background: var(--saved-bg); border: 1px solid var(--saved-line); box-shadow: var(--shadow); }
+  .saved .v { font-size: 38px; font-weight: 700; letter-spacing: -1px; }
+  .saved .hand { font-size: 19px; color: var(--marigold-ink); }
+
+  .form { margin: 12px 18px 0; padding: 16px; display: grid; gap: 12px; }
+  .price { display: grid; grid-template-columns: 36px 1fr 72px 72px; gap: 8px; align-items: center; }
+  .price .input { height: 42px; text-align: right; padding: 0 10px; }
+  .price-err { grid-column: 2 / -1; margin-top: -4px; }
+  .phead { display: grid; grid-template-columns: 36px 1fr 72px 72px; gap: 8px; font-size: 11px; color: var(--ink-3); }
+  .phead span:nth-child(n+3) { text-align: right; }
+  .scale { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-3); }
+  .links { display: grid; gap: 8px; margin: 12px 18px 0; }
+
+  /* Sheets */
+  .scrim { position: fixed; inset: 0; z-index: 100; background: rgba(30, 42, 69, .34); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); display: none; align-items: flex-end; justify-content: center; }
+  .scrim.on { display: flex; }
+  .sheet { width: min(480px, 100%); max-height: 92dvh; overflow-y: auto; background: var(--sheet); border-radius: 28px 28px 0 0; padding: 10px 18px calc(22px + env(safe-area-inset-bottom, 0px)); display: none; animation: rise .25s var(--ease); box-shadow: 0 -20px 40px -20px rgba(30, 42, 69, .35); }
+  .sheet.on { display: block; }
+  @keyframes rise { from { transform: translateY(60px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .grab { width: 42px; height: 5px; border-radius: 3px; background: var(--line-2); margin: 0 auto 14px; }
+  .sh-head { display: flex; align-items: center; gap: 12px; }
+  .sh-head .t { font-size: 16px; font-weight: 600; } .sh-head .s { font-size: 12px; color: var(--ink-3); }
+  .sh-head .icon-btn { margin-left: auto; }
+  .stack > * + * { margin-top: 14px; }
+  .zones input { position: absolute; left: -14px; right: -14px; top: -14px; width: calc(100% + 28px); height: 40px; opacity: 0; margin: 0; cursor: pointer; }
+  .fam-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="views">
+    <!-- HOME -->
+    <section class="view on" id="v-home" role="tabpanel" aria-labelledby="t-home">
+      <svg class="awning"></svg>
+      <div class="head">
+        <div class="greet"><small id="greet">Namaste,</small><b id="owner">Ramesh ji</b></div>
+        <div style="display:flex;gap:8px;align-items:center"><button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button>
+        <nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav></div>
+      </div>
+      <div class="sub">
+        <select class="input store" id="store" aria-label="Store"></select>
+        <label class="chip date-chip"><i class="ti ti-calendar-event" aria-hidden="true"></i><span id="date-label">–</span><input type="date" id="date" aria-label="Day to plan"></label>
+        <button class="chip" id="planned-chip"><i class="ti ti-checklist" aria-hidden="true"></i><span id="planned-label">0 of 8 planned</span></button>
+      </div>
+      <div class="hero-card hero" aria-live="polite">
+        <div class="between"><div class="t" id="h-title">–</div><span class="pill glass" id="h-pill"><i class="ti ti-sparkles" aria-hidden="true"></i>Smart pick</span></div>
+        <div class="hero-main">
+          <div><div class="big num"><span id="h-qty" class="skel">000</span><small id="h-unit"></small></div><div class="note" id="h-note"></div></div>
+          <svg class="mini-gauge" viewBox="0 0 240 132" id="h-gauge" aria-hidden="true"></svg>
+        </div>
+        <div class="hs-row">
+          <div class="hs glass"><b class="num" id="h-fc">–</b><span>Likely to sell</span></div>
+          <div class="hs glass"><b class="num" id="h-cost">–</b><span>Stock cost</span></div>
+          <div class="hs glass"><b class="num" id="h-risk">–</b><span id="h-risk-l">Likely waste</span></div>
+        </div>
+      </div>
+      <div class="sec"><b>Products</b><button id="see-khata">Open khata</button></div>
+      <div class="prods" id="prods" role="group" aria-label="Choose product"></div>
+      <div class="sec"><b id="todo-h">Still to plan</b><button id="plan-all">Plan next</button></div>
+      <div class="card list" id="todo"></div>
+    </section>
+
+    <!-- KHATA -->
+    <section class="view" id="v-khata" role="tabpanel" aria-labelledby="t-khata">
+      <svg class="awning"></svg>
+      <div class="title"><div><small id="k-store">Khata</small><h1>Tomorrow's order</h1><small id="k-date" style="margin-top:2px">–</small></div><div class="ctrls"><button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button><nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav></div></div>
+      <div class="card summary">
+        <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="21" stroke="#edf2ff" stroke-width="7" fill="none"/><circle id="k-ring" cx="26" cy="26" r="21" stroke="#4c7dff" stroke-width="7" fill="none" stroke-dasharray="0 132" stroke-linecap="round" transform="rotate(-90 26 26)"/><text id="k-ring-t" x="26" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#1e2a45" font-family="Poppins">0/8</text></svg>
+        <div><div style="font-size:12px;color:var(--ink-2)">Stock value</div><div style="font-size:24px;font-weight:700;letter-spacing:-.5px" class="num" id="k-value">₹0</div></div>
+        <span class="pill t-warn" id="k-left" style="margin-left:auto"><i class="ti ti-clock" aria-hidden="true"></i>to check</span>
+      </div>
+      <div id="k-groups"></div>
+    </section>
+
+    <!-- INSIGHTS -->
+    <section class="view" id="v-insights" role="tabpanel" aria-labelledby="t-insights">
+      <svg class="awning"></svg>
+      <div class="title"><div><small>What the numbers say</small><h1>Insights</h1></div><div class="ctrls"><button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button><nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav></div></div>
+      <div class="saved"><div style="font-size:12.5px;color:var(--ink-2)" id="i-saved-l">Saved vs ordering like last week</div><div class="v num" id="i-saved"><span class="skel">₹0,000</span></div><div class="hand" id="i-saved-note">adding up the demo weeks…</div></div>
+      <div class="chip-row pad" id="i-chips" style="margin-top:14px"></div>
+      <div class="card" style="margin:12px 18px 0;padding:16px">
+        <div class="between"><div><p class="h-title" id="i-title">–</p><p class="h-sub">Forecast vs what really sold</p></div><div class="legend"><span><i style="background:#dbe5ff"></i>Sold</span><span><i style="background:#4c7dff;height:3px"></i>Forecast</span></div></div>
+        <div id="i-chart" style="margin-top:10px"></div>
+      </div>
+      <div class="tiles"><div class="card tile"><b class="num" id="i-acc">–</b><span>Forecast accuracy</span></div><div class="card tile"><b class="num" id="i-close">–</b><span>Days within 10%</span></div><div class="card tile"><b class="num" id="i-sold">–</b><span>Sold, 4 weeks</span></div></div>
+      <div class="card" style="margin:12px 18px 0;padding:12px 16px;display:flex;gap:10px;align-items:flex-start" id="i-pattern-card"><i class="ti ti-bulb" style="font-size:20px;color:var(--marigold-ink)" aria-hidden="true"></i><div style="font-size:13px;line-height:1.5;color:var(--ink-2)" id="i-pattern"></div></div>
+    </section>
+
+    <!-- SHOP -->
+    <section class="view" id="v-shop" role="tabpanel" aria-labelledby="t-shop">
+      <svg class="awning"></svg>
+      <div class="title"><div><small>Your shop, your numbers</small><h1>Shop</h1></div><div class="ctrls"><button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button><nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav></div></div>
+      <div class="card form">
+        <p class="h-title">Profile</p>
+        <label class="field"><span>Your name</span><input class="input" id="f-owner" autocomplete="name"></label>
+        <label class="field"><span>Shop name</span><input class="input" id="f-shop"></label>
+        <label class="field"><span>Ask suppliers to confirm by</span><input class="input" id="f-confirm" placeholder="8 pm"></label>
+      </div>
+      <div class="sec"><b>Suppliers</b><button id="add-sup">+ Add supplier</button></div>
+      <div id="sup-list" class="pad"></div>
+      <div class="sec"><b>Prices</b><button id="reset">Reset</button></div>
+      <div class="card form" style="margin-top:0">
+        <div class="phead"><span></span><span>Rupees per unit</span><span>You pay</span><span>You sell</span></div>
+        <div id="price-rows" style="display:grid;gap:10px"></div>
+      </div>
+      <div class="card form">
+        <div class="between"><p class="h-title">Regular customers</p><span class="pill t-info" id="gw-v">20%</span></div>
+        <p class="h-sub" style="font-size:12.5px;line-height:1.5;margin:0">How much an empty shelf costs you in lost loyalty. Higher means Kal Kitna orders a little more.</p>
+        <input type="range" id="gw" min="0" max="1" step="0.05" aria-label="How much regular customers matter">
+        <div class="scale"><span>Rarely</span><span>Very much</span></div>
+      </div>
+      <div class="links">
+        <a class="btn btn-white btn-block" href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>How the model was built (Lab)</a>
+        <a class="btn btn-white btn-block" href="/app?view=desktop"><i class="ti ti-device-desktop" aria-hidden="true"></i>Open the laptop dashboard</a>
+      </div>
+      <div class="honest" style="margin:12px 18px 0"><i class="ti ti-shield-check" aria-hidden="true"></i>This demo serves simulated stores through a model trained on real grocery sales. Your prices, suppliers and orders are saved only on this phone.</div>
+    </section>
+  </div>
+
+  <div class="cta" id="cta-home"><button class="btn btn-blue btn-block" id="plan-btn"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i><span id="plan-label">Plan order</span></button></div>
+  <div class="cta two" id="cta-khata" hidden><button class="btn btn-wa" id="send-btn"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i>Send to suppliers</button><button class="btn btn-white" id="copy-btn" style="width:52px;padding:0" aria-label="Copy all orders"><i class="ti ti-copy" aria-hidden="true"></i></button></div>
+
+  <nav class="tabbar" role="tablist" aria-label="Sections">
+    <button role="tab" id="t-home" aria-selected="true" data-view="home"><i class="ti ti-smart-home" aria-hidden="true"></i>Home</button>
+    <button role="tab" id="t-khata" aria-selected="false" data-view="khata"><i class="ti ti-notebook" aria-hidden="true"></i><span class="badge" id="badge" hidden>0</span>Khata</button>
+    <button role="tab" id="t-insights" aria-selected="false" data-view="insights"><i class="ti ti-chart-dots-3" aria-hidden="true"></i>Insights</button>
+    <button role="tab" id="t-shop" aria-selected="false" data-view="shop"><i class="ti ti-settings-2" aria-hidden="true"></i>Shop</button>
+  </nav>
+</div>
+
+<div class="scrim" id="scrim">
+  <!-- Plan -->
+  <div class="sheet" id="sh-plan" role="dialog" aria-modal="true" aria-labelledby="p-title">
+    <div class="grab" aria-hidden="true"></div>
+    <div class="stack">
+      <div class="sh-head"><span class="ava" id="p-ava"></span><div><div class="t" id="p-title">–</div><div class="s" id="p-sub">–</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+      <div class="stepper"><button id="minus" aria-label="One less">−</button><div class="val"><b class="num" id="p-qty">0</b><span id="p-unit">units</span></div><button id="plus" aria-label="One more">+</button></div>
+      <div class="presets" id="p-presets"></div>
+      <div><div class="zones" id="p-zones"><div class="knob" id="p-knob"></div><input type="range" id="p-range" min="0" step="1" aria-label="Order quantity"></div>
+        <div class="zl"><span data-z="0">Might run out</span><span data-z="1">Sweet spot</span><span data-z="2">Might spoil</span></div></div>
+      <div class="explain" id="p-explain"></div>
+      <div class="swipe" id="p-swipe" tabindex="0" role="button" aria-label="Add to khata. Swipe right, or press Enter."><div class="trail"></div><div class="handle"><i class="ti ti-chevrons-right" aria-hidden="true"></i></div><span>Swipe to add to khata</span></div>
+      <button class="btn btn-ghost btn-block" id="p-remove" hidden>Remove from khata</button>
+    </div>
+  </div>
+
+  <!-- Send -->
+  <div class="sheet" id="sh-send" role="dialog" aria-modal="true" aria-labelledby="s-title">
+    <div class="grab" aria-hidden="true"></div>
+    <div class="stack">
+      <div class="sh-head"><div><div class="t" id="s-title">Who gets what?</div><div class="s">Each supplier only sees their own items</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+      <div id="s-list" role="group" aria-label="Suppliers"></div>
+      <div class="wa" id="s-preview"></div>
+      <button class="btn btn-wa btn-block" id="s-go"><i class="ti ti-send" aria-hidden="true"></i><span id="s-go-l">Send</span></button>
+      <p class="h-sub" style="text-align:center;margin:-4px 0 0">Opens WhatsApp one chat at a time, so nothing is sent without you.</p>
+    </div>
+  </div>
+
+  <!-- Supplier editor -->
+  <div class="sheet" id="sh-sup" role="dialog" aria-modal="true" aria-labelledby="e-title">
+    <div class="grab" aria-hidden="true"></div>
+    <div class="stack">
+      <div class="sh-head"><div><div class="t" id="e-title">Supplier</div><div class="s">Products they deliver</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+      <label class="field"><span>Name</span><input class="input" id="e-name" placeholder="Sharma Dairy"></label>
+      <label class="field"><span>WhatsApp number</span><input class="input" id="e-phone" type="tel" inputmode="tel" placeholder="98765 43210"></label>
+      <div><div style="font-size:12px;font-weight:500;color:var(--ink-2);margin-bottom:8px">Supplies</div><div class="fam-pick" id="e-fams"></div></div>
+      <div class="field-error" id="e-err"></div>
+      <button class="btn btn-blue btn-block" id="e-save">Save supplier</button>
+      <button class="btn btn-ghost btn-block" id="e-del" style="color:var(--coral)">Delete supplier</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/core.js?v=8"></script>
+<script>
+(function () {
+  "use strict";
+  const K = window.KK, S = K.S, $ = (id) => document.getElementById(id);
+  let view = "home", qty = 0, insFam = null, editing = null, sendSel = new Set(), sendFocus = null, queue = [];
+
+  /* ---------- Navigation ---------- */
+  function go(v) {
+    view = v;
+    document.querySelectorAll(".view").forEach((el) => el.classList.toggle("on", el.id === "v-" + v));
+    document.querySelectorAll(".tabbar button").forEach((b) => b.setAttribute("aria-selected", b.dataset.view === v));
+    $("cta-home").hidden = v !== "home"; $("cta-khata").hidden = v !== "khata";
+    if (v === "insights") renderInsights();
+    if (v === "shop") renderShop();
+    K.decorate();
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll(".tabbar button").forEach((b) => (b.onclick = () => go(b.dataset.view)));
+  $("planned-chip").onclick = $("see-khata").onclick = () => go("khata");
+
+  /* ---------- Home ---------- */
+  function renderHeader() {
+    $("greet").textContent = K.greeting() + ",";
+    $("owner").textContent = S.profile.owner;
+    $("date-label").textContent = "For " + K.short(S.date);
+    $("date").value = S.date;
+  }
+  function renderProducts() {
+    $("prods").innerHTML = K.families().map((f) => {
+      const L = K.look(f);
+      return `<button class="prod" data-f="${f}" aria-pressed="${f === S.family}"><span class="ava" style="--c:${L.hue}"><i class="ti ${L.icon}" aria-hidden="true"></i>${K.planned(f) ? '<span class="tick"><i class="ti ti-check" aria-hidden="true"></i></span>' : ""}</span>${L.name}</button>`;
+    }).join("");
+    $("prods").querySelectorAll(".prod").forEach((b) => (b.onclick = () => { S.family = b.dataset.f; K.haptic(8); renderProducts(); renderHero(); }));
+  }
+  function renderHero() {
+    const f = S.family, r = S.recs[f], L = K.look(f);
+    $("h-title").innerHTML = `${L.name} <span>· ${K.day(S.date, { weekday: "long" })}</span>`;
+    $("plan-label").textContent = K.planned(f) ? `Edit ${L.name.toLowerCase()} order` : `Plan ${L.name.toLowerCase()} order`;
+    if (!r) { $("h-qty").textContent = "–"; $("h-note").textContent = "Check this product's prices in Shop"; return; }
+    const q = K.qtyFor(f);
+    $("h-qty").textContent = K.fmt(q); $("h-qty").classList.remove("skel");
+    $("h-unit").textContent = L.unit;
+    $("h-note").textContent = r.recommended_order < r.forecast ? `a little under the forecast, ${L.name.toLowerCase()} spoils fast` : `a little over the forecast, running out costs more here`;
+    $("h-gauge").innerHTML = K.gauge(q / K.sliderTop(r), true);
+    $("h-fc").textContent = K.fmt(r.forecast);
+    $("h-cost").textContent = K.money(q * S.costs[f].cost);
+    if (r.actual != null) { $("h-risk").textContent = K.money(K.mistake(f, q, r.actual).wasteRs); $("h-risk-l").textContent = "Likely waste"; }
+    else { $("h-risk").textContent = Math.round(r.critical_ratio * 100) + "%"; $("h-risk-l").textContent = "Fully stocked"; }
+    $("h-pill").innerHTML = K.planned(f) ? '<i class="ti ti-check" aria-hidden="true"></i>In khata' : '<i class="ti ti-sparkles" aria-hidden="true"></i>Smart pick';
+  }
+  function renderTodo() {
+    const todo = K.families().filter((f) => S.recs[f] && !K.planned(f));
+    $("todo-h").textContent = todo.length ? "Still to plan" : "All set for tomorrow";
+    $("plan-all").hidden = !todo.length;
+    $("todo").innerHTML = todo.length ? todo.slice(0, 3).map((f) => {
+      const L = K.look(f), r = S.recs[f], s = K.supplierOf(f);
+      return `<button class="li" data-f="${f}"><span class="ava" style="--c:${L.hue}"><i class="ti ${L.icon}" aria-hidden="true"></i></span><div><div class="nm">${L.name}</div><div class="sb">${s ? K.esc(s.name) : "No supplier yet"}</div></div><div class="q num">${K.fmt(Math.round(r.recommended_order))}<span>${L.unit} suggested</span></div><span class="go" style="background:var(--primary-wash);color:var(--primary-ink)"><i class="ti ti-chevron-right" aria-hidden="true"></i></span></button>`;
+    }).join("") : `<div class="empty"><i class="ti ti-circle-check" style="color:var(--leaf)" aria-hidden="true"></i>Every product is in the khata. Send it to your suppliers from the Khata tab.</div>`;
+    $("todo").querySelectorAll(".li").forEach((b) => (b.onclick = () => { S.family = b.dataset.f; renderProducts(); renderHero(); openPlan(); }));
+  }
+  $("plan-all").onclick = () => { const f = K.families().find((x) => S.recs[x] && !K.planned(x)); if (f) { S.family = f; renderProducts(); renderHero(); openPlan(); } };
+
+  /* ---------- Khata ---------- */
+  function renderKhata() {
+    const n = K.plannedCount(), total = K.families().filter((f) => S.recs[f]).length;
+    $("planned-label").textContent = `${n} of ${total} planned`;
+    $("badge").hidden = n === 0; $("badge").textContent = n;
+    $("k-store").textContent = `Khata · ${S.profile.shop}`;
+    $("k-date").textContent = "For " + K.day(S.date, { weekday: "long", day: "numeric", month: "long" });
+    $("k-value").textContent = K.money(K.stockValue());
+    $("k-ring").setAttribute("stroke-dasharray", `${(n / (total || 1)) * 132} 132`);
+    $("k-ring-t").textContent = `${n}/${total}`;
+    $("k-left").hidden = n === total; $("k-left").innerHTML = `<i class="ti ti-clock" aria-hidden="true"></i>${total - n} to check`;
+    const groups = S.suppliers.map((s) => [s, s.families.filter((f) => S.recs[f])]).filter(([, fs]) => fs.length);
+    const loose = K.families().filter((f) => S.recs[f] && !K.supplierOf(f));
+    if (loose.length) groups.push([{ name: "No supplier yet", color: "#98a2b8" }, loose]);
+    $("k-groups").innerHTML = groups.map(([s, fs]) => `<div class="grp-h"><span class="dot" style="background:${s.color}"></span>${K.esc(s.name)}<span>${fs.length} item${fs.length > 1 ? "s" : ""}</span></div>
+      <div class="card list">${fs.map((f) => {
+        const L = K.look(f), on = K.planned(f);
+        return `<button class="li" data-f="${f}"><span class="ava" style="--c:${L.hue}"><i class="ti ${L.icon}" aria-hidden="true"></i></span><div><div class="nm">${L.name}</div><div class="sb">${on ? "Confirmed" : "Suggested · tap to check"}</div></div><div class="q num">${K.fmt(K.qtyFor(f))}<span>${L.unit}</span></div><span class="go" style="background:${on ? "var(--leaf-wash)" : "var(--wash)"};color:${on ? "var(--leaf)" : "var(--ink-3)"}"><i class="ti ${on ? "ti-check" : "ti-chevron-right"}" aria-hidden="true"></i></span></button>`;
+      }).join("")}</div>`).join("");
+    $("k-groups").querySelectorAll(".li").forEach((b) => (b.onclick = () => { S.family = b.dataset.f; renderProducts(); renderHero(); openPlan(); }));
+    $("send-btn").disabled = n === 0; $("copy-btn").disabled = n === 0;
+  }
+  $("copy-btn").onclick = async () => {
+    const text = S.suppliers.filter((s) => K.itemsFor(s).length).map((s) => `To ${s.name}:\n${K.message(s)}`).join("\n\n");
+    try { await navigator.clipboard.writeText(text); K.toast("All orders copied"); } catch { K.toast("Couldn't copy. Try again."); }
+  };
+
+  /* ---------- Plan sheet ---------- */
+  async function openPlan() {
+    const f = S.family, r = S.recs[f]; if (!r) { K.toast("Fix this product's prices in Shop first"); return; }
+    const L = K.look(f), s = K.supplierOf(f);
+    qty = K.qtyFor(f);
+    $("p-ava").style.setProperty("--c", L.hue); $("p-ava").innerHTML = `<i class="ti ${L.icon}" aria-hidden="true"></i>`;
+    $("p-title").textContent = `${L.name} order`;
+    $("p-sub").textContent = `${s ? s.name : "No supplier"} · ${K.short(S.date)}`;
+    $("p-unit").textContent = L.unit;
+    $("p-range").max = K.sliderTop(r);
+    $("p-zones").style.background = K.zonesBG(r, K.sliderTop(r));
+    $("p-remove").hidden = !K.planned(f);
+    $("p-presets").innerHTML = "";
+    paint(); open("sh-plan");
+    const list = await K.presets(f);
+    $("p-presets").innerHTML = list.map((p) => `<button class="preset" data-q="${p.q}"><b class="num">${K.fmt(p.q)}</b>${p.label}</button>`).join("");
+    $("p-presets").querySelectorAll(".preset").forEach((b) => (b.onclick = () => { qty = Number(b.dataset.q); K.haptic(6); paint(); }));
+    paint();
+  }
+  function paint() {
+    const f = S.family, r = S.recs[f], top = Number($("p-range").max);
+    $("p-qty").textContent = K.fmt(qty); $("p-range").value = qty;
+    $("p-knob").style.left = Math.min(100, (qty / top) * 100) + "%";
+    const v = K.verdict(qty, r);
+    document.querySelectorAll(".zl span").forEach((s) => s.classList.toggle("on", Number(s.dataset.z) === v.zone));
+    $("p-explain").innerHTML = K.explain(f, qty);
+    $("p-presets").querySelectorAll(".preset").forEach((b) => b.setAttribute("aria-pressed", Number(b.dataset.q) === qty));
+  }
+  $("minus").onclick = () => { qty = Math.max(0, qty - 1); K.haptic(5); paint(); };
+  $("plus").onclick = () => { qty = Math.min(Number($("p-range").max), qty + 1); K.haptic(5); paint(); };
+  $("p-range").oninput = (e) => { qty = Number(e.target.value); paint(); };
+  K.swipe($("p-swipe"), () => {
+    const f = S.family, before = S.plan[f];
+    K.savePlan(f, qty); K.haptic(20); close(); renderAll();
+    K.toast(`${K.look(f).name}: ${K.fmt(qty)} ${K.look(f).unit} added`, { label: "Undo", run: () => { if (before == null) K.removePlan(f); else K.savePlan(f, before); renderAll(); } });
+  });
+  $("p-remove").onclick = () => {
+    const f = S.family, before = S.plan[f]; K.removePlan(f); close(); renderAll();
+    K.toast(`${K.look(f).name} removed`, { label: "Undo", run: () => { K.savePlan(f, before); renderAll(); } });
+  };
+  $("plan-btn").onclick = openPlan;
+
+  /* ---------- Send to suppliers ---------- */
+  function openSend() {
+    const ready = S.suppliers.filter((s) => K.itemsFor(s).length);
+    if (!ready.length) { K.toast("Add items to the khata first"); return; }
+    sendSel = new Set(ready.map((s) => s.id)); sendFocus = ready[0].id; queue = [];
+    renderSend(); open("sh-send");
+  }
+  function renderSend() {
+    $("s-list").innerHTML = S.suppliers.map((s) => {
+      const items = K.itemsFor(s), on = sendSel.has(s.id);
+      const value = items.reduce((t, f) => t + S.plan[f] * S.costs[f].cost, 0);
+      return `<button class="sup" role="checkbox" aria-checked="${on && items.length > 0}" data-id="${s.id}" ${items.length ? "" : "disabled style='opacity:.5'"}>
+        <span class="ini" style="background:${s.color}">${K.initials(s.name)}</span>
+        <div><div class="nm">${K.esc(s.name)}</div><div class="meta">${items.length ? `${items.length} item${items.length > 1 ? "s" : ""} · ${K.money(value)}` : "Nothing planned for them"}${s.phone ? "" : " · no number yet"}</div>
+        <div class="tags">${s.families.map((f) => `<span class="tag">${K.look(f).name}</span>`).join("")}</div></div><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></button>`;
+    }).join("");
+    $("s-list").querySelectorAll(".sup:not([disabled])").forEach((b) => (b.onclick = () => {
+      const id = b.dataset.id; sendSel.has(id) ? sendSel.delete(id) : sendSel.add(id); sendFocus = id; renderSend();
+    }));
+    const s = S.suppliers.find((x) => x.id === sendFocus) || S.suppliers.find((x) => sendSel.has(x.id));
+    $("s-preview").innerHTML = s ? `<div class="wa-to"><i class="ti ti-brand-whatsapp" style="color:#1faa53;font-size:15px" aria-hidden="true"></i>Preview for ${K.esc(s.name)} · ${K.maskPhone(s.phone)}</div><div class="bubble">${K.esc(K.message(s))}</div>` : "";
+    const n = [...sendSel].filter((id) => K.itemsFor(S.suppliers.find((x) => x.id === id) || { families: [] }).length).length;
+    $("s-go").disabled = n === 0;
+    $("s-go-l").textContent = queue.length ? `Next: ${queue[0].name} (${queue.length} left)` : `Send to ${n} supplier${n === 1 ? "" : "s"}`;
+  }
+  $("s-go").onclick = () => {
+    if (!queue.length) queue = S.suppliers.filter((s) => sendSel.has(s.id) && K.itemsFor(s).length);
+    const s = queue.shift(); if (!s) return;
+    window.open(K.waLink(s), "_blank", "noopener");
+    sendFocus = queue[0] ? queue[0].id : s.id;
+    if (!queue.length) { K.toast("All orders opened in WhatsApp"); close(); return; }
+    renderSend();
+  };
+  $("send-btn").onclick = openSend;
+
+  /* ---------- Insights ---------- */
+  async function renderInsights() {
+    insFam = insFam || S.family;
+    $("i-chips").innerHTML = K.families().map((f) => { const L = K.look(f); return `<button class="chip" aria-pressed="${f === insFam}" data-f="${f}"><i class="ti ${L.icon}" aria-hidden="true"></i>${L.name}</button>`; }).join("");
+    $("i-chips").querySelectorAll("button").forEach((b) => (b.onclick = () => { insFam = b.dataset.f; renderInsights(); }));
+    $("i-title").textContent = `${K.look(insFam).name} · Store ${S.store}`;
+    $("i-chart").innerHTML = '<div class="skel" style="height:170px"></div>';
+    try {
+      const s = await K.loadSeries(insFam), ins = K.insights(insFam, s);
+      $("i-chart").innerHTML = K.chart(s, S.date, 340, 170);
+      $("i-chart").querySelectorAll("[data-date]").forEach((r) => (r.onclick = () => { S.family = insFam; changeDate(r.dataset.date); go("home"); }));
+      $("i-acc").textContent = ins.accuracy == null ? "–" : Math.round(ins.accuracy * 100) + "%";
+      $("i-close").textContent = `${ins.close}/${ins.days}`;
+      $("i-sold").textContent = K.fmt(ins.sold);
+      $("i-pattern-card").hidden = !ins.pattern;
+      $("i-pattern").innerHTML = ins.pattern ? `<b style="color:var(--ink)">${ins.pattern}</b> Kal Kitna already orders more on those days.` : "";
+      const all = await Promise.all(K.families().map((f) => K.loadSeries(f).then((x) => [f, K.insights(f, x).saved])));
+      const total = all.reduce((t, [, v]) => t + v, 0), top = all.sort((a, b) => b[1] - a[1]).slice(0, 2).map(([f]) => K.look(f).name.toLowerCase());
+      if (total > 0) {
+        $("i-saved-l").textContent = "Saved vs ordering like last week";
+        $("i-saved").textContent = K.money(total);
+        $("i-saved-note").textContent = `over the demo weeks, mostly on ${top.join(" & ")}`;
+      } else {
+        const acc = (await Promise.all(K.families().map((f) => K.loadSeries(f).then((x) => K.insights(f, x).accuracy)))).filter((x) => x != null);
+        $("i-saved-l").textContent = "Forecast accuracy, all products";
+        $("i-saved").textContent = Math.round((acc.reduce((a, b) => a + b, 0) / (acc.length || 1)) * 100) + "%";
+        $("i-saved-note").textContent = "savings show up as more days are tracked";
+      }
+    } catch (e) { $("i-chart").innerHTML = `<p class="h-sub">${K.esc(e.message)}</p>`; }
+  }
+
+  /* ---------- Shop ---------- */
+  function renderShop() {
+    $("f-owner").value = S.profile.owner; $("f-shop").value = S.profile.shop; $("f-confirm").value = S.profile.confirmBy;
+    $("sup-list").innerHTML = S.suppliers.map((s) => `<button class="sup" data-id="${s.id}"><span class="ini" style="background:${s.color}">${K.initials(s.name)}</span><div><div class="nm">${K.esc(s.name)}</div><div class="meta">${K.maskPhone(s.phone)}</div><div class="tags">${s.families.map((f) => `<span class="tag">${K.look(f).name}</span>`).join("") || '<span class="tag">No products yet</span>'}</div></div><i class="ti ti-chevron-right" style="margin-left:auto;color:var(--ink-3)" aria-hidden="true"></i></button>`).join("");
+    $("sup-list").querySelectorAll(".sup").forEach((b) => (b.onclick = () => editSupplier(b.dataset.id)));
+    $("price-rows").innerHTML = K.families().map((f) => {
+      const L = K.look(f), c = S.costs[f];
+      return `<div class="price"><span class="ava" style="--c:${L.hue};width:36px;height:36px;font-size:18px;border-radius:12px"><i class="ti ${L.icon}" aria-hidden="true"></i></span><span style="font-size:13.5px;font-weight:500">${L.name}<br><span style="font-size:10.5px;color:var(--ink-3);font-weight:400">per ${L.unit.replace(/s$/, "")}</span></span>
+        <input class="input" type="number" inputmode="decimal" min="1" value="${c.cost}" data-f="${f}" data-k="cost" aria-label="${L.name}, you pay"><input class="input" type="number" inputmode="decimal" min="1" value="${c.price}" data-f="${f}" data-k="price" aria-label="${L.name}, you sell at">
+        <div class="field-error price-err" id="err-${L.name}" aria-live="polite"></div></div>`;
+    }).join("");
+    const reload = K.debounce(refresh, 450);
+    $("price-rows").querySelectorAll("input").forEach((i) => (i.oninput = () => {
+      const f = i.dataset.f; K.setCost(f, i.dataset.k, i.value);
+      const ok = K.priceOk(f), name = K.look(f).name;
+      $("price-rows").querySelectorAll(`input[data-f="${f}"]`).forEach((x) => x.classList.toggle("invalid", !ok));
+      $("err-" + name).textContent = ok ? "" : "Selling price must be higher than what you pay.";
+      if (ok) reload();
+    }));
+    $("gw").value = S.gw; $("gw-v").textContent = Math.round(S.gw * 100) + "%";
+  }
+  ["f-owner", "f-shop", "f-confirm"].forEach((id) => ($(id).oninput = K.debounce(() => {
+    K.setProfile({ owner: $("f-owner").value.trim() || "Shop owner", shop: $("f-shop").value.trim() || "My shop", confirmBy: $("f-confirm").value.trim() || "8 pm" });
+    renderHeader(); renderKhata();
+  }, 300)));
+  $("gw").oninput = () => { $("gw-v").textContent = Math.round($("gw").value * 100) + "%"; };
+  $("gw").onchange = () => { K.setGoodwill($("gw").value); refresh(); };
+  $("reset").onclick = () => { K.resetPrices(); renderShop(); refresh(); K.toast("Prices reset"); };
+
+  function editSupplier(id) {
+    editing = id ? S.suppliers.find((s) => s.id === id) : null;
+    $("e-title").textContent = editing ? "Edit supplier" : "New supplier";
+    $("e-name").value = editing ? editing.name : ""; $("e-phone").value = editing ? editing.phone : ""; $("e-err").textContent = "";
+    $("e-del").hidden = !editing;
+    const mine = new Set(editing ? editing.families : []);
+    $("e-fams").innerHTML = K.families().map((f) => { const L = K.look(f), other = K.supplierOf(f); return `<button class="chip" aria-pressed="${mine.has(f)}" data-f="${f}" title="${other && (!editing || other.id !== editing.id) ? "Currently with " + K.esc(other.name) : ""}"><i class="ti ${L.icon}" aria-hidden="true"></i>${L.name}</button>`; }).join("");
+    $("e-fams").querySelectorAll("button").forEach((b) => (b.onclick = () => b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true")));
+    open("sh-sup");
+    setTimeout(() => $("e-name").focus(), 80);
+  }
+  $("add-sup").onclick = () => editSupplier(null);
+  $("e-save").onclick = () => {
+    const name = $("e-name").value.trim(), phone = $("e-phone").value.trim();
+    if (!name) { $("e-err").textContent = "Give the supplier a name."; return; }
+    if (phone && phone.replace(/\D/g, "").length < 10) { $("e-err").textContent = "That number looks too short. Use 10 digits."; return; }
+    const s = editing || K.addSupplier(name, phone);
+    s.name = name; s.phone = phone;
+    const picked = [...$("e-fams").querySelectorAll('button[aria-pressed="true"]')].map((b) => b.dataset.f);
+    K.families().forEach((f) => { if (picked.includes(f)) K.assign(f, s.id); else if (s.families.includes(f)) s.families = s.families.filter((x) => x !== f); });
+    K.saveSuppliers(); close(); renderShop(); renderAll(); K.toast(`${name} saved`);
+  };
+  $("e-del").onclick = () => {
+    const s = editing; K.removeSupplier(s.id); close(); renderShop(); renderAll();
+    K.toast(`${s.name} deleted`, { label: "Undo", run: () => { S.suppliers.push(s); K.saveSuppliers(); renderShop(); renderAll(); } });
+  };
+
+  /* ---------- Sheets: back button and Escape close them ---------- */
+  function open(id) {
+    $("scrim").classList.add("on"); document.querySelectorAll(".sheet").forEach((s) => s.classList.toggle("on", s.id === id));
+    if (!history.state || !history.state.sheet) history.pushState({ sheet: true }, "");
+  }
+  function hide() { $("scrim").classList.remove("on"); document.querySelectorAll(".sheet").forEach((s) => s.classList.remove("on")); queue = []; }
+  function close() { if (history.state && history.state.sheet) history.back(); else hide(); }
+  window.addEventListener("popstate", hide);
+  document.querySelectorAll("[data-close]").forEach((b) => (b.onclick = close));
+  $("scrim").addEventListener("click", (e) => { if (e.target.id === "scrim") close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && $("scrim").classList.contains("on")) close(); });
+
+  /* ---------- Data flow ---------- */
+  function renderAll() { renderProducts(); renderHero(); renderTodo(); renderKhata(); }
+  async function refresh() {
+    try { await K.loadOrders(); } catch (e) { K.toast(e.message); }
+    renderAll();
+  }
+  async function changeDate(d) {
+    if (d < S.opts.first_date || d > S.opts.last_date) { K.toast("Pick a day inside the demo weeks"); renderHeader(); return; }
+    K.setDate(d); renderHeader(); await refresh();
+  }
+  $("date").onchange = (e) => changeDate(e.target.value);
+  $("store").onchange = async (e) => { K.setStore(e.target.value); await refresh(); if (view === "insights") renderInsights(); };
+
+  (async function boot() {
+    K.fitLayout("mobile");
+    K.decorate();
+    try {
+      await K.init();
+      $("store").innerHTML = S.opts.stores.map((s) => `<option value="${s}" ${s === S.store ? "selected" : ""}>Store ${s}</option>`).join("");
+      $("date").min = S.opts.first_date; $("date").max = S.opts.last_date;
+      renderHeader(); $("h-gauge").innerHTML = K.gauge(0, true);
+      await refresh();
+    } catch (e) {
+      document.querySelector(".views").innerHTML = `<div class="empty" style="padding-top:30vh"><i class="ti ti-wifi-off" aria-hidden="true"></i>${K.esc(e.message)}<br><button class="btn btn-white" style="margin-top:16px" onclick="location.reload()">Try again</button></div>`;
+    }
+  })();
+})();
+</script>
+</body>
+</html>

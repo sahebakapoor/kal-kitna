@@ -2,19 +2,21 @@ import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
 
-from kal_kitna.api import Artifacts, create_app
+from kal_kitna.api import Artifacts, create_app, is_phone
 
 LEVELS = [round(q / 100, 2) for q in range(1, 100)]
+IPHONE = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Mobile/15E148"
+LAPTOP = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0"
 
 
 def _artifacts():
     features = pd.DataFrame(
         {
-            "date": pd.to_datetime(["2017-08-01", "2017-08-01"]),
-            "store_nbr": pd.Categorical([1, 1]),
-            "family": pd.Categorical(["DAIRY", "EGGS"]),
-            "sales": [12.0, None],
-            "lag_1": [10.0, 4.0],
+            "date": pd.to_datetime(["2017-08-01", "2017-08-01", "2017-08-02"]),
+            "store_nbr": pd.Categorical([1, 1, 1]),
+            "family": pd.Categorical(["DAIRY", "EGGS", "DAIRY"]),
+            "sales": [12.0, None, 9.0],
+            "lag_1": [10.0, 4.0, 8.0],
         }
     )
     spread = [0.5 + q for q in LEVELS]  # multiplier = 0.5 + critical ratio
@@ -43,10 +45,67 @@ def client():
     return TestClient(create_app(_artifacts()))
 
 
-def test_root_redirects_to_docs(client):
-    r = client.get("/", follow_redirects=False)
-    assert r.status_code in (302, 307)
-    assert r.headers["location"] == "/docs"
+# ---------- pages ----------
+
+
+def test_front_door_offers_both_doors(client):
+    r = client.get("/")
+    assert r.status_code == 200
+    assert 'data-page="door"' in r.text
+    assert 'href="/lab"' in r.text and 'href="/app"' in r.text
+
+
+def test_lab_has_phone_and_laptop_layouts(client):
+    phone = client.get("/lab", headers={"user-agent": IPHONE})
+    laptop = client.get("/lab", headers={"user-agent": LAPTOP})
+    assert 'data-page="lab"' in phone.text and 'data-layout="mobile"' in phone.text
+    assert 'data-layout="desktop"' in laptop.text
+
+
+def test_lab_data_missing_is_404(tmp_path):
+    client = TestClient(create_app(_artifacts(), lab_report=tmp_path / "nope.json"))
+    assert client.get("/lab/data").status_code == 404
+
+
+def test_lab_data_is_served(tmp_path):
+    report = tmp_path / "lab.json"
+    report.write_text('{"overall": {"model": {"wape": 0.09}}}')
+    client = TestClient(create_app(_artifacts(), lab_report=report))
+    assert client.get("/lab/data").json()["overall"]["model"]["wape"] == 0.09
+
+
+def test_phone_gets_mobile_layout(client):
+    r = client.get("/app", headers={"user-agent": IPHONE})
+    assert r.status_code == 200
+    assert 'data-layout="mobile"' in r.text
+
+
+def test_laptop_gets_desktop_layout(client):
+    r = client.get("/app", headers={"user-agent": LAPTOP})
+    assert 'data-layout="desktop"' in r.text
+
+
+def test_pages_are_never_served_stale(client):
+    for path in ("/", "/app", "/lab"):
+        assert client.get(path).headers["cache-control"] == "no-cache"
+
+
+def test_view_parameter_overrides_device(client):
+    r = client.get("/app?view=desktop", headers={"user-agent": IPHONE})
+    assert 'data-layout="desktop"' in r.text
+
+
+def test_shared_assets_are_served(client):
+    assert client.get("/static/kk.css").status_code == 200
+    assert client.get("/static/core.js").status_code == 200
+
+
+def test_is_phone():
+    assert is_phone(IPHONE)
+    assert not is_phone(LAPTOP)
+
+
+# ---------- data ----------
 
 
 def test_health(client):
@@ -57,7 +116,10 @@ def test_options(client):
     body = client.get("/options").json()
     assert body["stores"] == [1]
     assert body["families"] == ["DAIRY", "EGGS"]
-    assert body["first_date"] == body["last_date"] == "2017-08-01"
+    assert body["first_date"] == "2017-08-01"
+    assert body["last_date"] == "2017-08-02"
+    assert body["costs"]["DAIRY"] == {"cost": 50, "price": 100}
+    assert body["demo"] is False
 
 
 def test_forecast_at_ratio_half_orders_the_forecast(client):
@@ -110,3 +172,18 @@ def test_unknown_family_is_404(client):
         client.get("/forecast?store_nbr=1&family=COFFEE&date=2017-08-01").status_code
         == 404
     )
+
+
+def test_series_is_sorted_and_complete(client):
+    body = client.get("/series?store_nbr=1&family=DAIRY").json()
+    assert [p["date"] for p in body] == ["2017-08-01", "2017-08-02"]
+    assert body[0] == {
+        "date": "2017-08-01",
+        "forecast": 10.0,
+        "recommended_order": 10.0,
+        "actual": 12.0,
+    }
+
+
+def test_series_unknown_store_is_404(client):
+    assert client.get("/series?store_nbr=999&family=DAIRY").status_code == 404

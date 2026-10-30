@@ -10,8 +10,8 @@ stages:
       nfiles: 7
     - path: src/kal_kitna/data.py
       hash: md5
-      md5: 490ae0cb7c1e5e67a91fd966542139cd
-      size: 2573
+      md5: d2419a116cd0f1660c9d8e7df3d53704
+      size: 2723
     params:
       params.yaml:
         data.families:
@@ -26,23 +26,23 @@ stages:
     outs:
     - path: data/processed/holidays.parquet
       hash: md5
-      md5: b8df8993d8080e2d9d61f2a9626acf3c
+      md5: 8e3376078c49e0618e84548a85a3c11b
       size: 8695
     - path: data/processed/perishables.parquet
       hash: md5
-      md5: 9808b454eb67ce943f7ebe0a04e4dcdb
+      md5: 62ac7029e78b3ccd8974d5e817d46caa
       size: 3489409
   explore:
     cmd: python -m kal_kitna.explore
     deps:
     - path: data/processed/perishables.parquet
       hash: md5
-      md5: 9808b454eb67ce943f7ebe0a04e4dcdb
+      md5: 62ac7029e78b3ccd8974d5e817d46caa
       size: 3489409
     - path: src/kal_kitna/explore.py
       hash: md5
-      md5: 2c95f71cc146a06fa8a73b52d6a8fecb
-      size: 1767
+      md5: 5d6d3b7f2b3edec5b330d7fa61bb5505
+      size: 1817
     outs:
     - path: reports/figures
       hash: md5
@@ -54,16 +54,16 @@ stages:
     deps:
     - path: data/processed/holidays.parquet
       hash: md5
-      md5: b8df8993d8080e2d9d61f2a9626acf3c
+      md5: 8e3376078c49e0618e84548a85a3c11b
       size: 8695
     - path: data/processed/perishables.parquet
       hash: md5
-      md5: 9808b454eb67ce943f7ebe0a04e4dcdb
+      md5: 62ac7029e78b3ccd8974d5e817d46caa
       size: 3489409
     - path: src/kal_kitna/features.py
       hash: md5
-      md5: 99576fc7545e1525ff0ac1b012e50cb2
-      size: 3631
+      md5: 83f2f17431b9b0d651faa646c8563df3
+      size: 3675
     params:
       params.yaml:
         features:
@@ -89,12 +89,12 @@ stages:
       size: 24127943
     - path: src/kal_kitna/baseline.py
       hash: md5
-      md5: a02cea1b2896b7d6fc9870143ab41a51
-      size: 1260
+      md5: 095649f90101824af6644add130ba74b
+      size: 1262
     - path: src/kal_kitna/evaluation.py
       hash: md5
-      md5: 54944676407f67b1583b773596d92634
-      size: 1166
+      md5: 12221c2c693aab24ef065834b3bd4c15
+      size: 1168
     params:
       params.yaml:
         split:
@@ -118,12 +118,12 @@ stages:
       size: 293
     - path: src/kal_kitna/evaluation.py
       hash: md5
-      md5: 54944676407f67b1583b773596d92634
-      size: 1166
+      md5: 12221c2c693aab24ef065834b3bd4c15
+      size: 1168
     - path: src/kal_kitna/train.py
       hash: md5
-      md5: a584ae63f25f43ea5089ebff5849b1e7
-      size: 3459
+      md5: 65779f5576b08bb225d5446c293a7650
+      size: 3559
     params:
       params.yaml:
         model:
@@ -163,20 +163,20 @@ stages:
       size: 9675111
     - path: src/kal_kitna/decide.py
       hash: md5
-      md5: 2304552580bff34097d8ca81d9e6b767
-      size: 4769
+      md5: 6326f5626146cbf7610517bf1a67be00
+      size: 4835
     - path: src/kal_kitna/evaluation.py
       hash: md5
-      md5: 54944676407f67b1583b773596d92634
-      size: 1166
+      md5: 12221c2c693aab24ef065834b3bd4c15
+      size: 1168
     - path: src/kal_kitna/newsvendor.py
       hash: md5
-      md5: 95072742674f3ea5e1e1c32df277ae70
-      size: 597
+      md5: 7c35ba9a0d0ce39f3f79a67feeb06f4c
+      size: 599
     - path: src/kal_kitna/train.py
       hash: md5
-      md5: a584ae63f25f43ea5089ebff5849b1e7
-      size: 3459
+      md5: 65779f5576b08bb225d5446c293a7650
+      size: 3559
     params:
       params.yaml:
         costs:
@@ -227,16 +227,16 @@ stages:
       size: 9675111
     - path: src/kal_kitna/decide.py
       hash: md5
-      md5: 2304552580bff34097d8ca81d9e6b767
-      size: 4769
+      md5: 6326f5626146cbf7610517bf1a67be00
+      size: 4835
     - path: src/kal_kitna/export.py
       hash: md5
-      md5: 75e40c7906d4bc70b0418b2f0c6f6ff5
-      size: 1901
+      md5: bced0254863e6ed0031badd7b3871d51
+      size: 1927
     - path: src/kal_kitna/train.py
       hash: md5
-      md5: a584ae63f25f43ea5089ebff5849b1e7
-      size: 3459
+      md5: 65779f5576b08bb225d5446c293a7650
+      size: 3559
     params:
       params.yaml:
         costs:
@@ -275,3 +275,81 @@ stages:
       md5: e87ab1d6bb74cda512a38af9ca069e6f.dir
       size: 10226695
       nfiles: 3
+  demo:
+    cmd: python -m kal_kitna.demo_bundle
+    deps:
+    - path: models/serving
+      hash: md5
+      md5: e87ab1d6bb74cda512a38af9ca069e6f.dir
+      size: 10226695
+      nfiles: 3
+    - path: src/kal_kitna/demo_bundle.py
+      hash: md5
+      md5: cecfb0c168c97be69d7a4e4777c01137
+      size: 5005
+    - path: src/kal_kitna/features.py
+      hash: md5
+      md5: 83f2f17431b9b0d651faa646c8563df3
+      size: 3675
+    params:
+      params.yaml:
+        features:
+          lags:
+          - 1
+          - 7
+          - 14
+          - 28
+          windows:
+          - 7
+          - 28
+    outs:
+    - path: models/demo
+      hash: md5
+      md5: 25a72297520b2272463b4aa123742a4f.dir
+      size: 9751655
+      nfiles: 3
+  lab:
+    cmd: python -m kal_kitna.lab_report
+    deps:
+    - path: data/features/features.parquet
+      hash: md5
+      md5: 54a2176d2f314988dbd60000147eef83
+      size: 24127943
+    - path: models/model.txt
+      hash: md5
+      md5: 4310e4d7b5805cf4e3257a2225b9b85c
+      size: 9675111
+    - path: reports/business.json
+      hash: md5
+      md5: 213a5116c213a5f12af14e47e59a6930
+      size: 914
+    - path: reports/importance.json
+      hash: md5
+      md5: b5cf060a16f3e098b163f7752a90151f
+      size: 655
+    - path: src/kal_kitna/baseline.py
+      hash: md5
+      md5: 095649f90101824af6644add130ba74b
+      size: 1262
+    - path: src/kal_kitna/decide.py
+      hash: md5
+      md5: 6326f5626146cbf7610517bf1a67be00
+      size: 4835
+    - path: src/kal_kitna/evaluation.py
+      hash: md5
+      md5: 12221c2c693aab24ef065834b3bd4c15
+      size: 1168
+    - path: src/kal_kitna/lab_report.py
+      hash: md5
+      md5: 09c5bdb1fedfad1beae937244b845e46
+      size: 4642
+    params:
+      params.yaml:
+        split:
+          valid_start: '2017-06-21'
+          test_start: '2017-07-19'
+    outs:
+    - path: models/lab.json
+      hash: md5
+      md5: eb1fd4466f333fd41073ca0946302ad7
+      size: 42298

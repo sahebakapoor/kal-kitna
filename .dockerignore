@@ -12,4 +12,5 @@ mlruns
 mlartifacts
 mlflow.db
 models/*
-!models/serving
+!models/demo
+!models/lab.json

@@ -31,3 +31,4 @@ Conclusion: ...
 | 5 | FastAPI + tests | done | 4 endpoints + docs redirect, serving bundle, 38 tests, p95 ___ ms |
 
 | 6 | Docker | done | python:3.11-slim + uv, deps cached as a layer, MLflow kept out, non-root user, healthcheck; image 347 MB content / 1.47 GB disk |
+| 7 | GitHub Actions CI | done | pre-commit locally; CI runs lockfile check, lint, format, 38 tests, DVC validation on every push; reformat reproduced identical metrics |

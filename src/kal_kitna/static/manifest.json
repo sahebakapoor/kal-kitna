@@ -1,0 +1,10 @@
+{
+  "name": "Kal Kitna",
+  "short_name": "Kal Kitna",
+  "description": "How much perishable stock to order tomorrow.",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#eaf1ff",
+  "theme_color": "#4c7dff",
+  "icons": [{ "src": "/static/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

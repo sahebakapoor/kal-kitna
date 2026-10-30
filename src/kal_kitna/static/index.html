@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-page="door">
+<head>
+<meta charset="utf-8">
+<script>(function(){var t=null;try{t=JSON.parse(localStorage.getItem("kk:theme"))}catch(e){}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eaf1ff">
+<meta name="description" content="Kal Kitna: a forecasting model trained on real grocery sales, and a kirana app that turns it into tomorrow's order.">
+<title>Kal Kitna · how much should a shop order tomorrow?</title>
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="/static/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" rel="stylesheet">
+<link href="/static/kk.css?v=8" rel="stylesheet">
+<style>
+  .awning { height: 34px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 40px; text-align: center; }
+  .wordmark { font-size: 26px; }
+  h1 { font-size: clamp(30px, 5vw, 48px); font-weight: 700; letter-spacing: -1.2px; line-height: 1.1; margin: 34px 0 12px; }
+  h1 em { font-style: normal; background: var(--hero); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { max-width: 620px; margin: 0 auto; font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 40px; text-align: left; }
+  .door { position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 370px; padding: 30px; border-radius: var(--r-2xl); text-decoration: none; color: inherit; transition: transform .2s var(--ease), box-shadow .2s; }
+  .door:hover { transform: translateY(-4px); }
+  .door.lab { background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); order: 1; }
+  .door.app { background: var(--hero); color: #fff; box-shadow: var(--shadow-lift); order: 2; }
+  .door.app::before { content: ""; position: absolute; right: -80px; top: -90px; width: 300px; height: 300px; border-radius: 50%; background: rgba(255, 255, 255, .12); }
+  .door > * { position: relative; }
+  .ico { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; font-size: 28px; margin-bottom: 18px; }
+  .lab .ico { background: var(--primary-wash); color: var(--primary-ink); }
+  .app .ico { background: rgba(255, 255, 255, .22); color: #fff; }
+  .door .eyebrow { opacity: .75; }
+  .door h2 { font-size: 28px; font-weight: 700; letter-spacing: -.5px; margin: 6px 0 10px; }
+  .door p { margin: 0; font-size: 14.5px; line-height: 1.65; }
+  .lab p { color: var(--ink-2); }
+  .app p { opacity: .92; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .fact { height: 32px; padding: 0 12px; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; }
+  .lab .fact { background: var(--wash); }
+  .app .fact { background: rgba(255, 255, 255, .2); border: 1px solid rgba(255, 255, 255, .3); }
+  .go { margin-top: auto; padding-top: 22px; display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 700; }
+  .arrow { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; font-size: 24px; transition: transform .2s var(--ease); }
+  .door:hover .arrow { transform: translateX(4px); }
+  .lab .arrow { background: var(--primary); color: #fff; }
+  .app .arrow { background: #fff; color: #2f5fe0; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: 30px; font-size: 12.5px; color: var(--ink-3); }
+  .foot a, .foot span { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); text-decoration: none; }
+  .foot a:hover { color: var(--primary-ink); }
+
+  .topline { display: flex; justify-content: flex-end; align-items: center; gap: 10px; max-width: 1080px; margin: 14px auto 0; padding: 0 24px; }
+  .viewpick { display: inline-flex; padding: 3px; gap: 2px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .viewpick button { display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 11px; border: 0; border-radius: 9px; background: none; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+  .viewpick button i { font-size: 16px; }
+  .viewpick button[aria-checked="true"] { background: var(--primary); color: #fff; }
+  .viewnote { text-align: center; font-size: 12.5px; color: var(--ink-3); margin-top: 14px; min-height: 18px; }
+  @media (max-width: 760px) {
+    .topline { justify-content: space-between; padding: 0 18px; }
+    .viewnote { text-align: left; }
+    h1 br { display: none; }
+    .wrap { padding: 24px 18px 32px; text-align: left; }
+    .wordmark { font-size: 20px; }
+    h1 { margin-top: 24px; }
+    .lead { margin: 0; font-size: 14.5px; }
+    .doors { grid-template-columns: 1fr; gap: 12px; margin-top: 22px; }
+    .door { min-height: 0; padding: 22px; border-radius: var(--r-xl); }
+    .door.app { order: 1; } .door.lab { order: 2; }
+    .door h2 { font-size: 22px; }
+    .door p { font-size: 13.5px; }
+    .ico { width: 46px; height: 46px; font-size: 23px; border-radius: 14px; margin-bottom: 12px; }
+    .facts { display: none; }
+    .arrow { width: 44px; height: 44px; border-radius: 14px; font-size: 20px; }
+    .foot { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<svg class="awning"></svg>
+<div class="topline">
+  <div class="viewpick" role="radiogroup" aria-label="How should the apps open?">
+    <button role="radio" data-view="auto"><i class="ti ti-wand" aria-hidden="true"></i>Auto</button>
+    <button role="radio" data-view="mobile"><i class="ti ti-device-mobile" aria-hidden="true"></i>Phone</button>
+    <button role="radio" data-view="desktop"><i class="ti ti-device-laptop" aria-hidden="true"></i>Laptop</button>
+  </div>
+  <button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button>
+</div>
+<main class="wrap">
+  <span class="wordmark">Kal Kitna</span>
+  <h1>How much should a shop<br>order <em>tomorrow?</em></h1>
+  <p class="lead">A forecasting model trained on real grocery sales, and a kirana app that turns its forecasts into tomorrow's order. Pick a door.</p>
+
+  <div class="doors">
+    <a class="door lab" href="/lab">
+      <div class="ico"><i class="ti ti-flask" aria-hidden="true"></i></div>
+      <div class="eyebrow">The Lab</div>
+      <h2>Built on real grocery data</h2>
+      <p>How the model was trained and tested on 4.5 years of sales from 54 stores, how it beat a naive baseline, and a playground to try it yourself.</p>
+      <div class="facts">
+        <span class="fact"><i class="ti ti-trending-down" style="color:var(--leaf)" aria-hidden="true"></i>33.5% less error</span>
+        <span class="fact"><i class="ti ti-database" style="color:var(--primary)" aria-hidden="true"></i>727k real rows</span>
+        <span class="fact"><i class="ti ti-git-branch" style="color:var(--primary)" aria-hidden="true"></i>Reproducible pipeline</span>
+      </div>
+      <div class="go">Open the Lab<span class="arrow"><i class="ti ti-arrow-right" aria-hidden="true"></i></span></div>
+    </a>
+
+    <a class="door app" href="/app">
+      <div class="ico"><i class="ti ti-building-store" aria-hidden="true"></i></div>
+      <div class="eyebrow">The Kirana App</div>
+      <h2>Built for Indian shops</h2>
+      <p>Plan tomorrow's order in a minute, keep a clean khata, and send each supplier only their items on WhatsApp. Works best on your phone.</p>
+      <div class="facts">
+        <span class="fact"><i class="ti ti-notebook" aria-hidden="true"></i>Khata</span>
+        <span class="fact"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i>Supplier orders</span>
+        <span class="fact"><i class="ti ti-currency-rupee" aria-hidden="true"></i>Your own prices</span>
+      </div>
+      <div class="go">Open the app<span class="arrow"><i class="ti ti-arrow-right" aria-hidden="true"></i></span></div>
+    </a>
+  </div>
+
+  <p class="viewnote" id="viewnote" aria-live="polite"></p>
+  <div class="foot">
+    <a href="https://github.com/sahebakapoor/kal-kitna"><i class="ti ti-brand-github" aria-hidden="true"></i>sahebakapoor/kal-kitna</a>
+    <a href="/docs"><i class="ti ti-api" aria-hidden="true"></i>API docs</a>
+    <span><i class="ti ti-shield-check" aria-hidden="true"></i>Public demo uses simulated stores; real data stays private</span>
+  </div>
+</main>
+<script src="/static/core.js?v=8"></script>
+<script>
+  KK.decorate();
+  const notes = { auto: "Apps open in the layout that fits this screen.", mobile: "Apps open as the phone version, even on a laptop.", desktop: "Apps open as the laptop version." };
+  function paint() {
+    const v = KK.getView();
+    document.querySelectorAll(".viewpick button").forEach((b) => b.setAttribute("aria-checked", b.dataset.view === v));
+    document.getElementById("viewnote").textContent = notes[v];
+  }
+  document.querySelectorAll(".viewpick button").forEach((b) => (b.onclick = () => { KK.setView(b.dataset.view); paint(); }));
+  paint();
+</script>
+</body>
+</html>
