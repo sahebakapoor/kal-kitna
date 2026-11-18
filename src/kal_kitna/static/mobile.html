@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <script>(function(){var t=null;try{t=JSON.parse(localStorage.getItem("kk:theme"))}catch(e){}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");})();</script>
-
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#eaf1ff">
+<meta name="theme-color" content="#FBF7F0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Kal Kitna">
 <title>Kal Kitna</title>
@@ -13,395 +12,465 @@
 <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/static/icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" rel="stylesheet">
-<link href="/static/kk.css?v=8" rel="stylesheet">
+<link href="/static/kk.css?v=11" rel="stylesheet">
 <style>
-  /* The page itself scrolls (no nested scroll boxes); bars are fixed to the screen. */
   .shell { max-width: 480px; margin: 0 auto; min-height: 100dvh; }
-  .view { padding-bottom: calc(176px + env(safe-area-inset-bottom, 0px)); display: none; }
-  .view.on { display: block; animation: fade .18s var(--ease); }
+  .view { display: none; padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }
+  .view.on { display: block; animation: fade .2s ease; }
   @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  .pad { padding: 0 18px; }
-
-  .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px 0; }
-  .greet small { display: block; font-size: 13px; color: var(--ink-2); }
-  .greet { min-width: 0; }
-  .greet b { display: block; font-size: clamp(19px, 5.6vw, 22px); font-weight: 600; letter-spacing: -.2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .store { height: 36px; width: auto; flex: none; padding: 0 30px 0 12px; border-radius: 999px; background-color: var(--glass); font-size: 12.5px; font-weight: 600; }
-  .sub { display: flex; gap: 8px; padding: 12px 18px 2px; overflow-x: auto; scrollbar-width: none; }
-  .sub::-webkit-scrollbar { display: none; }
-  .sub > * { flex: none; }
-  .date-chip { position: relative; }
-  .date-chip input { position: absolute; inset: 0; opacity: 0; width: 100%; }
-  button.chip { border: 1px solid var(--line); }
-
-  .hero { margin: 14px 18px 0; padding: 18px 18px 16px; }
-  .hero .t { font-size: 14px; font-weight: 600; } .hero .t span { opacity: .82; font-weight: 400; }
-  .hero-main { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
-  .big { font-size: clamp(42px, 13vw, 56px); font-weight: 700; line-height: 1; letter-spacing: -1.5px; white-space: nowrap; }
-  .big small { font-size: 14px; font-weight: 500; letter-spacing: 0; opacity: .85; margin-left: 4px; }
-  .hero .note { font-family: var(--hand); font-size: clamp(16px, 4.6vw, 19px); line-height: 1.1; margin-top: 6px; max-width: 190px; opacity: .95; }
-  .mini-gauge { width: clamp(88px, 28vw, 118px); flex: none; }
-  .hs b { font-size: clamp(14px, 4vw, 16px) !important; }
-  .hs-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
-  .hs { border-radius: 14px; padding: 9px 10px; }
-  .hs b { display: block; font-size: 16px; font-weight: 600; }
-  .hs span { font-size: 10.5px; opacity: .88; }
-
-  .sec { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 18px 10px; }
-  .sec b { font-size: 15px; font-weight: 600; }
-  .sec button { border: 0; background: none; font-size: 12px; font-weight: 500; color: var(--primary-ink); }
-  .prods { display: flex; gap: 10px; padding: 2px 18px 4px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
-  .prods::-webkit-scrollbar { display: none; }
-  .prod { flex: none; width: 64px; display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: none; padding: 0; font-size: 11px; font-weight: 500; color: var(--ink-2); scroll-snap-align: start; }
-  .prod .ava { width: 56px; height: 56px; border-radius: 18px; font-size: 24px; border: 2px solid transparent; transition: transform .15s; }
-  .prod[aria-pressed="true"] { color: var(--ink); font-weight: 600; }
-  .prod[aria-pressed="true"] .ava { border-color: var(--c); transform: translateY(-2px); box-shadow: 0 8px 16px -10px var(--c); }
-  .tick { position: absolute; right: -4px; top: -4px; width: 19px; height: 19px; border-radius: 50%; background: var(--leaf); color: #fff; font-size: 12px; display: grid; place-items: center; border: 2px solid var(--card); }
-
-  .list { margin: 0 18px; padding: 2px 14px; }
+  .pad { padding: 0 20px; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 20px 0; }
+  .hello small { display: block; font-size: 13px; color: var(--ink-2); }
+  .hello b { font-size: clamp(18px, 5.4vw, 21px); font-weight: 600; }
+  .ctrls { display: flex; gap: 6px; align-items: center; flex: none; }
+  .ctrls .seg > * { height: 30px; padding: 0 8px; font-size: 12px; }
+  .title { padding: 14px 20px 0; }
+  .title small { display: block; font-size: 13px; color: var(--ink-2); }
+  .title h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -.4px; }
+  .title .ctrls { justify-content: flex-end; margin-bottom: 6px; }
+  .bar2 { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 20px 0; }
+  .bar2::-webkit-scrollbar { display: none; }
+  .bar2 > * { flex: none; }
+  .store-pick { height: 34px; width: auto; padding: 0 30px 0 12px; border-radius: 999px; background-color: var(--card); font-size: 12.5px; font-weight: 500; }
+  .clockbar { flex: 1 1 100%; display: flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 3px 4px 3px 11px; font-size: 12px; color: var(--ink-2); }
+  .clockbar b { color: var(--ink); font-weight: 600; min-width: 52px; }
+  .clockbar .sp { flex: 1; }
+  .clockbar button, .clockbar b, .clockbar span { white-space: nowrap; }
+  @media (max-width: 400px) { .clockbar [data-t] { display: none; } .clockbar button { padding: 0 7px; } }
+  .clockbar button { height: 28px; border: 0; border-radius: 999px; background: var(--mist); font-size: 11.5px; font-weight: 600; padding: 0 9px; color: var(--ink); }
+  .clockbar button.play { width: 28px; padding: 0; display: grid; place-items: center; font-size: 14px; background: var(--loud); color: var(--on-loud); }
+  .card.box { margin: 12px 20px 0; padding: 14px 16px; }
+  .money { font-size: 34px; font-weight: 700; letter-spacing: -1px; }
+  .hours { display: flex; align-items: flex-end; gap: 4px; height: 46px; margin-top: 12px; }
+  .hours i { flex: 1; display: block; border-radius: 4px 4px 2px 2px; background: var(--mist); min-height: 3px; transition: height .4s; }
+  .hours i.now { background: var(--loud); }
+  .hours i.future { background: none; border: 1.5px dashed var(--mist-deep); border-bottom: none; }
+  .hl { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--ink-3); margin-top: 3px; }
+  .need { display: flex; align-items: center; gap: 12px; }
+  .need.alert { border-color: var(--loud); }
+  .need .ic { width: 40px; height: 40px; border-radius: 12px; background: var(--loud-soft); display: grid; place-items: center; font-size: 20px; flex: none; }
+  .need.calm .ic { background: var(--good-soft); color: var(--good); }
+  .need b { display: block; font-size: 14px; } .need span { font-size: 12px; color: var(--ink-2); }
+  .need .btn { height: 38px; padding: 0 12px; font-size: 12.5px; border-radius: 12px; margin-left: auto; flex: none; }
+  .cues { display: flex; gap: 8px; margin: 12px 20px 0; overflow-x: auto; scrollbar-width: none; }
+  .cues::-webkit-scrollbar { display: none; }
+  .cue { flex: none; display: flex; gap: 9px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 9px 12px; font-size: 11.5px; color: var(--ink-2); max-width: 250px; }
+  .cue i { font-size: 19px; color: var(--ink); } .cue b { display: block; font-size: 12.5px; color: var(--ink); font-weight: 600; }
+  .prog { height: 8px; border-radius: 4px; background: var(--mist); overflow: hidden; margin-top: 7px; }
+  .prog div { height: 100%; background: var(--slate); border-radius: 4px; transition: width .3s; }
+  .sec { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 20px 10px; }
+  .sec b { font-size: 16px; font-weight: 600; } .sec span { font-size: 12px; color: var(--ink-3); display: flex; gap: 4px; align-items: center; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px; }
+  .pc { position: relative; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 14px; }
+  .pc .nm { font-size: 15px; font-weight: 600; margin-top: 9px; }
+  .pc .qt { font-size: 11.5px; color: var(--ink-3); margin-top: 1px; }
+  .fvs-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+  .fvs-tiles > div { background: var(--canvas); border-radius: 12px; padding: 9px 10px; } .fvs-tiles span { display: block; font-size: 11px; color: var(--ink-2); } .fvs-tiles b { font-size: 17px; }
+  .tabbar { position: fixed; left: 50%; transform: translateX(-50%); width: min(456px, calc(100% - 24px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 40; height: 64px; display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; border-radius: 24px; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); }
+  .tabbar button { height: 100%; border: 0; background: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10.5px; color: var(--ink-3); }
+  .tabbar button i { font-size: 21px; }
+  .tabbar button[aria-selected="true"] { color: var(--ink); font-weight: 600; }
+  .tabbar button[aria-selected="true"]::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--loud); }
+  .tabbar .badge { position: absolute; transform: translate(10px, -14px); min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--loud); color: var(--on-loud); font-size: 9.5px; font-weight: 700; display: grid; place-items: center; }
+  /* Product detail layer */
+  .layer { position: fixed; inset: 0; z-index: 60; background: var(--canvas); overflow-y: auto; display: none; }
+  .layer.on { display: block; animation: slide .22s ease; }
+  @keyframes slide { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .layer .in { max-width: 480px; margin: 0 auto; padding-bottom: 40px; }
+  .back { display: flex; align-items: center; gap: 10px; padding: 14px 20px 0; }
+  .back b { display: block; font-size: 19px; font-weight: 600; } .back span { font-size: 12.5px; color: var(--ink-2); }
+  .stage { margin: 14px 20px 0; padding: 16px; position: relative; }
+  .say { font-size: 15px; line-height: 1.5; margin-top: 12px; } .say b { font-weight: 600; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 20px 0; }
+  .st { padding: 11px 13px; } .st span { display: block; font-size: 11.5px; color: var(--ink-2); } .st b { display: block; font-size: 20px; font-weight: 700; margin-top: 1px; }
+  .st em { font-style: normal; font-size: 11.5px; font-weight: 500; color: var(--ink-3); }
+  .st em.up { color: var(--good); }
+  .st.wide { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; }
+  .st.wide .btn { margin-left: auto; height: 42px; padding: 0 14px; font-size: 13px; border-radius: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 9px 0; font-size: 13px; font-weight: 500; }
+  .brand + .brand { border-top: 1px solid var(--line); }
+  .brand .bar { flex: 1; height: 6px; border-radius: 3px; background: var(--mist); overflow: hidden; } .brand .bar div { height: 100%; background: var(--slate); }
+  .brand small { width: 56px; text-align: right; color: var(--ink-3); font-size: 11.5px; }
+  /* Lists */
+  .list { margin: 0 20px; padding: 2px 14px; }
   .li { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; border: 0; background: none; text-align: left; padding: 8px 0; }
   .li + .li { border-top: 1px solid var(--line); }
-  .li .nm { font-size: 14px; font-weight: 600; }
-  .li .sb { font-size: 11px; color: var(--ink-3); }
-  .li .q { margin-left: auto; text-align: right; font-size: 16px; font-weight: 700; }
-  .li .q span { display: block; font-size: 10.5px; font-weight: 500; color: var(--ink-3); }
-  .li .go { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; flex: none; margin-left: 4px; }
-
-  .title { padding: 16px 18px 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-  .ctrls { display: flex; gap: 8px; align-items: center; flex: none; }
-  /* Compact switch on inner tabs: icons only, the words stay for screen readers */
-  .ctrls .modes a { font-size: 0; gap: 0; padding: 0 9px; }
-  .ctrls .modes a i { font-size: 17px; }
-  .title { flex-wrap: wrap; }
-  .title > div:first-child { width: 100%; }
-  .title .ctrls { order: -1; margin-left: auto; }
-  .title small { display: block; font-size: 12.5px; color: var(--ink-2); }
-  .title h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -.4px; }
-  .summary { margin: 14px 18px 0; padding: 14px 16px; display: flex; align-items: center; gap: 14px; }
-  .grp-h { display: flex; align-items: center; gap: 8px; margin: 16px 20px 8px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
-  .grp-h .dot { width: 8px; height: 8px; border-radius: 50%; }
-  .grp-h span:last-child { margin-left: auto; font-weight: 500; color: var(--ink-3); }
-
-  .cta { position: fixed; left: 50%; transform: translateX(-50%); width: min(444px, calc(100% - 36px)); bottom: calc(94px + env(safe-area-inset-bottom, 0px)); z-index: 30; }
-  .cta.two { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
-  .tabbar { position: fixed; left: 50%; transform: translateX(-50%); width: min(456px, calc(100% - 24px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 40; height: 66px; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; border-radius: 22px; background: var(--glass); border: 1px solid var(--line); box-shadow: var(--shadow); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-  .tabbar button { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: 0; background: none; font-size: 10.5px; font-weight: 500; color: var(--ink-3); }
-  .tabbar button i { font-size: 23px; }
-  .tabbar button[aria-selected="true"] { color: var(--primary-ink); font-weight: 600; }
-  .tabbar button[aria-selected="true"]::before { content: ""; position: absolute; top: 4px; width: 22px; height: 3px; border-radius: 2px; background: var(--primary); }
-  .badge { position: absolute; top: 8px; left: calc(50% + 6px); min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: var(--marigold); color: #4a2f00; font-size: 10px; font-weight: 700; display: grid; place-items: center; }
-
-  .toast { bottom: calc(168px + env(safe-area-inset-bottom, 0px)); }
-  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 18px 0; }
-  .tile { padding: 12px; }
-  .tile b { display: block; font-size: 18px; font-weight: 700; }
-  .tile span { font-size: 10.5px; color: var(--ink-3); }
-  .saved { margin: 14px 18px 0; padding: 18px; border-radius: var(--r-xl); background: var(--saved-bg); border: 1px solid var(--saved-line); box-shadow: var(--shadow); }
-  .saved .v { font-size: 38px; font-weight: 700; letter-spacing: -1px; }
-  .saved .hand { font-size: 19px; color: var(--marigold-ink); }
-
-  .form { margin: 12px 18px 0; padding: 16px; display: grid; gap: 12px; }
-  .price { display: grid; grid-template-columns: 36px 1fr 72px 72px; gap: 8px; align-items: center; }
-  .price .input { height: 42px; text-align: right; padding: 0 10px; }
-  .price-err { grid-column: 2 / -1; margin-top: -4px; }
-  .phead { display: grid; grid-template-columns: 36px 1fr 72px 72px; gap: 8px; font-size: 11px; color: var(--ink-3); }
-  .phead span:nth-child(n+3) { text-align: right; }
-  .scale { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-3); }
-  .links { display: grid; gap: 8px; margin: 12px 18px 0; }
-
+  .li .ic { width: 40px; height: 40px; flex: none; border-radius: 13px; background: var(--mist); display: grid; place-items: center; font-size: 19px; }
+  .li .nm { font-size: 14px; font-weight: 600; } .li .sb { font-size: 11.5px; color: var(--ink-3); }
+  .li .q { margin-left: auto; text-align: right; font-size: 16px; font-weight: 700; } .li .q span { display: block; font-size: 10.5px; font-weight: 500; color: var(--ink-3); }
+  .li .go { width: 26px; height: 26px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 15px; background: var(--mist); color: var(--ink-3); }
+  .li .go.ok { background: var(--good-soft); color: var(--good); }
+  .grp { display: flex; align-items: center; gap: 8px; margin: 16px 22px 8px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+  .grp span:last-child { margin-left: auto; font-weight: 500; color: var(--ink-3); }
+  .actions { position: fixed; left: 50%; transform: translateX(-50%); width: min(440px, calc(100% - 40px)); bottom: calc(86px + env(safe-area-inset-bottom, 0px)); z-index: 30; display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+  .actions .btn-quiet { width: 50px; padding: 0; }
+  /* Shop insights */
+  .ins { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 20px 0; }
+  .ins .card { padding: 12px 14px; } .ins .wide { grid-column: 1 / -1; }
+  .big { font-size: 26px; font-weight: 700; letter-spacing: -.6px; }
+  .rank { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 13px; }
+  .rank + .rank { border-top: 1px solid var(--line); }
+  .rank b { margin-left: auto; font-weight: 600; }
+  .week { display: flex; align-items: flex-end; gap: 6px; height: 70px; margin-top: 10px; }
+  .week div { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; color: var(--ink-3); }
+  .week i { width: 100%; display: block; border-radius: 5px 5px 2px 2px; background: var(--mist-deep); }
+  .week .top i { background: var(--loud); }
+  .form { margin: 12px 20px 0; padding: 16px; display: grid; gap: 12px; }
+  .price { display: grid; grid-template-columns: 1fr 72px 72px; gap: 8px; align-items: center; }
+  .price .input { height: 40px; text-align: right; padding: 0 10px; }
+  .price-err { grid-column: 1 / -1; margin-top: -6px; }
+  /* Nearby */
+  .map { margin: 12px 20px 0; padding: 10px; }
+  .map svg { width: 100%; display: block; border-radius: 16px; }
   /* Sheets */
-  .scrim { position: fixed; inset: 0; z-index: 100; background: rgba(30, 42, 69, .34); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); display: none; align-items: flex-end; justify-content: center; }
+  .scrim { position: fixed; inset: 0; z-index: 100; background: rgba(20, 23, 29, .38); display: none; align-items: flex-end; justify-content: center; }
   .scrim.on { display: flex; }
-  .sheet { width: min(480px, 100%); max-height: 92dvh; overflow-y: auto; background: var(--sheet); border-radius: 28px 28px 0 0; padding: 10px 18px calc(22px + env(safe-area-inset-bottom, 0px)); display: none; animation: rise .25s var(--ease); box-shadow: 0 -20px 40px -20px rgba(30, 42, 69, .35); }
+  .sheet { width: min(480px, 100%); max-height: 92dvh; overflow-y: auto; background: var(--canvas); border-radius: 28px 28px 0 0; padding: 10px 18px calc(22px + env(safe-area-inset-bottom, 0px)); display: none; animation: rise .25s ease; }
   .sheet.on { display: block; }
-  @keyframes rise { from { transform: translateY(60px); opacity: 0; } to { transform: none; opacity: 1; } }
-  .grab { width: 42px; height: 5px; border-radius: 3px; background: var(--line-2); margin: 0 auto 14px; }
+  @keyframes rise { from { transform: translateY(50px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .grab { width: 42px; height: 5px; border-radius: 3px; background: var(--mist-deep); margin: 0 auto 14px; }
   .sh-head { display: flex; align-items: center; gap: 12px; }
   .sh-head .t { font-size: 16px; font-weight: 600; } .sh-head .s { font-size: 12px; color: var(--ink-3); }
   .sh-head .icon-btn { margin-left: auto; }
   .stack > * + * { margin-top: 14px; }
-  .zones input { position: absolute; left: -14px; right: -14px; top: -14px; width: calc(100% + 28px); height: 40px; opacity: 0; margin: 0; cursor: pointer; }
-  .fam-pick { display: flex; flex-wrap: wrap; gap: 8px; }
 </style>
 </head>
 <body>
 <div class="shell">
-  <div class="views">
-    <!-- HOME -->
-    <section class="view on" id="v-home" role="tabpanel" aria-labelledby="t-home">
-      <svg class="awning"></svg>
-      <div class="head">
-        <div class="greet"><small id="greet">Namaste,</small><b id="owner">Ramesh ji</b></div>
-        <div style="display:flex;gap:8px;align-items:center"><button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button>
-        <nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav></div>
-      </div>
-      <div class="sub">
-        <select class="input store" id="store" aria-label="Store"></select>
-        <label class="chip date-chip"><i class="ti ti-calendar-event" aria-hidden="true"></i><span id="date-label">–</span><input type="date" id="date" aria-label="Day to plan"></label>
-        <button class="chip" id="planned-chip"><i class="ti ti-checklist" aria-hidden="true"></i><span id="planned-label">0 of 8 planned</span></button>
-      </div>
-      <div class="hero-card hero" aria-live="polite">
-        <div class="between"><div class="t" id="h-title">–</div><span class="pill glass" id="h-pill"><i class="ti ti-sparkles" aria-hidden="true"></i>Smart pick</span></div>
-        <div class="hero-main">
-          <div><div class="big num"><span id="h-qty" class="skel">000</span><small id="h-unit"></small></div><div class="note" id="h-note"></div></div>
-          <svg class="mini-gauge" viewBox="0 0 240 132" id="h-gauge" aria-hidden="true"></svg>
-        </div>
-        <div class="hs-row">
-          <div class="hs glass"><b class="num" id="h-fc">–</b><span>Likely to sell</span></div>
-          <div class="hs glass"><b class="num" id="h-cost">–</b><span>Stock cost</span></div>
-          <div class="hs glass"><b class="num" id="h-risk">–</b><span id="h-risk-l">Likely waste</span></div>
-        </div>
-      </div>
-      <div class="sec"><b>Products</b><button id="see-khata">Open khata</button></div>
-      <div class="prods" id="prods" role="group" aria-label="Choose product"></div>
-      <div class="sec"><b id="todo-h">Still to plan</b><button id="plan-all">Plan next</button></div>
-      <div class="card list" id="todo"></div>
-    </section>
+  <!-- HOME -->
+  <section class="view on" id="v-home">
+    <svg class="awning"></svg>
+    <div class="top">
+      <div class="row" style="gap:10px"><a class="mark-only" href="/" aria-label="Kal Kitna home"></a><div class="hello"><small id="greet">–</small><b id="owner">–</b></div></div>
+      <div class="ctrls" data-ctrls></div>
+    </div>
+    <div class="bar2">
+      <select class="input store-pick" id="store" aria-label="Store"></select>
+      <div class="clockbar" role="group" aria-label="Demo clock"><i class="ti ti-clock-play" aria-hidden="true"></i><span data-t="Demo day">Demo day</span><b id="clock">1 pm</b><span class="sp"></span>
+        <button data-h="9" data-clock="9">9 am</button><button data-h="13" data-clock="13">1 pm</button><button data-h="18" data-clock="18">6 pm</button>
+        <button class="play" id="play" aria-label="Play the demo day"><i class="ti ti-player-play-filled"></i></button></div>
+    </div>
+    <div class="card box" aria-live="polite">
+      <div class="label" data-t="Today so far">Today so far</div>
+      <div class="row" style="align-items:baseline;flex-wrap:wrap;gap:6px 10px"><div class="money num" id="money">–</div><span class="tag good" id="vs"></span></div>
+      <div class="hours" id="hours"></div><div class="hl"><span data-clock="8">8 am</span><span data-t="now">now</span><span data-clock="22">10 pm</span></div>
+    </div>
+    <div class="card box need" id="need"></div>
+    <div class="cues" id="cues"></div>
+    <div class="card box">
+      <div class="between"><div style="flex:1"><div class="label" data-t="Tomorrow's order">Tomorrow's order</div><b style="font-size:15px" id="planned">–</b><div class="prog"><div id="planbar" style="width:0"></div></div></div><button class="link" id="to-plan" data-t="Continue">Continue</button></div>
+    </div>
+    <div class="sec"><b data-t="Your shelf">Your shelf</b><span><span data-t="Scroll">Scroll</span><i class="ti ti-chevron-down"></i></span></div>
+    <div class="grid" id="shelf"></div>
+    <p class="demo-note pad" style="margin-top:12px"><i class="ti ti-info-circle"></i>Demo shop: simulated sales, real forecasting model.</p>
+  </section>
 
-    <!-- KHATA -->
-    <section class="view" id="v-khata" role="tabpanel" aria-labelledby="t-khata">
-      <svg class="awning"></svg>
-      <div class="title"><div><small id="k-store">Khata</small><h1>Tomorrow's order</h1><small id="k-date" style="margin-top:2px">–</small></div><div class="ctrls"><button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button><nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav></div></div>
-      <div class="card summary">
-        <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="21" stroke="#edf2ff" stroke-width="7" fill="none"/><circle id="k-ring" cx="26" cy="26" r="21" stroke="#4c7dff" stroke-width="7" fill="none" stroke-dasharray="0 132" stroke-linecap="round" transform="rotate(-90 26 26)"/><text id="k-ring-t" x="26" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#1e2a45" font-family="Poppins">0/8</text></svg>
-        <div><div style="font-size:12px;color:var(--ink-2)">Stock value</div><div style="font-size:24px;font-weight:700;letter-spacing:-.5px" class="num" id="k-value">₹0</div></div>
-        <span class="pill t-warn" id="k-left" style="margin-left:auto"><i class="ti ti-clock" aria-hidden="true"></i>to check</span>
-      </div>
-      <div id="k-groups"></div>
-    </section>
+  <!-- PLAN -->
+  <section class="view" id="v-plan">
+    <svg class="awning"></svg>
+    <div class="title"><div class="ctrls" data-ctrls></div><small id="plan-for">–</small><h1 data-t="Tomorrow's order">Tomorrow's order</h1></div>
+    <div class="bar2"><label class="pill" style="position:relative"><i class="ti ti-calendar-event"></i><span id="date-label">–</span><input type="date" id="date" aria-label="Day to plan" style="position:absolute;inset:0;opacity:0"></label><span class="pill" id="plan-count">–</span></div>
+    <p class="pad muted" style="font-size:13.5px;line-height:1.55;margin:12px 0 0">Kal Kitna suggests a smart order for each product. Tap one to check it, then swipe to add it to your khata.</p>
+    <div class="card list" id="plan-list" style="margin-top:12px"></div>
+    <div class="pad" style="margin-top:12px"><button class="btn btn-loud btn-block" id="plan-next"><i class="ti ti-arrow-right"></i>Plan next product</button></div>
+  </section>
 
-    <!-- INSIGHTS -->
-    <section class="view" id="v-insights" role="tabpanel" aria-labelledby="t-insights">
-      <svg class="awning"></svg>
-      <div class="title"><div><small>What the numbers say</small><h1>Insights</h1></div><div class="ctrls"><button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button><nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav></div></div>
-      <div class="saved"><div style="font-size:12.5px;color:var(--ink-2)" id="i-saved-l">Saved vs ordering like last week</div><div class="v num" id="i-saved"><span class="skel">₹0,000</span></div><div class="hand" id="i-saved-note">adding up the demo weeks…</div></div>
-      <div class="chip-row pad" id="i-chips" style="margin-top:14px"></div>
-      <div class="card" style="margin:12px 18px 0;padding:16px">
-        <div class="between"><div><p class="h-title" id="i-title">–</p><p class="h-sub">Forecast vs what really sold</p></div><div class="legend"><span><i style="background:#dbe5ff"></i>Sold</span><span><i style="background:#4c7dff;height:3px"></i>Forecast</span></div></div>
-        <div id="i-chart" style="margin-top:10px"></div>
-      </div>
-      <div class="tiles"><div class="card tile"><b class="num" id="i-acc">–</b><span>Forecast accuracy</span></div><div class="card tile"><b class="num" id="i-close">–</b><span>Days within 10%</span></div><div class="card tile"><b class="num" id="i-sold">–</b><span>Sold, 4 weeks</span></div></div>
-      <div class="card" style="margin:12px 18px 0;padding:12px 16px;display:flex;gap:10px;align-items:flex-start" id="i-pattern-card"><i class="ti ti-bulb" style="font-size:20px;color:var(--marigold-ink)" aria-hidden="true"></i><div style="font-size:13px;line-height:1.5;color:var(--ink-2)" id="i-pattern"></div></div>
-    </section>
+  <!-- KHATA -->
+  <section class="view" id="v-khata">
+    <svg class="awning"></svg>
+    <div class="title"><div class="ctrls" data-ctrls></div><small id="k-sub">–</small><h1 data-t="Khata">Khata</h1></div>
+    <div class="card box between">
+      <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="21" style="stroke:var(--mist)" stroke-width="7" fill="none"/><circle id="k-ring" cx="26" cy="26" r="21" style="stroke:var(--loud)" stroke-width="7" fill="none" stroke-dasharray="0 132" stroke-linecap="round" transform="rotate(-90 26 26)"/></svg>
+      <div style="flex:1"><div class="label">Stock value</div><div style="font-size:24px;font-weight:700" class="num" id="k-value">₹0</div></div>
+      <span class="tag loud" id="k-left">–</span>
+    </div>
+    <div id="k-groups"></div>
+    <div style="height:70px"></div>
+  </section>
 
-    <!-- SHOP -->
-    <section class="view" id="v-shop" role="tabpanel" aria-labelledby="t-shop">
-      <svg class="awning"></svg>
-      <div class="title"><div><small>Your shop, your numbers</small><h1>Shop</h1></div><div class="ctrls"><button class="theme-btn" data-theme-toggle type="button" aria-label="Switch theme"><i class="ti ti-moon" aria-hidden="true"></i></button><nav class="modes" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page"><i class="ti ti-building-store" aria-hidden="true"></i>App</a><a href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>Lab</a></nav></div></div>
-      <div class="card form">
-        <p class="h-title">Profile</p>
-        <label class="field"><span>Your name</span><input class="input" id="f-owner" autocomplete="name"></label>
-        <label class="field"><span>Shop name</span><input class="input" id="f-shop"></label>
-        <label class="field"><span>Ask suppliers to confirm by</span><input class="input" id="f-confirm" placeholder="8 pm"></label>
-      </div>
-      <div class="sec"><b>Suppliers</b><button id="add-sup">+ Add supplier</button></div>
-      <div id="sup-list" class="pad"></div>
-      <div class="sec"><b>Prices</b><button id="reset">Reset</button></div>
-      <div class="card form" style="margin-top:0">
-        <div class="phead"><span></span><span>Rupees per unit</span><span>You pay</span><span>You sell</span></div>
-        <div id="price-rows" style="display:grid;gap:10px"></div>
-      </div>
-      <div class="card form">
-        <div class="between"><p class="h-title">Regular customers</p><span class="pill t-info" id="gw-v">20%</span></div>
-        <p class="h-sub" style="font-size:12.5px;line-height:1.5;margin:0">How much an empty shelf costs you in lost loyalty. Higher means Kal Kitna orders a little more.</p>
-        <input type="range" id="gw" min="0" max="1" step="0.05" aria-label="How much regular customers matter">
-        <div class="scale"><span>Rarely</span><span>Very much</span></div>
-      </div>
-      <div class="links">
-        <a class="btn btn-white btn-block" href="/lab?view=mobile"><i class="ti ti-flask" aria-hidden="true"></i>How the model was built (Lab)</a>
-        <a class="btn btn-white btn-block" href="/app?view=desktop"><i class="ti ti-device-desktop" aria-hidden="true"></i>Open the laptop dashboard</a>
-      </div>
-      <div class="honest" style="margin:12px 18px 0"><i class="ti ti-shield-check" aria-hidden="true"></i>This demo serves simulated stores through a model trained on real grocery sales. Your prices, suppliers and orders are saved only on this phone.</div>
-    </section>
-  </div>
+  <!-- NEARBY -->
+  <section class="view" id="v-nearby">
+    <svg class="awning"></svg>
+    <div class="title"><div class="ctrls" data-ctrls></div><small>Demo neighbourhood</small><h1 data-t="Nearby">Nearby</h1></div>
+    <div class="card box"><div style="font-size:14.5px;line-height:1.55" id="area-say">–</div></div>
+    <div class="card map"><div id="map"></div></div>
+    <div class="card list" id="near-list" style="margin-top:12px"></div>
+    <p class="demo-note pad" style="margin-top:12px"><i class="ti ti-info-circle"></i>Nearby shops are the other demo stores, shown to explain the idea.</p>
+  </section>
 
-  <div class="cta" id="cta-home"><button class="btn btn-blue btn-block" id="plan-btn"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i><span id="plan-label">Plan order</span></button></div>
-  <div class="cta two" id="cta-khata" hidden><button class="btn btn-wa" id="send-btn"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i>Send to suppliers</button><button class="btn btn-white" id="copy-btn" style="width:52px;padding:0" aria-label="Copy all orders"><i class="ti ti-copy" aria-hidden="true"></i></button></div>
-
-  <nav class="tabbar" role="tablist" aria-label="Sections">
-    <button role="tab" id="t-home" aria-selected="true" data-view="home"><i class="ti ti-smart-home" aria-hidden="true"></i>Home</button>
-    <button role="tab" id="t-khata" aria-selected="false" data-view="khata"><i class="ti ti-notebook" aria-hidden="true"></i><span class="badge" id="badge" hidden>0</span>Khata</button>
-    <button role="tab" id="t-insights" aria-selected="false" data-view="insights"><i class="ti ti-chart-dots-3" aria-hidden="true"></i>Insights</button>
-    <button role="tab" id="t-shop" aria-selected="false" data-view="shop"><i class="ti ti-settings-2" aria-hidden="true"></i>Shop</button>
-  </nav>
+  <!-- SHOP -->
+  <section class="view" id="v-shop">
+    <svg class="awning"></svg>
+    <div class="title"><div class="ctrls" data-ctrls></div><small id="shop-sub">–</small><h1 data-t="Shop">Shop</h1></div>
+    <div class="ins" id="ins"></div>
+    <div class="sec"><b>Suppliers</b><button class="link" id="add-sup">+ Add supplier</button></div>
+    <div class="pad" id="sup-list"></div>
+    <div class="sec"><b>Profile and language</b></div>
+    <div class="card form" style="margin-top:0">
+      <label class="field"><span>Your name</span><input class="input" id="f-owner" autocomplete="name"></label>
+      <label class="field"><span>Shop name</span><input class="input" id="f-shop"></label>
+      <label class="field"><span>Ask suppliers to confirm by</span><input class="input" id="f-confirm"></label>
+      <div class="between"><span class="label">Language</span><div class="seg" id="lang2"><button data-l="en">English</button><button data-l="hi">हिंदी</button></div></div>
+    </div>
+    <div class="sec"><b>Prices</b><button class="link" id="reset">Reset</button></div>
+    <div class="card form" style="margin-top:0">
+      <div class="price label"><span>Rupees per unit</span><span style="text-align:right">You pay</span><span style="text-align:right">You sell</span></div>
+      <div id="price-rows" style="display:grid;gap:10px"></div>
+    </div>
+    <div class="card form">
+      <div class="between"><b style="font-size:15px">Regular customers</b><span class="tag" id="gw-v">20%</span></div>
+      <p class="label" style="margin:0;line-height:1.5">How much an empty shelf costs you in lost loyalty. Higher means Kal Kitna orders a little more.</p>
+      <input type="range" id="gw" min="0" max="1" step="0.05" aria-label="How much regular customers matter">
+    </div>
+    <div class="pad" style="display:grid;gap:8px;margin-top:12px">
+      <a class="btn btn-quiet btn-block" href="/lab?view=mobile"><i class="ti ti-flask"></i>How the model was built (Lab)</a>
+      <a class="btn btn-quiet btn-block" href="/app?view=desktop"><i class="ti ti-device-desktop"></i>Open the laptop dashboard</a>
+    </div>
+    <p class="demo-note pad" style="margin-top:12px;line-height:1.5"><i class="ti ti-shield-check"></i>Demo shop with simulated sales; the forecasting model was trained on real grocery data. Your prices, suppliers and orders stay on this phone.</p>
+  </section>
 </div>
 
+<nav class="tabbar" role="tablist" aria-label="Sections">
+  <button role="tab" aria-selected="true" data-view="home"><i class="ti ti-smart-home"></i><span data-t="Home">Home</span></button>
+  <button role="tab" aria-selected="false" data-view="plan"><i class="ti ti-adjustments-horizontal"></i><span data-t="Plan">Plan</span></button>
+  <button role="tab" aria-selected="false" data-view="khata"><i class="ti ti-notebook"></i><span class="badge" id="badge" hidden>0</span><span data-t="Khata">Khata</span></button>
+  <button role="tab" aria-selected="false" data-view="nearby"><i class="ti ti-map-pin"></i><span data-t="Nearby">Nearby</span></button>
+  <button role="tab" aria-selected="false" data-view="shop"><i class="ti ti-building-store"></i><span data-t="Shop">Shop</span></button>
+</nav>
+<div class="actions" id="k-actions" hidden><button class="btn btn-wa" id="send-btn"><i class="ti ti-brand-whatsapp"></i>Send to suppliers</button><button class="btn btn-quiet" id="copy-btn" aria-label="Copy all orders"><i class="ti ti-copy"></i></button></div>
+
+<!-- Product detail -->
+<div class="layer" id="detail" role="dialog" aria-modal="true" aria-labelledby="d-name"><div class="in">
+  <div class="back"><button class="icon-btn" id="d-back" aria-label="Back"><i class="ti ti-arrow-left"></i></button><div><b id="d-name">–</b><span id="d-sub">–</span></div></div>
+  <div class="card stage"><div id="d-obj"></div><div class="say" id="d-say"></div><span class="tag" id="d-tag" style="margin-top:8px"></span></div>
+  <div class="stats">
+    <div class="card st"><span data-t="Sold today">Sold today</span><b class="num" id="d-sold">–</b><em id="d-vsy"></em></div>
+    <div class="card st"><span data-t="Same day last week">Same day last week</span><b class="num" id="d-lw">–</b><em id="d-lwby"></em></div>
+    <div class="card st wide"><div><span data-t="Tomorrow's forecast">Tomorrow's forecast</span><b class="num" id="d-fc">–</b><em id="d-smart"></em></div><button class="btn btn-loud" id="d-plan" data-t="Plan order">Plan order</button></div>
+  </div>
+  <div class="card box"><div class="between"><b style="font-size:15px" data-t="Through the day">Through the day</b><div class="legend"><span><i style="background:var(--slate)"></i><span data-t="stock">stock</span></span><span><i style="background:var(--mist-deep)"></i><span data-t="expected">expected</span></span></div></div><div id="d-line" style="margin-top:8px"></div></div>
+  <div class="card box"><div class="between"><b style="font-size:15px" data-t="By brand">By brand</b><span class="demo-note" data-t="Demo split">Demo split</span></div><div id="d-brands"></div></div>
+</div></div>
+
 <div class="scrim" id="scrim">
-  <!-- Plan -->
   <div class="sheet" id="sh-plan" role="dialog" aria-modal="true" aria-labelledby="p-title">
-    <div class="grab" aria-hidden="true"></div>
+    <div class="grab"></div>
     <div class="stack">
-      <div class="sh-head"><span class="ava" id="p-ava"></span><div><div class="t" id="p-title">–</div><div class="s" id="p-sub">–</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+      <div class="sh-head"><span class="li" style="width:auto;min-height:0;padding:0"><span class="ic" id="p-ic"></span></span><div><div class="t" id="p-title">–</div><div class="s" id="p-sub">–</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x"></i></button></div>
       <div class="stepper"><button id="minus" aria-label="One less">−</button><div class="val"><b class="num" id="p-qty">0</b><span id="p-unit">units</span></div><button id="plus" aria-label="One more">+</button></div>
       <div class="presets" id="p-presets"></div>
-      <div><div class="zones" id="p-zones"><div class="knob" id="p-knob"></div><input type="range" id="p-range" min="0" step="1" aria-label="Order quantity"></div>
+      <div><div class="zones" id="p-zones"><div class="sweet" id="p-sweet"></div><div class="knob" id="p-knob"></div><input type="range" id="p-range" min="0" step="1" aria-label="Order quantity"></div>
         <div class="zl"><span data-z="0">Might run out</span><span data-z="1">Sweet spot</span><span data-z="2">Might spoil</span></div></div>
       <div class="explain" id="p-explain"></div>
-      <div class="swipe" id="p-swipe" tabindex="0" role="button" aria-label="Add to khata. Swipe right, or press Enter."><div class="trail"></div><div class="handle"><i class="ti ti-chevrons-right" aria-hidden="true"></i></div><span>Swipe to add to khata</span></div>
+      <div class="swipe" id="p-swipe" tabindex="0" role="button" aria-label="Add to khata. Swipe right, or press Enter."><div class="trail"></div><div class="handle"><i class="ti ti-chevrons-right"></i></div><span>Swipe to add to khata</span></div>
       <button class="btn btn-ghost btn-block" id="p-remove" hidden>Remove from khata</button>
     </div>
   </div>
-
-  <!-- Send -->
   <div class="sheet" id="sh-send" role="dialog" aria-modal="true" aria-labelledby="s-title">
-    <div class="grab" aria-hidden="true"></div>
+    <div class="grab"></div>
     <div class="stack">
-      <div class="sh-head"><div><div class="t" id="s-title">Who gets what?</div><div class="s">Each supplier only sees their own items</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+      <div class="sh-head"><div><div class="t" id="s-title">Who gets what?</div><div class="s">Each supplier only sees their own items</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x"></i></button></div>
       <div id="s-list" role="group" aria-label="Suppliers"></div>
       <div class="wa" id="s-preview"></div>
-      <button class="btn btn-wa btn-block" id="s-go"><i class="ti ti-send" aria-hidden="true"></i><span id="s-go-l">Send</span></button>
-      <p class="h-sub" style="text-align:center;margin:-4px 0 0">Opens WhatsApp one chat at a time, so nothing is sent without you.</p>
+      <button class="btn btn-wa btn-block" id="s-go"><i class="ti ti-send"></i><span id="s-go-l">Send</span></button>
+      <p class="label" style="text-align:center;margin:-4px 0 0">Opens WhatsApp one chat at a time, so nothing is sent without you.</p>
     </div>
   </div>
-
-  <!-- Supplier editor -->
   <div class="sheet" id="sh-sup" role="dialog" aria-modal="true" aria-labelledby="e-title">
-    <div class="grab" aria-hidden="true"></div>
+    <div class="grab"></div>
     <div class="stack">
-      <div class="sh-head"><div><div class="t" id="e-title">Supplier</div><div class="s">Products they deliver</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+      <div class="sh-head"><div><div class="t" id="e-title">Supplier</div><div class="s">Products they deliver</div></div><button class="icon-btn" data-close aria-label="Close"><i class="ti ti-x"></i></button></div>
       <label class="field"><span>Name</span><input class="input" id="e-name" placeholder="Sharma Dairy"></label>
       <label class="field"><span>WhatsApp number</span><input class="input" id="e-phone" type="tel" inputmode="tel" placeholder="98765 43210"></label>
-      <div><div style="font-size:12px;font-weight:500;color:var(--ink-2);margin-bottom:8px">Supplies</div><div class="fam-pick" id="e-fams"></div></div>
-      <div class="field-error" id="e-err"></div>
-      <button class="btn btn-blue btn-block" id="e-save">Save supplier</button>
-      <button class="btn btn-ghost btn-block" id="e-del" style="color:var(--coral)">Delete supplier</button>
+      <div><div class="label" style="margin-bottom:8px">Supplies</div><div class="scroll-x" style="flex-wrap:wrap" id="e-fams"></div></div>
+      <div class="error" id="e-err"></div>
+      <button class="btn btn-loud btn-block" id="e-save">Save supplier</button>
+      <button class="btn btn-ghost btn-block" id="e-del" style="color:var(--bad)">Delete supplier</button>
     </div>
   </div>
 </div>
 
-<script src="/static/core.js?v=8"></script>
+<script src="/static/core.js?v=11"></script>
 <script>
 (function () {
   "use strict";
-  const K = window.KK, S = K.S, $ = (id) => document.getElementById(id);
-  let view = "home", qty = 0, insFam = null, editing = null, sendSel = new Set(), sendFocus = null, queue = [];
+  const K = window.KK, S = K.S, t = K.t, $ = (id) => document.getElementById(id);
+  K.extendHI({ "Demo day": "डेमो दिन", "Continue": "जारी रखें", "Plan next product": "अगला सामान तय करें", "Suggested": "सुझाव", "Confirmed": "तय", "Smart order {n} {u}": "सही ऑर्डर {n} {u}", "Planning for {d}": "{d} के लिए", "to check": "देखना बाकी" });
+  let view = "home", qty = 0, editing = null, sendSel = new Set(), sendFocus = null, queue = [], lastLeft = {};
+
+  /* ---------- Shared header controls: language, theme, App/Lab ---------- */
+  function ctrls() {
+    const lang = K.lang();
+    document.querySelectorAll("[data-ctrls]").forEach((el) => {
+      el.innerHTML = `<div class="seg" role="group" aria-label="Language"><button data-l="en" aria-pressed="${lang === "en"}">EN</button><button data-l="hi" aria-pressed="${lang === "hi"}">हिं</button></div>
+        <button class="icon-btn" data-theme-toggle type="button" aria-label="Switch theme"></button>
+        <nav class="seg loud" aria-label="Switch between the app and the Lab"><a href="/app?view=mobile" aria-current="page" aria-label="App"><i class="ti ti-building-store"></i></a><a href="/lab?view=mobile" aria-label="Lab"><i class="ti ti-flask"></i></a></nav>`;
+      el.querySelectorAll("[data-l]").forEach((b) => (b.onclick = () => K.setLang(b.dataset.l)));
+    });
+    document.querySelectorAll("#lang2 [data-l]").forEach((b) => { b.setAttribute("aria-pressed", b.dataset.l === lang); b.onclick = () => K.setLang(b.dataset.l); });
+    K.decorate();
+  }
+  function applyT() { document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = t(el.dataset.t); }); document.querySelectorAll("[data-clock]").forEach((el) => { el.textContent = K.clockLabel(Number(el.dataset.clock)); }); }
+  document.addEventListener("kk:lang", () => { ctrls(); applyT(); renderAll(); if ($("detail").classList.contains("on")) paintDetail(); });
 
   /* ---------- Navigation ---------- */
   function go(v) {
     view = v;
     document.querySelectorAll(".view").forEach((el) => el.classList.toggle("on", el.id === "v-" + v));
     document.querySelectorAll(".tabbar button").forEach((b) => b.setAttribute("aria-selected", b.dataset.view === v));
-    $("cta-home").hidden = v !== "home"; $("cta-khata").hidden = v !== "khata";
-    if (v === "insights") renderInsights();
+    $("k-actions").hidden = v !== "khata";
+    if (v === "nearby") renderNearby();
     if (v === "shop") renderShop();
-    K.decorate();
-    window.scrollTo(0, 0);
+    K.decorate(); window.scrollTo(0, 0);
   }
   document.querySelectorAll(".tabbar button").forEach((b) => (b.onclick = () => go(b.dataset.view)));
-  $("planned-chip").onclick = $("see-khata").onclick = () => go("khata");
+  $("to-plan").onclick = () => go("plan");
 
   /* ---------- Home ---------- */
-  function renderHeader() {
-    $("greet").textContent = K.greeting() + ",";
+  function renderHome() {
+    $("greet").textContent = K.greeting(S.hour) + ",";
     $("owner").textContent = S.profile.owner;
-    $("date-label").textContent = "For " + K.short(S.date);
-    $("date").value = S.date;
+    $("clock").textContent = K.clockLabel(S.hour);
+    $("play").innerHTML = `<i class="ti ${K.clock.playing ? "ti-player-pause-filled" : "ti-player-play-filled"}"></i>`;
+    $("play").setAttribute("aria-label", K.clock.playing ? t("Pause") : t("Play"));
+    const d = K.daySummary();
+    $("money").textContent = K.money(d.moneySoFar);
+    const diff = d.moneySoFar - d.lastWeek;
+    $("vs").className = "tag " + (diff >= 0 ? "good" : "");
+    $("vs").innerHTML = `<i class="ti ${diff >= 0 ? "ti-arrow-up" : "ti-arrow-down"}"></i>${K.money(Math.abs(diff))} ${t(diff >= 0 ? "more than last {d}" : "less than last {d}", { d: d.lastWeekDay })}`;
+    const mx = Math.max(...d.hours.map((x) => x.value), 1);
+    $("hours").innerHTML = d.hours.map((x) => `<i class="${x.kind}" style="height:${Math.max(6, (x.value / mx) * 100)}%"></i>`).join("");
+    const need = d.needs[0];
+    if (need) {
+      const [f, s] = need, sup = K.supplierOf(f);
+      $("need").className = "card box need alert";
+      $("need").innerHTML = `<div class="ic"><i class="ti ${K.look(f).icon}"></i></div><div><b>${t("{p} may run out by {h}", { p: K.pname(f), h: K.clockLabel(s.runOut) })}</b><span>${t("Selling faster than usual today")}</span></div>${sup ? `<button class="btn btn-loud" id="need-call"><i class="ti ti-phone"></i>${t("Call")}</button>` : ""}`;
+      if (sup) $("need-call").onclick = () => { if (sup.phone) location.href = "tel:" + sup.phone.replace(/\s/g, ""); else K.toast(`Add ${sup.name}'s number in Shop to call from here`); };
+    } else {
+      $("need").className = "card box need calm";
+      $("need").innerHTML = `<div class="ic"><i class="ti ti-check"></i></div><div><b>${t("All good. Nothing needs you right now.")}</b></div>`;
+    }
+    $("cues").innerHTML = K.cues().map((c) => `<div class="cue"><i class="ti ${c.icon}"></i><div><b>${K.esc(c.title)}</b>${K.esc(c.note)}</div></div>`).join("");
+    $("cues").hidden = !$("cues").innerHTML;
+    renderShelf();
   }
-  function renderProducts() {
-    $("prods").innerHTML = K.families().map((f) => {
-      const L = K.look(f);
-      return `<button class="prod" data-f="${f}" aria-pressed="${f === S.family}"><span class="ava" style="--c:${L.hue}"><i class="ti ${L.icon}" aria-hidden="true"></i>${K.planned(f) ? '<span class="tick"><i class="ti ti-check" aria-hidden="true"></i></span>' : ""}</span>${L.name}</button>`;
+  function renderShelf() {
+    $("shelf").innerHTML = K.families().map((f) => {
+      const s = K.shelf(f); if (!s) return "";
+      const prev = lastLeft[f], drop = prev != null ? Math.floor(prev) - Math.floor(s.left) : 0; lastLeft[f] = s.left;
+      return `<button class="pc" data-f="${f}">${K.ring(K.look(f).icon, s.frac, s.state)}${drop > 0 && K.clock.playing ? `<span class="sold-pop">−${drop}</span>` : ""}
+        <div class="nm">${K.pname(f)}</div><div class="status ${K.statusClass(s.state)}"><span class="dot"></span>${t(K.STATUS[s.state])}</div>
+        <div class="qt">${t("{n} of {t} {u} left", { n: K.whole(s.left), t: K.whole(s.stock), u: K.punit(f) })}</div></button>`;
     }).join("");
-    $("prods").querySelectorAll(".prod").forEach((b) => (b.onclick = () => { S.family = b.dataset.f; K.haptic(8); renderProducts(); renderHero(); }));
+    $("shelf").querySelectorAll(".pc").forEach((b) => (b.onclick = () => openDetail(b.dataset.f)));
   }
-  function renderHero() {
-    const f = S.family, r = S.recs[f], L = K.look(f);
-    $("h-title").innerHTML = `${L.name} <span>· ${K.day(S.date, { weekday: "long" })}</span>`;
-    $("plan-label").textContent = K.planned(f) ? `Edit ${L.name.toLowerCase()} order` : `Plan ${L.name.toLowerCase()} order`;
-    if (!r) { $("h-qty").textContent = "–"; $("h-note").textContent = "Check this product's prices in Shop"; return; }
-    const q = K.qtyFor(f);
-    $("h-qty").textContent = K.fmt(q); $("h-qty").classList.remove("skel");
-    $("h-unit").textContent = L.unit;
-    $("h-note").textContent = r.recommended_order < r.forecast ? `a little under the forecast, ${L.name.toLowerCase()} spoils fast` : `a little over the forecast, running out costs more here`;
-    $("h-gauge").innerHTML = K.gauge(q / K.sliderTop(r), true);
-    $("h-fc").textContent = K.fmt(r.forecast);
-    $("h-cost").textContent = K.money(q * S.costs[f].cost);
-    if (r.actual != null) { $("h-risk").textContent = K.money(K.mistake(f, q, r.actual).wasteRs); $("h-risk-l").textContent = "Likely waste"; }
-    else { $("h-risk").textContent = Math.round(r.critical_ratio * 100) + "%"; $("h-risk-l").textContent = "Fully stocked"; }
-    $("h-pill").innerHTML = K.planned(f) ? '<i class="ti ti-check" aria-hidden="true"></i>In khata' : '<i class="ti ti-sparkles" aria-hidden="true"></i>Smart pick';
-  }
-  function renderTodo() {
-    const todo = K.families().filter((f) => S.recs[f] && !K.planned(f));
-    $("todo-h").textContent = todo.length ? "Still to plan" : "All set for tomorrow";
-    $("plan-all").hidden = !todo.length;
-    $("todo").innerHTML = todo.length ? todo.slice(0, 3).map((f) => {
-      const L = K.look(f), r = S.recs[f], s = K.supplierOf(f);
-      return `<button class="li" data-f="${f}"><span class="ava" style="--c:${L.hue}"><i class="ti ${L.icon}" aria-hidden="true"></i></span><div><div class="nm">${L.name}</div><div class="sb">${s ? K.esc(s.name) : "No supplier yet"}</div></div><div class="q num">${K.fmt(Math.round(r.recommended_order))}<span>${L.unit} suggested</span></div><span class="go" style="background:var(--primary-wash);color:var(--primary-ink)"><i class="ti ti-chevron-right" aria-hidden="true"></i></span></button>`;
-    }).join("") : `<div class="empty"><i class="ti ti-circle-check" style="color:var(--leaf)" aria-hidden="true"></i>Every product is in the khata. Send it to your suppliers from the Khata tab.</div>`;
-    $("todo").querySelectorAll(".li").forEach((b) => (b.onclick = () => { S.family = b.dataset.f; renderProducts(); renderHero(); openPlan(); }));
-  }
-  $("plan-all").onclick = () => { const f = K.families().find((x) => S.recs[x] && !K.planned(x)); if (f) { S.family = f; renderProducts(); renderHero(); openPlan(); } };
+  document.querySelectorAll(".clockbar [data-h]").forEach((b) => (b.onclick = () => { K.clock.pause(); lastLeft = {}; K.clock.set(Number(b.dataset.h)); }));
+  $("play").onclick = () => (K.clock.playing ? K.clock.pause() : K.clock.play());
+  K.clock.on(() => { renderHome(); if ($("detail").classList.contains("on")) paintDetail(); });
 
-  /* ---------- Khata ---------- */
-  function renderKhata() {
+  /* ---------- Product detail ---------- */
+  let detailF = null;
+  function openDetail(f) { detailF = f; S.family = f; paintDetail(); $("detail").classList.add("on"); $("detail").scrollTop = 0; history.pushState({ layer: true }, ""); }
+  function closeDetail() { if (history.state && history.state.layer) history.back(); else $("detail").classList.remove("on"); }
+  $("d-back").onclick = closeDetail;
+  function paintDetail() {
+    const f = detailF, s = K.shelf(f), r = S.recs[f], L = K.look(f), sup = K.supplierOf(f), u = K.punit(f);
+    if (!s) return;
+    $("d-name").textContent = K.pname(f);
+    $("d-sub").textContent = `${sup ? sup.name + " · " : ""}${K.clockLabel(S.hour)}`;
+    $("d-obj").innerHTML = K.objectSVG(f, s.frac);
+    let say = t("About {n} {u} left.", { n: `<b>${K.whole(s.left)}</b>`, u: u }) + " ";
+    if (s.state === "out") say = t("It sold out at {h}.", { h: `<b>${K.clockLabel(s.runOut)}</b>` });
+    else say += s.hoursLeft ? t("At today's pace, it will last about {h} hours.", { h: `<b>${Math.max(1, Math.round(s.hoursLeft))}</b>` }) : t("Enough for the rest of today.");
+    $("d-say").innerHTML = say;
+    const late = s.earlier > 0;
+    $("d-tag").className = "tag " + (late ? "loud" : "");
+    $("d-tag").innerHTML = late ? `<i class="ti ti-clock"></i>${t("{h} hours earlier than usual", { h: s.earlier })}` : `<i class="ti ti-check"></i>${t("On track")}`;
+    $("d-sold").textContent = K.whole(s.sold);
+    if (s.soldYesterday != null) { const dv = Math.round(s.sold - s.soldYesterday); $("d-vsy").className = dv > 0 ? "up" : ""; $("d-vsy").textContent = dv > 0 ? "↑ " + t("{n} more than yesterday", { n: dv }) : dv < 0 ? t("{n} fewer than yesterday", { n: -dv }) : t("same as yesterday"); }
+    $("d-lw").textContent = s.soldLastWeek != null ? K.whole(s.soldLastWeek) : "–";
+    $("d-lwby").textContent = t("by {h}", { h: K.clockLabel(S.hour) });
+    if (r) { $("d-fc").textContent = `${K.whole(r.forecast)} ${u}`; $("d-smart").textContent = t("Smart order: {n}", { n: K.whole(r.recommended_order) }); }
+    $("d-line").innerHTML = K.dayLine(f);
+    $("d-brands").innerHTML = K.brandSplit(f, s.left).map(([b, n]) => `<div class="brand">${K.esc(b)}<div class="bar"><div style="width:${s.stock ? Math.min(100, (n / (s.stock * 0.57)) * 100) : 0}%"></div></div><small>${n} ${t("left")}</small></div>`).join("");
+  }
+  $("d-plan").onclick = () => openPlan(detailF);
+
+  /* ---------- Plan (tomorrow) ---------- */
+  function renderPlan() {
     const n = K.plannedCount(), total = K.families().filter((f) => S.recs[f]).length;
-    $("planned-label").textContent = `${n} of ${total} planned`;
+    $("plan-for").textContent = t("Planning for {d}", { d: K.day(S.date, { weekday: "long", day: "numeric", month: "long" }) });
+    $("date-label").textContent = K.short(S.date); $("date").value = S.date;
+    $("plan-count").textContent = t("{n} of {t} products planned", { n, t: total });
+    $("planned").textContent = t("{n} of {t} products planned", { n, t: total });
+    $("planbar").style.width = (total ? (n / total) * 100 : 0) + "%";
     $("badge").hidden = n === 0; $("badge").textContent = n;
-    $("k-store").textContent = `Khata · ${S.profile.shop}`;
-    $("k-date").textContent = "For " + K.day(S.date, { weekday: "long", day: "numeric", month: "long" });
-    $("k-value").textContent = K.money(K.stockValue());
-    $("k-ring").setAttribute("stroke-dasharray", `${(n / (total || 1)) * 132} 132`);
-    $("k-ring-t").textContent = `${n}/${total}`;
-    $("k-left").hidden = n === total; $("k-left").innerHTML = `<i class="ti ti-clock" aria-hidden="true"></i>${total - n} to check`;
-    const groups = S.suppliers.map((s) => [s, s.families.filter((f) => S.recs[f])]).filter(([, fs]) => fs.length);
-    const loose = K.families().filter((f) => S.recs[f] && !K.supplierOf(f));
-    if (loose.length) groups.push([{ name: "No supplier yet", color: "#98a2b8" }, loose]);
-    $("k-groups").innerHTML = groups.map(([s, fs]) => `<div class="grp-h"><span class="dot" style="background:${s.color}"></span>${K.esc(s.name)}<span>${fs.length} item${fs.length > 1 ? "s" : ""}</span></div>
-      <div class="card list">${fs.map((f) => {
-        const L = K.look(f), on = K.planned(f);
-        return `<button class="li" data-f="${f}"><span class="ava" style="--c:${L.hue}"><i class="ti ${L.icon}" aria-hidden="true"></i></span><div><div class="nm">${L.name}</div><div class="sb">${on ? "Confirmed" : "Suggested · tap to check"}</div></div><div class="q num">${K.fmt(K.qtyFor(f))}<span>${L.unit}</span></div><span class="go" style="background:${on ? "var(--leaf-wash)" : "var(--wash)"};color:${on ? "var(--leaf)" : "var(--ink-3)"}"><i class="ti ${on ? "ti-check" : "ti-chevron-right"}" aria-hidden="true"></i></span></button>`;
-      }).join("")}</div>`).join("");
-    $("k-groups").querySelectorAll(".li").forEach((b) => (b.onclick = () => { S.family = b.dataset.f; renderProducts(); renderHero(); openPlan(); }));
-    $("send-btn").disabled = n === 0; $("copy-btn").disabled = n === 0;
+    $("plan-list").innerHTML = K.families().map((f) => {
+      const r = S.recs[f], on = K.planned(f);
+      if (!r) return `<div class="li"><span class="ic"><i class="ti ${K.look(f).icon}"></i></span><div><div class="nm">${K.pname(f)}</div><div class="sb" style="color:var(--bad)">Check this product's prices in Shop</div></div></div>`;
+      return `<button class="li" data-f="${f}"><span class="ic"><i class="ti ${K.look(f).icon}"></i></span><div><div class="nm">${K.pname(f)}</div><div class="sb">${on ? t("Confirmed") : t("Smart order {n} {u}", { n: K.whole(r.recommended_order), u: K.punit(f) })}</div></div><div class="q num">${K.whole(K.qtyFor(f))}<span>${K.punit(f)}</span></div><span class="go ${on ? "ok" : ""}"><i class="ti ${on ? "ti-check" : "ti-chevron-right"}"></i></span></button>`;
+    }).join("");
+    $("plan-list").querySelectorAll("button.li").forEach((b) => (b.onclick = () => openPlan(b.dataset.f)));
+    $("plan-next").hidden = n === total;
   }
-  $("copy-btn").onclick = async () => {
-    const text = S.suppliers.filter((s) => K.itemsFor(s).length).map((s) => `To ${s.name}:\n${K.message(s)}`).join("\n\n");
-    try { await navigator.clipboard.writeText(text); K.toast("All orders copied"); } catch { K.toast("Couldn't copy. Try again."); }
-  };
+  $("plan-next").onclick = () => { const f = K.families().find((x) => S.recs[x] && !K.planned(x)); if (f) openPlan(f); };
 
-  /* ---------- Plan sheet ---------- */
-  async function openPlan() {
-    const f = S.family, r = S.recs[f]; if (!r) { K.toast("Fix this product's prices in Shop first"); return; }
-    const L = K.look(f), s = K.supplierOf(f);
-    qty = K.qtyFor(f);
-    $("p-ava").style.setProperty("--c", L.hue); $("p-ava").innerHTML = `<i class="ti ${L.icon}" aria-hidden="true"></i>`;
-    $("p-title").textContent = `${L.name} order`;
-    $("p-sub").textContent = `${s ? s.name : "No supplier"} · ${K.short(S.date)}`;
-    $("p-unit").textContent = L.unit;
-    $("p-range").max = K.sliderTop(r);
-    $("p-zones").style.background = K.zonesBG(r, K.sliderTop(r));
+  async function openPlan(f) {
+    const r = S.recs[f]; if (!r) { K.toast("Fix this product's prices in Shop first"); return; }
+    S.family = f; qty = K.qtyFor(f);
+    const sup = K.supplierOf(f), top = K.sliderTop(r);
+    $("p-ic").innerHTML = `<i class="ti ${K.look(f).icon}"></i>`;
+    $("p-title").textContent = K.pname(f);
+    $("p-sub").textContent = `${sup ? sup.name + " · " : ""}${K.short(S.date)}`;
+    $("p-unit").textContent = K.punit(f);
+    $("p-range").max = top;
+    $("p-sweet").style.left = (r.recommended_order * 0.9 / top) * 100 + "%";
+    $("p-sweet").style.width = (r.recommended_order * 0.2 / top) * 100 + "%";
     $("p-remove").hidden = !K.planned(f);
     $("p-presets").innerHTML = "";
     paint(); open("sh-plan");
     const list = await K.presets(f);
-    $("p-presets").innerHTML = list.map((p) => `<button class="preset" data-q="${p.q}"><b class="num">${K.fmt(p.q)}</b>${p.label}</button>`).join("");
+    $("p-presets").innerHTML = list.map((p) => `<button class="preset" data-q="${p.q}"><b class="num">${K.whole(p.q)}</b>${p.label}</button>`).join("");
     $("p-presets").querySelectorAll(".preset").forEach((b) => (b.onclick = () => { qty = Number(b.dataset.q); K.haptic(6); paint(); }));
     paint();
   }
   function paint() {
     const f = S.family, r = S.recs[f], top = Number($("p-range").max);
-    $("p-qty").textContent = K.fmt(qty); $("p-range").value = qty;
+    $("p-qty").textContent = K.whole(qty); $("p-range").value = qty;
     $("p-knob").style.left = Math.min(100, (qty / top) * 100) + "%";
     const v = K.verdict(qty, r);
     document.querySelectorAll(".zl span").forEach((s) => s.classList.toggle("on", Number(s.dataset.z) === v.zone));
     $("p-explain").innerHTML = K.explain(f, qty);
     $("p-presets").querySelectorAll(".preset").forEach((b) => b.setAttribute("aria-pressed", Number(b.dataset.q) === qty));
   }
-  $("minus").onclick = () => { qty = Math.max(0, qty - 1); K.haptic(5); paint(); };
-  $("plus").onclick = () => { qty = Math.min(Number($("p-range").max), qty + 1); K.haptic(5); paint(); };
+  $("minus").onclick = () => { qty = Math.max(0, qty - 1); paint(); };
+  $("plus").onclick = () => { qty = Math.min(Number($("p-range").max), qty + 1); paint(); };
   $("p-range").oninput = (e) => { qty = Number(e.target.value); paint(); };
   K.swipe($("p-swipe"), () => {
     const f = S.family, before = S.plan[f];
     K.savePlan(f, qty); K.haptic(20); close(); renderAll();
-    K.toast(`${K.look(f).name}: ${K.fmt(qty)} ${K.look(f).unit} added`, { label: "Undo", run: () => { if (before == null) K.removePlan(f); else K.savePlan(f, before); renderAll(); } });
+    K.toast(`${K.pname(f)}: ${K.whole(qty)} ${K.punit(f)} added`, { label: "Undo", run: () => { if (before == null) K.removePlan(f); else K.savePlan(f, before); renderAll(); } });
   });
-  $("p-remove").onclick = () => {
-    const f = S.family, before = S.plan[f]; K.removePlan(f); close(); renderAll();
-    K.toast(`${K.look(f).name} removed`, { label: "Undo", run: () => { K.savePlan(f, before); renderAll(); } });
-  };
-  $("plan-btn").onclick = openPlan;
+  $("p-remove").onclick = () => { const f = S.family, b = S.plan[f]; K.removePlan(f); close(); renderAll(); K.toast(`${K.pname(f)} removed`, { label: "Undo", run: () => { K.savePlan(f, b); renderAll(); } }); };
+
+  /* ---------- Khata ---------- */
+  function renderKhata() {
+    const n = K.plannedCount(), total = K.families().filter((f) => S.recs[f]).length;
+    $("k-sub").textContent = `${S.profile.shop} · ${t("Planning for {d}", { d: K.short(S.date) })}`;
+    $("k-value").textContent = K.money(K.stockValue());
+    $("k-ring").setAttribute("stroke-dasharray", `${(total ? n / total : 0) * 132} 132`);
+    $("k-left").hidden = n === total; $("k-left").textContent = `${total - n} ${t("to check")}`;
+    const groups = S.suppliers.map((s) => [s.name, s.families.filter((f) => S.recs[f])]).filter(([, fs]) => fs.length);
+    const loose = K.families().filter((f) => S.recs[f] && !K.supplierOf(f));
+    if (loose.length) groups.push(["No supplier yet", loose]);
+    $("k-groups").innerHTML = groups.map(([g, fs]) => `<div class="grp"><span>${K.esc(g)}</span><span>${fs.length} item${fs.length > 1 ? "s" : ""}</span></div><div class="card list">${fs.map((f) => { const on = K.planned(f);
+      return `<button class="li" data-f="${f}"><span class="ic"><i class="ti ${K.look(f).icon}"></i></span><div><div class="nm">${K.pname(f)}</div><div class="sb">${on ? t("Confirmed") : t("Suggested")}</div></div><div class="q num">${K.whole(K.qtyFor(f))}<span>${K.punit(f)}</span></div><span class="go ${on ? "ok" : ""}"><i class="ti ${on ? "ti-check" : "ti-chevron-right"}"></i></span></button>`; }).join("")}</div>`).join("");
+    $("k-groups").querySelectorAll(".li").forEach((b) => (b.onclick = () => openPlan(b.dataset.f)));
+    $("send-btn").disabled = n === 0; $("copy-btn").disabled = n === 0;
+  }
+  $("copy-btn").onclick = async () => { const text = S.suppliers.filter((s) => K.itemsFor(s).length).map((s) => `To ${s.name}:\n${K.message(s)}`).join("\n\n"); try { await navigator.clipboard.writeText(text); K.toast("All orders copied"); } catch { K.toast("Couldn't copy. Try again."); } };
 
   /* ---------- Send to suppliers ---------- */
   function openSend() {
@@ -411,20 +480,12 @@
     renderSend(); open("sh-send");
   }
   function renderSend() {
-    $("s-list").innerHTML = S.suppliers.map((s) => {
-      const items = K.itemsFor(s), on = sendSel.has(s.id);
-      const value = items.reduce((t, f) => t + S.plan[f] * S.costs[f].cost, 0);
-      return `<button class="sup" role="checkbox" aria-checked="${on && items.length > 0}" data-id="${s.id}" ${items.length ? "" : "disabled style='opacity:.5'"}>
-        <span class="ini" style="background:${s.color}">${K.initials(s.name)}</span>
-        <div><div class="nm">${K.esc(s.name)}</div><div class="meta">${items.length ? `${items.length} item${items.length > 1 ? "s" : ""} · ${K.money(value)}` : "Nothing planned for them"}${s.phone ? "" : " · no number yet"}</div>
-        <div class="tags">${s.families.map((f) => `<span class="tag">${K.look(f).name}</span>`).join("")}</div></div><span class="check"><i class="ti ti-check" aria-hidden="true"></i></span></button>`;
-    }).join("");
-    $("s-list").querySelectorAll(".sup:not([disabled])").forEach((b) => (b.onclick = () => {
-      const id = b.dataset.id; sendSel.has(id) ? sendSel.delete(id) : sendSel.add(id); sendFocus = id; renderSend();
-    }));
-    const s = S.suppliers.find((x) => x.id === sendFocus) || S.suppliers.find((x) => sendSel.has(x.id));
-    $("s-preview").innerHTML = s ? `<div class="wa-to"><i class="ti ti-brand-whatsapp" style="color:#1faa53;font-size:15px" aria-hidden="true"></i>Preview for ${K.esc(s.name)} · ${K.maskPhone(s.phone)}</div><div class="bubble">${K.esc(K.message(s))}</div>` : "";
-    const n = [...sendSel].filter((id) => K.itemsFor(S.suppliers.find((x) => x.id === id) || { families: [] }).length).length;
+    $("s-list").innerHTML = S.suppliers.map((s) => { const items = K.itemsFor(s), on = sendSel.has(s.id) && items.length > 0, v = items.reduce((a, f) => a + S.plan[f] * S.costs[f].cost, 0);
+      return `<button class="sup" role="checkbox" aria-checked="${on}" data-id="${s.id}" ${items.length ? "" : "disabled style='opacity:.5'"}><span class="ini">${K.initials(s.name)}</span><div><div class="nm">${K.esc(s.name)}</div><div class="meta">${items.length ? `${items.length} item${items.length > 1 ? "s" : ""} · ${K.money(v)}` : "Nothing planned for them"}${s.phone ? "" : " · no number yet"}</div><div class="tags">${s.families.map((f) => `<span>${K.pname(f)}</span>`).join("")}</div></div><span class="check"><i class="ti ti-check"></i></span></button>`; }).join("");
+    $("s-list").querySelectorAll(".sup:not([disabled])").forEach((b) => (b.onclick = () => { const id = b.dataset.id; sendSel.has(id) ? sendSel.delete(id) : sendSel.add(id); sendFocus = id; renderSend(); }));
+    const s = S.suppliers.find((x) => x.id === sendFocus);
+    $("s-preview").innerHTML = s ? `<div class="wa-to"><i class="ti ti-brand-whatsapp"></i> Preview for ${K.esc(s.name)} · ${K.maskPhone(s.phone)}</div><div class="bubble">${K.esc(K.message(s))}</div>` : "";
+    const n = S.suppliers.filter((x) => sendSel.has(x.id) && K.itemsFor(x).length).length;
     $("s-go").disabled = n === 0;
     $("s-go-l").textContent = queue.length ? `Next: ${queue[0].name} (${queue.length} left)` : `Send to ${n} supplier${n === 1 ? "" : "s"}`;
   }
@@ -432,68 +493,73 @@
     if (!queue.length) queue = S.suppliers.filter((s) => sendSel.has(s.id) && K.itemsFor(s).length);
     const s = queue.shift(); if (!s) return;
     window.open(K.waLink(s), "_blank", "noopener");
-    sendFocus = queue[0] ? queue[0].id : s.id;
     if (!queue.length) { K.toast("All orders opened in WhatsApp"); close(); return; }
-    renderSend();
+    sendFocus = queue[0].id; renderSend();
   };
   $("send-btn").onclick = openSend;
 
-  /* ---------- Insights ---------- */
-  async function renderInsights() {
-    insFam = insFam || S.family;
-    $("i-chips").innerHTML = K.families().map((f) => { const L = K.look(f); return `<button class="chip" aria-pressed="${f === insFam}" data-f="${f}"><i class="ti ${L.icon}" aria-hidden="true"></i>${L.name}</button>`; }).join("");
-    $("i-chips").querySelectorAll("button").forEach((b) => (b.onclick = () => { insFam = b.dataset.f; renderInsights(); }));
-    $("i-title").textContent = `${K.look(insFam).name} · Store ${S.store}`;
-    $("i-chart").innerHTML = '<div class="skel" style="height:170px"></div>';
+  /* ---------- Nearby (other demo stores) ---------- */
+  async function renderNearby() {
+    $("map").innerHTML = '<div class="skel" style="height:220px"></div>';
+    const others = S.opts.stores.filter((s) => s !== S.store).slice(0, 5);
+    const T = K.today(), w0 = K.addDays(T, -6), p0 = K.addDays(T, -13), p1 = K.addDays(T, -7);
+    const change = async (s) => { const ser = await K.loadSeries("DAIRY", s); const a = ser.filter((d) => d.date >= w0 && d.date <= T).reduce((x, d) => x + d.actual, 0), b = ser.filter((d) => d.date >= p0 && d.date <= p1).reduce((x, d) => x + d.actual, 0); return b ? a / b - 1 : 0; };
     try {
-      const s = await K.loadSeries(insFam), ins = K.insights(insFam, s);
-      $("i-chart").innerHTML = K.chart(s, S.date, 340, 170);
-      $("i-chart").querySelectorAll("[data-date]").forEach((r) => (r.onclick = () => { S.family = insFam; changeDate(r.dataset.date); go("home"); }));
-      $("i-acc").textContent = ins.accuracy == null ? "–" : Math.round(ins.accuracy * 100) + "%";
-      $("i-close").textContent = `${ins.close}/${ins.days}`;
-      $("i-sold").textContent = K.fmt(ins.sold);
-      $("i-pattern-card").hidden = !ins.pattern;
-      $("i-pattern").innerHTML = ins.pattern ? `<b style="color:var(--ink)">${ins.pattern}</b> Kal Kitna already orders more on those days.` : "";
-      const all = await Promise.all(K.families().map((f) => K.loadSeries(f).then((x) => [f, K.insights(f, x).saved])));
-      const total = all.reduce((t, [, v]) => t + v, 0), top = all.sort((a, b) => b[1] - a[1]).slice(0, 2).map(([f]) => K.look(f).name.toLowerCase());
-      if (total > 0) {
-        $("i-saved-l").textContent = "Saved vs ordering like last week";
-        $("i-saved").textContent = K.money(total);
-        $("i-saved-note").textContent = `over the demo weeks, mostly on ${top.join(" & ")}`;
-      } else {
-        const acc = (await Promise.all(K.families().map((f) => K.loadSeries(f).then((x) => K.insights(f, x).accuracy)))).filter((x) => x != null);
-        $("i-saved-l").textContent = "Forecast accuracy, all products";
-        $("i-saved").textContent = Math.round((acc.reduce((a, b) => a + b, 0) / (acc.length || 1)) * 100) + "%";
-        $("i-saved-note").textContent = "savings show up as more days are tracked";
-      }
-    } catch (e) { $("i-chart").innerHTML = `<p class="h-sub">${K.esc(e.message)}</p>`; }
+      const rows = await Promise.all(others.map(async (s, i) => ({ s, ch: await change(s), km: (0.4 + i * 0.35).toFixed(1) })));
+      const pos = [[70, 60], [250, 50], [300, 160], [90, 180], [200, 205]];
+      let g = `<rect width="340" height="240" style="fill:var(--mist)"/>`;
+      [[0, 80, 340, 80], [0, 150, 340, 150], [120, 0, 120, 240], [230, 0, 230, 240]].forEach(([a, b, c, d]) => { g += `<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" style="stroke:var(--card)" stroke-width="12"/>`; });
+      rows.forEach((r, i) => { const [x, y] = pos[i], rad = 22 + Math.max(0, r.ch) * 160; g += `<circle cx="${x}" cy="${y}" r="${rad.toFixed(0)}" style="fill:var(--loud)" opacity="${r.ch > 0 ? 0.28 : 0.1}"/><circle cx="${x}" cy="${y}" r="6" style="fill:var(--ink-2)"/><text x="${x}" y="${y - 12}" text-anchor="middle" style="fill:var(--ink-2);font-size:11px;font-family:Poppins">Store ${r.s}</text>`; });
+      g += `<circle cx="170" cy="118" r="10" style="fill:var(--loud);stroke:var(--card)" stroke-width="3"/><text x="170" y="144" text-anchor="middle" style="fill:var(--ink);font-size:12px;font-weight:600;font-family:Poppins">You</text>`;
+      $("map").innerHTML = `<svg viewBox="0 0 340 240" role="img" aria-label="Map of nearby demo stores">${g}</svg>`;
+      const avg = rows.reduce((a, r) => a + r.ch, 0) / (rows.length || 1);
+      $("area-say").innerHTML = avg > 0.02 ? `Milk demand is <b>rising in your area</b> this week (<b>+${Math.round(avg * 100)}%</b>). Kal Kitna has this in mind for tomorrow.` : avg < -0.02 ? `Milk demand is <b>a little lower in your area</b> this week (<b>${Math.round(avg * 100)}%</b>).` : `Milk demand in your area is <b>steady</b> this week.`;
+      $("near-list").innerHTML = rows.map((r) => `<div class="li"><span class="ic"><i class="ti ti-building-store"></i></span><div><div class="nm">Store ${r.s}</div><div class="sb">${r.km} km away</div></div><div class="q" style="font-size:14px">${K.change(r.ch)}<span>milk this week</span></div></div>`).join("");
+    } catch (e) { $("map").innerHTML = `<div class="empty">${K.esc(e.message)}</div>`; }
   }
 
-  /* ---------- Shop ---------- */
+  /* ---------- Shop: insights hub and settings ---------- */
+  /* Shop insights: four weeks of forecast vs what sold, per product (restored from the launched app). */
+  let fvsFam = null;
+  function shopChart() {
+    fvsFam = fvsFam || S.family || K.families()[0];
+    $("fvs-chips").innerHTML = K.families().map((f) => `<button class="chip" aria-pressed="${f === fvsFam}" data-f="${f}"><i class="ti ${K.look(f).icon}"></i>${K.pname(f)}</button>`).join("");
+    $("fvs-chips").querySelectorAll("button").forEach((b) => (b.onclick = () => { fvsFam = b.dataset.f; shopChart(); }));
+    const s = K.seriesOf(fvsFam), box = $("fvs-chart"), w = Math.max(280, box.clientWidth || 320);
+    K.fourWeeks(box, s, w, 190, null, null);
+    const ins = s.length ? K.insights(fvsFam, s) : null;
+    $("fvs-tiles").innerHTML = ins ? `<div><span>${t("Accuracy")}</span><b>${ins.accuracy == null ? "–" : Math.round(ins.accuracy * 100) + "%"}</b></div><div><span>${t("Days within 10%")}</span><b>${ins.close}/${ins.days}</b></div><div><span>${t("Units sold")}</span><b>${K.fmt(ins.sold)}</b></div>` : "";
+  }
   function renderShop() {
-    $("f-owner").value = S.profile.owner; $("f-shop").value = S.profile.shop; $("f-confirm").value = S.profile.confirmBy;
-    $("sup-list").innerHTML = S.suppliers.map((s) => `<button class="sup" data-id="${s.id}"><span class="ini" style="background:${s.color}">${K.initials(s.name)}</span><div><div class="nm">${K.esc(s.name)}</div><div class="meta">${K.maskPhone(s.phone)}</div><div class="tags">${s.families.map((f) => `<span class="tag">${K.look(f).name}</span>`).join("") || '<span class="tag">No products yet</span>'}</div></div><i class="ti ti-chevron-right" style="margin-left:auto;color:var(--ink-3)" aria-hidden="true"></i></button>`).join("");
+    $("shop-sub").textContent = `${S.profile.shop} · Store ${S.store}`;
+    const I = K.shopInsights(), best = I.ranked.slice(0, 3), slow = I.ranked.slice(-2).reverse();
+    const mx = Math.max(...I.weekday);
+    $("ins").innerHTML = `
+      <div class="card wide"><div class="label">This week's sales</div><div class="row" style="align-items:baseline;flex-wrap:wrap;gap:4px 10px"><span class="big num">${K.money(I.week)}</span><span class="tag ${Math.round(I.change * 100) > 0 ? "good" : ""}">${K.change(I.change, "Same as last week")}${Math.round(I.change * 100) ? " vs last week" : ""}</span></div></div>
+      <div class="card"><div class="label">Best sellers</div>${best.map((x) => `<div class="rank"><i class="ti ${K.look(x.f).icon}"></i>${K.pname(x.f)}<b>${K.money(x.week)}</b></div>`).join("")}</div>
+      <div class="card"><div class="label">Slowest</div>${slow.map((x) => `<div class="rank"><i class="ti ${K.look(x.f).icon}"></i>${K.pname(x.f)}<b>${K.money(x.week)}</b></div>`).join("")}</div>
+      <div class="card wide"><div class="between"><div class="label">Busiest days</div><span class="label">${I.weekdayNames[I.busiestDay]} busiest, ${I.weekdayNames[I.quietestDay]} quietest</span></div>
+        <div class="week">${[1, 2, 3, 4, 5, 6, 0].map((i) => `<div class="${i === I.busiestDay ? "top" : ""}"><i style="height:${mx ? (I.weekday[i] / mx) * 52 : 0}px"></i>${I.weekdayNames[i].slice(0, 2)}</div>`).join("")}</div></div>
+      <div class="card"><div class="label">Busiest hours</div><div style="font-size:16px;font-weight:600;margin-top:4px">${I.busiestHours}</div><div class="demo-note">Demo pattern</div></div>
+      <div class="card"><div class="label">Forecast accuracy</div><div class="big num">${I.accuracy == null ? "–" : Math.round(I.accuracy * 100) + "%"}</div><div class="demo-note">Last 4 weeks</div></div>
+      <div class="card wide"><div class="label">Saved vs ordering like last week</div><div class="big num">${I.saved > 0 ? K.money(I.saved) : "About even"}</div><div class="label">Less spoiled stock and fewer empty shelves, over the demo weeks</div></div>
+      <div class="card  wide fvs"><div class="between" style="flex-wrap:wrap"><div class="label" style="font-weight:600;color:var(--ink);font-size:14px">${t("Forecast vs what sold")}</div><div class="legend"><span><i style="background:var(--mist)"></i>${t("Really sold")}</span><span><i style="background:var(--loud);height:3px"></i>${t("Forecast")}</span></div></div>
+        <div class="label" style="margin-top:2px">${t("Last 4 weeks. Tap a day to see its numbers.")}</div>
+        <div class="scroll-x" id="fvs-chips" style="margin-top:10px"></div><div class="chart-box" id="fvs-chart" style="margin-top:8px"></div><div class="fvs-tiles" id="fvs-tiles"></div></div>`;
+    shopChart();
+    $("sup-list").innerHTML = S.suppliers.map((s) => { const items = K.itemsFor(s), v = items.reduce((a, f) => a + S.plan[f] * S.costs[f].cost, 0);
+      return `<button class="sup" data-id="${s.id}"><span class="ini">${K.initials(s.name)}</span><div><div class="nm">${K.esc(s.name)}</div><div class="meta">${K.maskPhone(s.phone)}${items.length ? ` · tomorrow ${K.money(v)}` : ""}</div><div class="tags">${s.families.map((f) => `<span>${K.pname(f)}</span>`).join("") || "<span>No products yet</span>"}</div></div><i class="ti ti-chevron-right" style="margin-left:auto;color:var(--ink-3)"></i></button>`; }).join("");
     $("sup-list").querySelectorAll(".sup").forEach((b) => (b.onclick = () => editSupplier(b.dataset.id)));
-    $("price-rows").innerHTML = K.families().map((f) => {
-      const L = K.look(f), c = S.costs[f];
-      return `<div class="price"><span class="ava" style="--c:${L.hue};width:36px;height:36px;font-size:18px;border-radius:12px"><i class="ti ${L.icon}" aria-hidden="true"></i></span><span style="font-size:13.5px;font-weight:500">${L.name}<br><span style="font-size:10.5px;color:var(--ink-3);font-weight:400">per ${L.unit.replace(/s$/, "")}</span></span>
-        <input class="input" type="number" inputmode="decimal" min="1" value="${c.cost}" data-f="${f}" data-k="cost" aria-label="${L.name}, you pay"><input class="input" type="number" inputmode="decimal" min="1" value="${c.price}" data-f="${f}" data-k="price" aria-label="${L.name}, you sell at">
-        <div class="field-error price-err" id="err-${L.name}" aria-live="polite"></div></div>`;
-    }).join("");
+    $("f-owner").value = S.profile.owner; $("f-shop").value = S.profile.shop; $("f-confirm").value = S.profile.confirmBy;
+    $("price-rows").innerHTML = K.families().map((f) => { const c = S.costs[f], n = K.pname(f);
+      return `<div class="price"><span style="font-size:13.5px;font-weight:500">${n}<br><span class="faint" style="font-size:11px;font-weight:400">per ${K.look(f).unit.replace(/s$/, "")}</span></span><input class="input" type="number" inputmode="decimal" min="1" value="${c.cost}" data-f="${f}" data-k="cost" aria-label="${n}, you pay"><input class="input" type="number" inputmode="decimal" min="1" value="${c.price}" data-f="${f}" data-k="price" aria-label="${n}, you sell at"><div class="error price-err" data-err="${f}" aria-live="polite"></div></div>`; }).join("");
     const reload = K.debounce(refresh, 450);
-    $("price-rows").querySelectorAll("input").forEach((i) => (i.oninput = () => {
-      const f = i.dataset.f; K.setCost(f, i.dataset.k, i.value);
-      const ok = K.priceOk(f), name = K.look(f).name;
+    $("price-rows").querySelectorAll("input").forEach((i) => (i.oninput = () => { const f = i.dataset.f; K.setCost(f, i.dataset.k, i.value); const ok = K.priceOk(f);
       $("price-rows").querySelectorAll(`input[data-f="${f}"]`).forEach((x) => x.classList.toggle("invalid", !ok));
-      $("err-" + name).textContent = ok ? "" : "Selling price must be higher than what you pay.";
-      if (ok) reload();
-    }));
+      $("price-rows").querySelector(`[data-err="${f}"]`).textContent = ok ? "" : "Selling price must be higher than what you pay."; if (ok) reload(); }));
     $("gw").value = S.gw; $("gw-v").textContent = Math.round(S.gw * 100) + "%";
   }
-  ["f-owner", "f-shop", "f-confirm"].forEach((id) => ($(id).oninput = K.debounce(() => {
-    K.setProfile({ owner: $("f-owner").value.trim() || "Shop owner", shop: $("f-shop").value.trim() || "My shop", confirmBy: $("f-confirm").value.trim() || "8 pm" });
-    renderHeader(); renderKhata();
-  }, 300)));
+  ["f-owner", "f-shop", "f-confirm"].forEach((id) => ($(id).oninput = K.debounce(() => { K.setProfile({ owner: $("f-owner").value.trim() || "Shop owner", shop: $("f-shop").value.trim() || "My shop", confirmBy: $("f-confirm").value.trim() || "8 pm" }); renderHome(); }, 300)));
   $("gw").oninput = () => { $("gw-v").textContent = Math.round($("gw").value * 100) + "%"; };
   $("gw").onchange = () => { K.setGoodwill($("gw").value); refresh(); };
   $("reset").onclick = () => { K.resetPrices(); renderShop(); refresh(); K.toast("Prices reset"); };
@@ -501,66 +567,54 @@
   function editSupplier(id) {
     editing = id ? S.suppliers.find((s) => s.id === id) : null;
     $("e-title").textContent = editing ? "Edit supplier" : "New supplier";
-    $("e-name").value = editing ? editing.name : ""; $("e-phone").value = editing ? editing.phone : ""; $("e-err").textContent = "";
-    $("e-del").hidden = !editing;
+    $("e-name").value = editing ? editing.name : ""; $("e-phone").value = editing ? editing.phone : ""; $("e-err").textContent = ""; $("e-del").hidden = !editing;
     const mine = new Set(editing ? editing.families : []);
-    $("e-fams").innerHTML = K.families().map((f) => { const L = K.look(f), other = K.supplierOf(f); return `<button class="chip" aria-pressed="${mine.has(f)}" data-f="${f}" title="${other && (!editing || other.id !== editing.id) ? "Currently with " + K.esc(other.name) : ""}"><i class="ti ${L.icon}" aria-hidden="true"></i>${L.name}</button>`; }).join("");
+    $("e-fams").innerHTML = K.families().map((f) => `<button class="chip" aria-pressed="${mine.has(f)}" data-f="${f}"><i class="ti ${K.look(f).icon}"></i>${K.pname(f)}</button>`).join("");
     $("e-fams").querySelectorAll("button").forEach((b) => (b.onclick = () => b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true")));
     open("sh-sup");
-    setTimeout(() => $("e-name").focus(), 80);
   }
   $("add-sup").onclick = () => editSupplier(null);
   $("e-save").onclick = () => {
     const name = $("e-name").value.trim(), phone = $("e-phone").value.trim();
     if (!name) { $("e-err").textContent = "Give the supplier a name."; return; }
     if (phone && phone.replace(/\D/g, "").length < 10) { $("e-err").textContent = "That number looks too short. Use 10 digits."; return; }
-    const s = editing || K.addSupplier(name, phone);
-    s.name = name; s.phone = phone;
+    const s = editing || K.addSupplier(name, phone); s.name = name; s.phone = phone;
     const picked = [...$("e-fams").querySelectorAll('button[aria-pressed="true"]')].map((b) => b.dataset.f);
     K.families().forEach((f) => { if (picked.includes(f)) K.assign(f, s.id); else if (s.families.includes(f)) s.families = s.families.filter((x) => x !== f); });
     K.saveSuppliers(); close(); renderShop(); renderAll(); K.toast(`${name} saved`);
   };
-  $("e-del").onclick = () => {
-    const s = editing; K.removeSupplier(s.id); close(); renderShop(); renderAll();
-    K.toast(`${s.name} deleted`, { label: "Undo", run: () => { S.suppliers.push(s); K.saveSuppliers(); renderShop(); renderAll(); } });
-  };
+  $("e-del").onclick = () => { const s = editing; K.removeSupplier(s.id); close(); renderShop(); renderAll(); K.toast(`${s.name} deleted`, { label: "Undo", run: () => { S.suppliers.push(s); K.saveSuppliers(); renderShop(); renderAll(); } }); };
 
   /* ---------- Sheets: back button and Escape close them ---------- */
-  function open(id) {
-    $("scrim").classList.add("on"); document.querySelectorAll(".sheet").forEach((s) => s.classList.toggle("on", s.id === id));
-    if (!history.state || !history.state.sheet) history.pushState({ sheet: true }, "");
-  }
+  function open(id) { $("scrim").classList.add("on"); document.querySelectorAll(".sheet").forEach((s) => s.classList.toggle("on", s.id === id)); if (!history.state || !history.state.sheet) history.pushState({ sheet: true }, ""); }
   function hide() { $("scrim").classList.remove("on"); document.querySelectorAll(".sheet").forEach((s) => s.classList.remove("on")); queue = []; }
   function close() { if (history.state && history.state.sheet) history.back(); else hide(); }
-  window.addEventListener("popstate", hide);
+  window.addEventListener("popstate", () => { if ($("scrim").classList.contains("on")) hide(); else $("detail").classList.remove("on"); });
   document.querySelectorAll("[data-close]").forEach((b) => (b.onclick = close));
   $("scrim").addEventListener("click", (e) => { if (e.target.id === "scrim") close(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && $("scrim").classList.contains("on")) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") { if ($("scrim").classList.contains("on")) close(); else if ($("detail").classList.contains("on")) closeDetail(); } });
 
   /* ---------- Data flow ---------- */
-  function renderAll() { renderProducts(); renderHero(); renderTodo(); renderKhata(); }
-  async function refresh() {
-    try { await K.loadOrders(); } catch (e) { K.toast(e.message); }
-    renderAll();
-  }
+  function renderAll() { renderHome(); renderPlan(); renderKhata(); if (view === "shop") renderShop(); }
+  async function refresh() { try { await K.loadOrders(); } catch (e) { K.toast(e.message); } renderAll(); }
   async function changeDate(d) {
-    if (d < S.opts.first_date || d > S.opts.last_date) { K.toast("Pick a day inside the demo weeks"); renderHeader(); return; }
-    K.setDate(d); renderHeader(); await refresh();
+    if (d < K.minDate() || d > S.opts.last_date) { K.toast("Pick a day inside the demo weeks"); $("date").value = S.date; return; }
+    K.setDate(d); lastLeft = {}; await K.loadAllSeries(); await refresh();
   }
   $("date").onchange = (e) => changeDate(e.target.value);
-  $("store").onchange = async (e) => { K.setStore(e.target.value); await refresh(); if (view === "insights") renderInsights(); };
+  $("store").onchange = async (e) => { K.setStore(e.target.value); lastLeft = {}; await K.loadAllSeries(); await refresh(); if (view === "nearby") renderNearby(); if (view === "shop") renderShop(); };
 
   (async function boot() {
     K.fitLayout("mobile");
-    K.decorate();
+    ctrls(); applyT();
     try {
       await K.init();
       $("store").innerHTML = S.opts.stores.map((s) => `<option value="${s}" ${s === S.store ? "selected" : ""}>Store ${s}</option>`).join("");
-      $("date").min = S.opts.first_date; $("date").max = S.opts.last_date;
-      renderHeader(); $("h-gauge").innerHTML = K.gauge(0, true);
+      $("date").min = K.minDate(); $("date").max = S.opts.last_date;
+      await K.loadAllSeries();
       await refresh();
     } catch (e) {
-      document.querySelector(".views").innerHTML = `<div class="empty" style="padding-top:30vh"><i class="ti ti-wifi-off" aria-hidden="true"></i>${K.esc(e.message)}<br><button class="btn btn-white" style="margin-top:16px" onclick="location.reload()">Try again</button></div>`;
+      document.querySelector(".shell").innerHTML = `<div class="empty" style="padding-top:30vh"><i class="ti ti-wifi-off"></i>${K.esc(e.message)}<br><button class="btn btn-quiet" style="margin-top:16px" onclick="location.reload()">Try again</button></div>`;
     }
   })();
 })();
